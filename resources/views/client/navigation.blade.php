@@ -1,3 +1,3 @@
     <nav>
-        <p>Side Navigation Bar</p>
+        <p>Client Navigation Bar</p>
     </nav>
