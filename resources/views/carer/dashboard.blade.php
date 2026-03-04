@@ -3,8 +3,10 @@
         @section('title', 'Carer Dashboard')
 
         @section('carer-content')
-        <h1>Carer Dashboard</h1>
-        <p>It will mostly use components that are pulled in from sub folders</p>
+        <x-shared.header 
+                headline="Carer Dashboard: Welcome" 
+                sub-headline="Welcome to J-Goal, as a carer you can help your client achieve their goals">
+        </x-header>
 
         @endsection
 
