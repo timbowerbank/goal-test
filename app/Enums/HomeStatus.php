@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum OrganisationStatus: string {
+enum HomeStatus: string {
     case Active = 'active';
     case Paused = 'paused';
     case Archived = 'archived';
