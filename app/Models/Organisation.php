@@ -28,13 +28,13 @@ class Organisation extends Model
     ];
 
     // *** createdBy() ***
-    // allows you to use $organisation->createdBy->full_name
+    // Relationship - allows you to use $organisation->createdBy->full_name
     public function createdBy() {
-        return $this->belongsTo(User::class, 'created_by_user_id)');
+        return $this->belongsTo(User::class, 'created_by_user_id');
     }
 
     // *** updatedBy() ***
-    // allows you to use $organisation->updatedBy->full_name
+    // Relationship - allows you to use $organisation->updatedBy->full_name
     public function updatedBy() {
         return $this->belongsTo(User::class, 'updated_by_user_id');
     }
@@ -45,6 +45,7 @@ class Organisation extends Model
     protected function casts(): array {
         return [
             'organisation_status' => OrganisationStatus::class,
+            'deleted_at' => 'datetime',
         ];
     }
 }
