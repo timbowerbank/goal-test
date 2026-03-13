@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -48,8 +49,25 @@ class User extends Authenticatable
         ];
     }
 
-    public function getFullNameAttribute():string {
-        // usage - $user->full_name - gets this from the above method name - get[]Attribute()
-        return "{$this->first_name} {$this->surname}";
+    // Accessor
+    // reference $user->full_name
+    // Note snake_case
+    public function fullName():Attribute {
+        return Attribute::make(
+            get: fn () => "{$this->first_name} {$this->surname}",
+        );
+    }
+
+
+
+    // ******************
+    // *** USER ROLES ***
+    // ******************
+
+    // *** superAdmin ***
+    // Relationship - allow us to do $user->superAdmin !== null;
+    // note camelCase
+    public function superAdmin() {
+        return $this->hasOne(SuperAdmin::class);
     }
 }

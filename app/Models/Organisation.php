@@ -27,6 +27,19 @@ class Organisation extends Model
         'website_url',
     ];
 
+    // *** createdBy() ***
+    // allows you to use $organisation->createdBy->full_name
+    public function createdBy() {
+        return $this->belongsTo(User::class, 'created_by_user_id)');
+    }
+
+    // *** updatedBy() ***
+    // allows you to use $organisation->updatedBy->full_name
+    public function updatedBy() {
+        return $this->belongsTo(User::class, 'updated_by_user_id');
+    }
+
+
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $organisation->organisation_status = OrganisationStatus::Active;
     protected function casts(): array {
