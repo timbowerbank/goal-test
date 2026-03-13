@@ -60,14 +60,20 @@ class User extends Authenticatable
 
 
 
-    // ******************
-    // *** USER ROLES ***
-    // ******************
+    // **********************************
+    // *** USER ROLES - RELATIONSHIPS ***
+    // **********************************
 
     // *** superAdmin ***
-    // Relationship - allow us to do $user->superAdmin !== null;
+    // Relationship - allows us to do $user->superAdmin !== null;
     // note camelCase
     public function superAdmin() {
         return $this->hasOne(SuperAdmin::class);
+    }
+
+    // *** organisationAdministrator ***
+    // Relationship - allows us to do $user->organisationAdministrator !== null 
+    public function organisationAdministrator() {
+        return $this->hasOne(OrganisationAdministrator::class);
     }
 }
