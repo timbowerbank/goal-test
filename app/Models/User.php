@@ -76,4 +76,10 @@ class User extends Authenticatable
     public function organisationAdministrator() {
         return $this->hasOne(OrganisationAdministrator::class);
     }
+
+    // *** manager ***
+    // Relationship - allows us to do $user->manager !== null
+    public function manager() {
+        return $this->hasOne(Manager::class);
+    }
 }
