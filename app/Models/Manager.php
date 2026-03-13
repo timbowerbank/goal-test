@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use App\Enums\ManagerStatus;
 
@@ -14,19 +15,19 @@ class Manager extends Model
 
     // *** user ***
     // relationship - allows us to use $manager->user->full_name
-    public function user() {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
     // *** verifiedBy ***
     // relationship - allows us to use $manager->verifiedBy->full_name
-    public function verifiedBy() {
+    public function verifiedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'verified_by_user_id');
     }
 
     // *** updatedBy ***
     // relationship - allows us to use $manager->updatedBy->full_name
-    public function updatedBy() {
+    public function updatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'manager_status_updated_by');
     }
 

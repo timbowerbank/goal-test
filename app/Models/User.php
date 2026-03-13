@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class User extends Authenticatable
 {
@@ -67,19 +69,19 @@ class User extends Authenticatable
     // *** superAdmin ***
     // Relationship - allows us to do $user->superAdmin !== null;
     // note camelCase
-    public function superAdmin() {
+    public function superAdmin(): HasOne {
         return $this->hasOne(SuperAdmin::class);
     }
 
     // *** organisationAdministrator ***
     // Relationship - allows us to do $user->organisationAdministrator !== null 
-    public function organisationAdministrator() {
+    public function organisationAdministrator(): HasOne {
         return $this->hasOne(OrganisationAdministrator::class);
     }
 
     // *** manager ***
     // Relationship - allows us to do $user->manager !== null
-    public function manager() {
+    public function manager(): HasOne {
         return $this->hasOne(Manager::class);
     }
 }

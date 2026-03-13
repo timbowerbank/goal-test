@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class SuperAdmin extends Model
@@ -13,7 +14,7 @@ class SuperAdmin extends Model
 
     // *** user ***
     // allows you to $superAdmin->user->full_name;
-    public function user() {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }
