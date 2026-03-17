@@ -84,4 +84,10 @@ class User extends Authenticatable
     public function manager(): HasOne {
         return $this->hasOne(Manager::class);
     }
+
+    // *** carer ***
+    // Relationship - allows us to do $user->carer !== null
+    public function carer():HasOne {
+        return $this->hasOne(Carer::class);
+    }
 }
