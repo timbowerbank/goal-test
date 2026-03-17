@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\OrganisationStatus;
@@ -38,6 +39,11 @@ class Organisation extends Model
     // Relationship - allows you to use $organisation->updatedBy->full_name
     public function updatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'updated_by_user_id');
+    }
+
+    // *** administrators() ***
+    public function administrators(): HasMany {
+        return $this->hasMany(OrganisationAdministrator::class);
     }
 
 
