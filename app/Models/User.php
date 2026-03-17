@@ -90,4 +90,10 @@ class User extends Authenticatable
     public function carer():HasOne {
         return $this->hasOne(Carer::class);
     }
+
+    // *** client ***
+    // Relationship - allows us to do $user->client !== null
+    public function client():HasOne {
+        return $this->hasOne(Client::class);
+    }
 }
