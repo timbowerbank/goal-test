@@ -27,6 +27,8 @@ class Organisation extends Model
         'postcode',
         'telephone',
         'website_url',
+        'organisation_status',
+        'created_by_user_id',
     ];
 
     // *** createdBy() ***

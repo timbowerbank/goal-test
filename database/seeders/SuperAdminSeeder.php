@@ -15,16 +15,19 @@ class SuperAdminSeeder extends Seeder
     public function run(): void
     {
         // create a user
-        $user = User::create([
+        $user = User::firstOrCreate(
+        [
+            'email' => 'tim@pendigital.co.uk'
+        ],    
+        [
             'first_name' => 'Tim',
             'surname' => 'Bowerbank',
-            'email' => 'tim@pendigital.co.uk',
             'email_verified_at' => now(),
             'password' => env('SUPER_ADMIN_PASSWORD'),
         ]);
 
         // Now let's create a SuperAdmin instance
-        SuperAdmin::create([
+        SuperAdmin::firstOrCreate([
             'user_id' => $user->id,
 
         ]);
