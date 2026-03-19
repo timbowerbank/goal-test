@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\SuperAdminSeeder;
 use Database\Seeders\OrganisationsSeeder;
+use Database\Seeders\HomesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([SuperAdminSeeder::class, OrganisationsSeeder::class]);
+        $this->call([
+            SuperAdminSeeder::class, 
+            OrganisationsSeeder::class,
+            HomesSeeder::class,
+            ]);
     }
 }

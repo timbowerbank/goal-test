@@ -26,6 +26,8 @@ class Home extends Model
         'postcode',
         'telephone',
         'website_url',
+        'created_by_user_id',
+        'home_status',
 
     ];
 
