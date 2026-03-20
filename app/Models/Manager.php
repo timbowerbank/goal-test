@@ -13,7 +13,9 @@ class Manager extends Model
 {
     use HasUlids, SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+    ];
 
     // *** user ***
     // relationship - allows us to use $manager->user->full_name
@@ -30,7 +32,7 @@ class Manager extends Model
     // *** updatedBy ***
     // relationship - allows us to use $manager->updatedBy->full_name
     public function updatedBy(): BelongsTo {
-        return $this->belongsTo(User::class, 'manager_status_updated_by');
+        return $this->belongsTo(User::class, 'manager_status_updated_by_user_id');
     }
 
 

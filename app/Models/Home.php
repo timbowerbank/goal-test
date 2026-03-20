@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\HomeStatus;
@@ -42,6 +43,20 @@ class Home extends Model
     public function updatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'updated_by_user_id');
     }
+
+    // *** managers ***
+    // Relationship - allows us to implement $home->managers
+    public function managers():BelongsToMany {
+        return $this->belongsToMany(Manager::class, 'home_manager', 'home_id', 'manager_id')
+        ->withPivot(
+            'started_at',
+            'ended_at',
+            'created_by_user_id',
+            'updated_by_user_id'
+        )
+        ->withTimestamps();
+    }
+
 
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $home->home_status = HomeStatus::Active;
