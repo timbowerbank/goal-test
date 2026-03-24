@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             OrganisationsSeeder::class,
             HomesSeeder::class,
             CarersSeeder::class,
+            ClientsSeeder::class
             ]);
     }
 }
