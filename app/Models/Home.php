@@ -57,6 +57,19 @@ class Home extends Model
         ->withTimestamps();
     }
 
+    // *** carers ***
+    // Relationship - allows us to implement $home->carers
+    public function carers():BelongsToMany {
+        return $this->belongsToMany(Carer::class, 'carer_home', 'home_id', 'carer_id')
+        ->withPivot(
+            'started_at', 
+            'ended_at', 
+            'created_by_user_id',
+            'updated_by_user_id'
+        )
+        ->withTimestamps();
+    }
+
 
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $home->home_status = HomeStatus::Active;
