@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-2">
-                @include('organisation.navigation')
+                @include('organisation-admin.navigation')
             </div>
 
             <div class="col-10">
