@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col d-flex flex-row justify-content-center align-items-center vh-100">
                 <form method="post" action="/login">
+                    @csrf
                     <div class="p-3 border border-dark border-1 rounded">
                         <h1 class="mb-3">J-Goal</h1>
                         <div class="mb-3">
