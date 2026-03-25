@@ -12,9 +12,14 @@
                             <label for="email" class="form-label">Email Address</label>
                             <input name="email" type="email" id="email" class="form-control" placeholder="Enter Email">
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input name="password" type="password" id="password" class="form-control" placeholder="Enter Password">
+                        </div>
+                        <div class="form-check mb-4">
+                            <input name="remember" class="form-check-input" type="checkbox" id="rememberMe">
+                            <label for="rememberMe" class="form-check-label">Remember Me</label>
+
                         </div>
                         <div class="mb-3 d-flex flex-column">
                             <button class="btn btn-primary mb-3" type="Submit">Login</button>

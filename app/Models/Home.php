@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\HomeStatus;
@@ -44,6 +45,19 @@ class Home extends Model
         return $this->belongsTo(User::class, 'updated_by_user_id');
     }
 
+    // *** organisation ***
+    // Relationship - allows us to use $home->organisation
+    public function organisation():BelongsToMany {
+        return $this->belongsToMany(Organisation::class, 'home_organisation', 'home_id', 'organisation_id')
+        ->withPivot(
+            'started_at',
+            'ended_at',
+            'created_by_user_id',
+            'updated_by_user_id'
+        )
+        ->withTimestamps();
+    }
+
     // *** managers ***
     // Relationship - allows us to implement $home->managers
     public function managers():BelongsToMany {
@@ -68,6 +82,12 @@ class Home extends Model
             'updated_by_user_id'
         )
         ->withTimestamps();
+    }
+
+    // *** clients ***
+    // Relationship - allows us to implement $home->clients
+    public function clients():HasMany {
+        return $this->hasMany(Client::class);
     }
 
 

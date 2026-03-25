@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ManagerStatus;
@@ -31,8 +32,21 @@ class Manager extends Model
 
     // *** updatedBy ***
     // relationship - allows us to use $manager->updatedBy->full_name
-    public function updatedBy(): BelongsTo {
+    public function statusUpdatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'manager_status_updated_by_user_id');
+    }
+
+    // *** homes ***
+    // Relationship - allows us to use $manager->homes
+    public function homes(): BelongsToMany {
+        return $this->belongsToMany(Home::class, 'home_manager', 'manager_id', 'home_id')
+        ->withPivot(
+            'started_at', 
+            'ended_at',
+            'created_by_user_id',
+            'updated_by_user_id'
+        )
+        ->withTimestamps();
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\CarerStatus;
@@ -28,8 +29,21 @@ class Carer extends Model
 
     // *** updatedBy ***
     // Relationship - allows us to use $carer->updatedBy->full_name;
-    public function updatedBy():BelongsTo {
-        return $this->belongsTo(User::class, 'updated_by_user_id');
+    public function statusUpdatedBy():BelongsTo {
+        return $this->belongsTo(User::class, 'carer_status_updated_by_user_id');
+    }
+
+    // *** homes ***
+    // Relationship - allows us to use $carer->homes
+    public function homes():BelongsToMany {
+        return $this->belongsToMany(Home::class, 'carer_home', 'carer_id', 'home_id' )
+        ->withPivot(
+           'started_at',
+           'ended_at',
+           'created_by_user_id',
+           'updated_by_user_id' 
+        )
+        ->withTimestamps();
     }
 
     // *** casts ***

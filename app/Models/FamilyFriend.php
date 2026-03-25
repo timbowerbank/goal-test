@@ -28,7 +28,7 @@ class FamilyFriend extends Model
 
     // *** updatedBy ***
     // Relationship - allows us to use $familyFriend->updatedBy->full_name
-    public function updatedBy():BelongsTo {
+    public function statusUpdatedBy():BelongsTo {
         return $this->belongsTo(User::class, 'family_friend_status_updated_by_user_id');
     }
 
