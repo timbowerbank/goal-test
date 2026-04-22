@@ -19,7 +19,7 @@ Route::middleware(['auth'])->group(function(){
         return view('organisation-admin.dashboard');
     })->name('organisation-admin.dashboard');
 
-    // Manager
+    // Manager - see manager.php for all manager routes
     // Route::get('/organisations/{org_id}/manager/dashboard', function($org_id){
     //     return view('manager.dashboard');
     // })->name('manager.dashboard');
