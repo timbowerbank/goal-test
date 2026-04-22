@@ -20,9 +20,9 @@ Route::middleware(['auth'])->group(function(){
     })->name('organisation-admin.dashboard');
 
     // Manager
-    Route::get('/organisations/{org_id}/manager/dashboard', function($org_id){
-        return view('manager.dashboard');
-    })->name('manager.dashboard');
+    // Route::get('/organisations/{org_id}/manager/dashboard', function($org_id){
+    //     return view('manager.dashboard');
+    // })->name('manager.dashboard');
 
     // Carer
     Route::get('/organisations/{org_id}/carer/dashboard', function($org_id){
