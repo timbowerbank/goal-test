@@ -15,7 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // check for managers allowed access
+        $middleware->alias([
+            'manager.org.access' => \App\Http\Middleware\EnsureManagerBelongsToOrganisation::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

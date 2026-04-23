@@ -1,0 +1,1 @@
+<p>Manager pending verification</p>
