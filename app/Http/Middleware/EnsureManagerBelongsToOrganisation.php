@@ -6,6 +6,7 @@ use App\Services\OrganisationAccessService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\ManagerStatus;
 
 class EnsureManagerBelongsToOrganisation {
 
@@ -34,7 +35,7 @@ class EnsureManagerBelongsToOrganisation {
         }
 
         // check if not active
-        if($manager->manager_status !== 'active') {
+        if($manager->manager_status !== ManagerStatus::Active) {
             return redirect()->route('manager.inactive', ['org_id' => $request->route('org_id')]);
         }
 
