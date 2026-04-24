@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Enums\ManagerStatus;
 use App\Enums\CarerStatus;
+use App\Enums\ClientStatus;
 
 class OrganisationAccessService {
 
@@ -61,6 +62,34 @@ class OrganisationAccessService {
             ->whereHas('organisation', function($query) use ($org_id){
                     $query->where('organisations.id', $org_id);
                 })
+            ->exists();
+    }
+
+    // *** clientBelongsToOrganisation() ***
+    public function clientBelongsToOrganisation(User $user, int $org_id) {
+        // get the client
+        $client = $user->client;
+
+        // check if client exists
+        if(!$client) {
+            return false;
+        }
+
+        // check that the client is verified
+        if(!$client->is_verified) {
+            return false;
+        }
+
+        // check that the client is active
+        if($client->clientStatus !== ClientStatus::Active) {
+            return false;
+        }
+
+        // check that the client has a home
+        return $client->home()
+            ->whereHas('organisation', function($query) use ($org_id){
+                $query->where('organisations.id', $org_id);
+            })
             ->exists();
     }
 }

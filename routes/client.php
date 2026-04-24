@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\ClientDashboardController;
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'client.org.access'])
     ->prefix('organisations/{org_id}/client')
     ->name('client.')->group(function(){
 
