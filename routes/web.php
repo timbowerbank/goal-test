@@ -14,10 +14,10 @@ Route::middleware(['auth'])->group(function(){
         return view('super-admin.dashboard');
     })->name('super-admin.dashboard');
 
-    // Organisation Admninistrator
-    Route::get('/organisations/{org_id}/dashboard', function($org_id){
-        return view('organisation-admin.dashboard');
-    })->name('organisation-admin.dashboard');
+    // Organisation Admninistrator - see organisation-admin.php for all organisation admin routes
+    // Route::get('/organisations/{org_id}/dashboard', function($org_id){
+    //     return view('organisation-admin.dashboard');
+    // })->name('organisation-admin.dashboard');
 
     // Manager - see manager.php for all manager routes
     // Route::get('/organisations/{org_id}/manager/dashboard', function($org_id){

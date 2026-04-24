@@ -1,10 +1,9 @@
     @extends('layouts.organisation')
 
-    @section('title', 'Organisation Dashboard')
+    @section('title', 'Administrator Pending Verification')
 
     @section('organisation-content')
-    <h1>Organisation Dashboard</h1>
-    <p>This is for organisation admins only</p>
+    <p>Administrator is pending verification</p>
     <form method="post" action="{{ route('logout') }}">
         @csrf
         <button class="btn btn-primary mt-3" type="submit">Logout</button>

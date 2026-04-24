@@ -15,5 +15,5 @@ Route::middleware(['auth', 'carer.org.access'])
             return view('carer.pending-verification');
         })->name('pending-verification');
 
-        Route::get('/dashboard', [CarerDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [CarerDashboardController::class, 'index'])->name('dashboard');
     });

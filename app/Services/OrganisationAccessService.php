@@ -92,4 +92,25 @@ class OrganisationAccessService {
             })
             ->exists();
     }
+
+    public function adminBelongsToOrganisation(User $user, int $org_id) {
+        // get the admin
+        $admin = $user->organisationAdministrator;
+
+        // check admin is valid
+        if(!$admin) {
+            return false;
+        }
+
+        // check the admin is verified
+        if(!$admin.is_verified) {
+            return false;
+        }
+
+        // TO DO - this needs some database work as currently we don't have an administrator_status enum or database field
+        // check the status of the admin
+        // if($admin.administrator_status !== 'active') {
+
+        // }
+    }
 }
