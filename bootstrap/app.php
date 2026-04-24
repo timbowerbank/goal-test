@@ -12,12 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function(){
             Route::middleware('web')
                 ->group(base_path('routes/manager.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/carer.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // check for managers allowed access
         $middleware->alias([
-            'manager.org.access' => \App\Http\Middleware\EnsureManagerBelongsToOrganisation::class
+            'manager.org.access' => \App\Http\Middleware\EnsureManagerBelongsToOrganisation::class,
+            'carer.org.access' => \App\Http\Middleware\EnsureCarerBelongsToOrganisation::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

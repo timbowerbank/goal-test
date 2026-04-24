@@ -24,12 +24,12 @@ Route::middleware(['auth'])->group(function(){
     //     return view('manager.dashboard');
     // })->name('manager.dashboard');
 
-    // Carer
-    Route::get('/organisations/{org_id}/carer/dashboard', function($org_id){
-        return view('carer.dashboard');
-    })->name('carer.dashboard');
+    // Carer - see carer.php for all carer routes
+    // Route::get('/organisations/{org_id}/carer/dashboard', function($org_id){
+    //     return view('carer.dashboard');
+    // })->name('carer.dashboard');
 
-    // Client
+    // Client 
     Route::get('/organisations/{org_id}/client/dashboard', function($org_id){
         return view('client.dashboard');
     })->name('client.dashboard');
