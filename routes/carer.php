@@ -9,11 +9,11 @@ Route::middleware(['auth', 'carer.org.access'])
         
         Route::get('inactive', function(){
             return view('carer.inactive');
-        });
+        })->name('inactive');
 
         Route::get('pending-verification', function(){
             return view('carer.pending-verification');
-        });
+        })->name('pending-verification');
 
         Route::get('/dashboard', [CarerDashboardController::class, 'index'])->name('dashboard');
     });

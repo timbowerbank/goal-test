@@ -29,10 +29,10 @@ Route::middleware(['auth'])->group(function(){
     //     return view('carer.dashboard');
     // })->name('carer.dashboard');
 
-    // Client 
-    Route::get('/organisations/{org_id}/client/dashboard', function($org_id){
-        return view('client.dashboard');
-    })->name('client.dashboard');
+    // Client - see client.php for all client routes
+    // Route::get('/organisations/{org_id}/client/dashboard', function($org_id){
+    //     return view('client.dashboard');
+    // })->name('client.dashboard');
 
     
 
