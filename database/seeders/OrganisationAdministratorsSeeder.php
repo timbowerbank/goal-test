@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Organisation;
 use App\Models\OrganisationAdministrator;
+use App\Enums\OrganisationAdministratorStatus;
 
 
 class OrganisationAdministratorsSeeder extends Seeder
@@ -56,6 +57,9 @@ class OrganisationAdministratorsSeeder extends Seeder
         $orgAdmin->is_verified = true;
         $orgAdmin->verified_by_user_id = $superAdmin->id;
         $orgAdmin->verified_at = now();
+        $orgAdmin->administrator_status = OrganisationAdministratorStatus::Active;
+        $orgAdmin->status_updated_at = now();
+        $orgAdmin->status_updated_by_user_id = $user->id;
         $orgAdmin->save();
         return $orgAdmin;
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\OrganisationAdministratorStatus;
 
 
 class OrganisationAdministrator extends Model
@@ -30,5 +31,20 @@ class OrganisationAdministrator extends Model
     // relationship - allows us to use $organisationAdministrator->verifiedBy->full_name
     public function verifiedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'verified_by_user_id');
+    }
+
+    // *** statusUpdatedBy() ***
+    // relationship - allows us to use $organisationAdministrator->statusUpdatedBy->full_name
+    public function statusUpdatedBy(): BelongsTo {
+        return $this->belongsTo(User::class, 'status_updated_by_user_id');
+    }
+
+    protected function casts():array{
+        return [
+            'is_verified' => 'boolean',    
+            'verified_at' => 'datetime',
+            'administrator_status' => OrganisationAdministratorStatus::class,
+            'status_updated_at' => 'datetime',
+        ];
     }
 }
