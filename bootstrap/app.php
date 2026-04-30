@@ -29,6 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'carer.org.access' => \App\Http\Middleware\EnsureCarerBelongsToOrganisation::class,
             'client.org.access' => \App\Http\Middleware\EnsureClientBelongsToOrganisation::class,
             'administrator.org.access' => \App\Http\Middleware\EnsureAdministratorBelongsToOrganisation::class,
+            'family-friend.access' =>\App\Http\Middleware\EnsureFamilyFriendHasClient::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -54,10 +54,9 @@ class LoginResponse implements LoginResponseContract
             ]);
         }
 
-        // TODO
-        // if($user->familyFriend) {
-        //     return redirect()->route('family-friend.dashboard');
-        // }
+        if($user->familyFriend) {
+            return redirect()->route('family-friend.dashboard');
+        }
 
         return redirect()->route('login');
     }
