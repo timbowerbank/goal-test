@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ClientStatus;
@@ -37,6 +38,18 @@ class Client extends Model
     // Relationship - Allows us to use $client->statusUpdatedBy->full_name
     public function statusUpdatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'client_status_updated_by_user_id');
+    }
+
+    // *** familyFriends ***
+    // Relationship - Allows us to use $client->familyFriends
+    public function familyFriends(): BelongsToMany {
+        return $this->belongsToMany(FamilyFriend::class, 'client_family_friend')
+        ->withPivot([
+            'started_at',
+            'ended_at',
+            'created_by_user_id',
+            'updated_by_user_id'])
+        ->withTimestamps();
     }
 
     // *** casts() ***
