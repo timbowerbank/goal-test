@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Enums\ManagerStatus;
 use App\Enums\CarerStatus;
 use App\Enums\ClientStatus;
+use App\Enums\OrganisationAdministratorStatus;
 
 class OrganisationAccessService {
 
@@ -103,14 +104,22 @@ class OrganisationAccessService {
         }
 
         // check the admin is verified
-        if(!$admin.is_verified) {
+        if(!$admin->is_verified) {
             return false;
         }
 
-        // TO DO - this needs some database work as currently we don't have an administrator_status enum or database field
         // check the status of the admin
-        // if($admin.administrator_status !== 'active') {
+        if($admin->administrator_status !== OrganisationAdministratorStatus::Active) {
+            return false;
+        }
 
-        // }
+        // check that the administrator has an organisation
+        if($admin->organisation_id !== $org_id) {
+            return false;
+        }
+
+        return true;
+
+
     }
 }
