@@ -16,6 +16,7 @@ class ManagerDashboardController extends Controller
         $manager = Auth::user()->manager;
 
         return view('manager.dashboard')
-        ->with('homes', $manager->homes);
+        ->with('homes', $manager->homes)
+        ->with('is_manager', true);
     }
 }

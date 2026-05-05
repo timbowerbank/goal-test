@@ -3,8 +3,9 @@
         @section('title', 'Manager Dashboard')
 
         @section('manager-content')
-        <h1>Manager Dashboard</h1>
-        <p>This is for managers only</p>
+        <x-shared.header headline="Manager Dashboard" sub-headline="Welcome to J-Goal"></x-shared.header>
+
+        <x-shared.list-homes :homes="$homes" :is-manager="$is_manager"></x-shared.list-homes>
 
         <form method="post" action="{{ route('logout') }}">
                 @csrf
