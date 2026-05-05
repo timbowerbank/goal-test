@@ -1,6 +1,7 @@
 @props([
     'homes',
     'is-manager',
+    'org-id',
 ])
 <div class="p-4 rounded border mb-2">
     <h2>My Homes</h2>
@@ -23,7 +24,7 @@
                 <td class="d-none d-md-table-cell">{{ $home->city }}</td>
                 <td class="d-none d-md-table-cell"><a class="link" href="tel:{{ $home->telephone }}">{{ $home->telephone }}</a></td>
                 <td>
-                    <a href="#" class="btn btn-secondary btn-sm">View</a>
+                    <a href="{{ route('manager.home', ['org_id' => $orgId, 'home_id' => $home->id]) }}" class="btn btn-secondary btn-sm">View</a>
                 </td>
             </tr>
         @endforeach

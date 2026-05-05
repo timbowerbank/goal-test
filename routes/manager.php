@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\ManagerDashboardController;
+use App\Http\Controllers\Manager\ManagerViewHomeController;
 
 Route::middleware(['auth', 'manager.org.access'])
     ->prefix('organisations/{org_id}/manager')
@@ -16,5 +17,7 @@ Route::middleware(['auth', 'manager.org.access'])
         })->name('pending-verification');
 
         Route::get('dashboard', [ManagerDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('homes/{home_id}', [ManagerViewHomeController::class, 'index'])->name('home');
 
 });

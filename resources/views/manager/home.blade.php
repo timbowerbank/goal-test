@@ -1,11 +1,9 @@
         @extends('layouts.manager')
 
-        @section('title', 'Manager Dashboard')
+        @section('title', $home->home_name)
 
         @section('manager-content')
-        <x-shared.header headline="Manager Dashboard" sub-headline="Welcome to J-Goal"></x-shared.header>
-
-        <x-shared.list-homes :homes="$homes" :is-manager="$is_manager" :org-id="$org_id"></x-shared.list-homes>
+        <x-shared.header headline="{{ $home->home_name }}" sub-headline="See clients and carers for {{ $home->home_name }}"></x-shared.header>
 
         <form method="post" action="{{ route('logout') }}">
                 @csrf
