@@ -2,7 +2,7 @@
     'homes',
     'is-manager',
 ])
-<div class="p-2 rounded border mb-2">
+<div class="p-4 rounded border mb-2">
     <h2>My Homes</h2>
     @if($homes !== null)
     <table class="table">
@@ -21,7 +21,7 @@
                 <th scope="row">{{ $home->home_name }}</th>
                 <td class="d-none d-md-table-cell">{{ $home->address_1 }}</td>
                 <td class="d-none d-md-table-cell">{{ $home->city }}</td>
-                <td class="d-none d-md-table-cell">{{ $home->telephone }}</td>
+                <td class="d-none d-md-table-cell"><a class="link" href="tel:{{ $home->telephone }}">{{ $home->telephone }}</a></td>
                 <td>
                     <a href="#" class="btn btn-secondary btn-sm">View</a>
                 </td>
@@ -29,6 +29,9 @@
         @endforeach
         </tbody>
     </table>
+    <div>
+        <a href="#" class="mt-2 btn btn-primary">View All Homes</a>
+    </div>
     @else
 
     <p>You currently don't have any homes assigned.</p>
