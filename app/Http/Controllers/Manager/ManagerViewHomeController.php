@@ -14,6 +14,8 @@ class ManagerViewHomeController extends Controller
         $home = Home::with(['clients', 'carers'])->findOrFail($home_id);
 
         return view('manager.home')
-            ->with('home', $home);
+            ->with('home', $home)
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
     }
 }

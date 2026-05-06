@@ -1,6 +1,7 @@
 @props([
     'clients',
-    'home'
+    'home',
+    'org-id',
 ])
 <div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
     <header>
@@ -21,7 +22,7 @@
                 <tr>
                     <td scope="row">{{ $client->user->full_name }}</td>
                     <td>
-                        <a href="#" class="btn btn-secondary btn-sm">View</a>
+                        <a href="{{ route('manager.view-client', ['org_id' => $orgId, 'home_id' => $home->id, 'client_id' => $client->id]) }}" class="btn btn-secondary btn-sm">View</a>
                     </td>
                 </tr>
                 @endforeach
