@@ -2,8 +2,10 @@
     'clients',
     'home'
 ])
-<div class="p-4 rounded border mb-2 pd-list-card-with-scroll">
-    <h2>Clients at {{ $home->home_name }}</h2>
+<div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
+    <header>
+        <h2>Clients at {{ $home->home_name }}</h2>
+    </header>
     @if($clients !== null)
     <div class="pd-table-scroll-outer">
         <table class="w-100 table table-striped">
@@ -26,6 +28,9 @@
             </tbody>
     
         </table>
+        <footer>
+            <a href="#" class="mt-2 btn btn-primary">View All Clients</a>
+        </footer>
     </div>
 
     @else

@@ -3,8 +3,10 @@
     'is-manager',
     'org-id',
 ])
-<div class="p-4 rounded border mb-2">
-    <h2>My Homes</h2>
+<div class="p-4 rounded border mb-2 bg-white">
+    <header>
+        <h2>My Homes</h2>
+    </header>
     @if($homes !== null)
     <table class="table">
         <thead>
@@ -30,9 +32,9 @@
         @endforeach
         </tbody>
     </table>
-    <div>
+    <footer>
         <a href="#" class="mt-2 btn btn-primary">View All Homes</a>
-    </div>
+    </footer>
     @else
 
     <p>You currently don't have any homes assigned.</p>
