@@ -29,10 +29,10 @@
             </tbody>
     
         </table>
-        <footer>
-            <a href="#" class="mt-2 btn btn-primary">View All Clients</a>
-        </footer>
     </div>
+    <footer>
+        <a href="#" class="mt-2 btn btn-primary">View All Clients</a>
+    </footer>
 
     @else
     <p>Sorry, there aren't any clients at this home.</p>
