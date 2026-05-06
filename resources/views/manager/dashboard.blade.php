@@ -3,7 +3,9 @@
         @section('title', 'Manager Dashboard')
 
         @section('manager-content')
-        <x-shared.header headline="Manager Dashboard" sub-headline="Welcome to J-Goal"></x-shared.header>
+        <x-shared.header 
+                headline="Manager Dashboard" 
+                :sub-headline="'Welcome to J-Goal at ' . $organisation->organisation_name"></x-shared.header>
 
         <x-shared.list-homes :homes="$homes" :is-manager="$is_manager" :org-id="$org_id"></x-shared.list-homes>
 
