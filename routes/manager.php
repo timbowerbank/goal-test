@@ -6,6 +6,7 @@ use App\Http\Controllers\Manager\ManagerViewHomeController;
 use App\Http\Controllers\Manager\ManagerViewClientController;
 use App\Http\Controllers\Manager\ManagerViewCarerController;
 use App\Http\Controllers\Manager\ManagerViewClientsController;
+use App\Http\Controllers\Manager\ManagerViewCarersController;
 
 Route::middleware(['auth', 'manager.org.access'])
     ->prefix('organisations/{org_id}/manager')
@@ -27,7 +28,11 @@ Route::middleware(['auth', 'manager.org.access'])
 
         Route::get('homes/{home_id}/clients/{client_id}', [ManagerViewClientController::class, 'index'])->name('view-client');
 
+        Route::get('homes/{home_id}/carers', [ManagerViewCarersController::class, 'index'])->name('view-carers');
+        
         Route::get('homes/{home_id}/carers/{carer_id}', [ManagerViewCarerController::class, 'index'])->name('view-carer');
+
+
 
 
 });

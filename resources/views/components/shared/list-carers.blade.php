@@ -2,14 +2,17 @@
     'carers',
     'home',
     'org-id',
+    'is-card'
 ])
 
 <div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
+    @if($isCard)
     <header>
         <h2>Carers at {{ $home->home_name }}</h2>
     </header>
+    @endif
     @if($carers !== null)
-    <div class="pd-table-scroll-outer">
+    <div @if($isCard) class="pd-table-scroll-outer" @endif>
         <table class="w-100 table table-striped">
             <thead>
                 <tr>
@@ -30,9 +33,11 @@
     
         </table>
     </div>
-    <footer>
-        <a href="#" class="mt-2 btn btn-primary">View All Carers</a>
-    </footer>
+        @if($isCard)
+        <footer>
+            <a href="{{ route('manager.view-carers', ['org_id' => $orgId, 'home_id' => $home->id]) }}" class="mt-2 btn btn-primary">View All Carers</a>
+        </footer>
+        @endif
 
     @else
     <p>Sorry, there aren't any carers assigned to this home.</p>
