@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <x-shared.list-clients :clients="$home->clients" :home="$home" :org-id="$org_id"></x-shared.list-clients>
+                <x-shared.list-clients :clients="$home->clients" :home="$home" :org-id="$org_id" is-card="true"></x-shared.list-clients>
             </div>
             <div class="col-md-6">
                 <x-shared.list-carers :carers="$home->carers" :home="$home" :org-id="$org_id"></x-shared.list-carers>
