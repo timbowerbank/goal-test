@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\GoalStatus;
 
 class Goal extends Model
 {
@@ -100,11 +101,18 @@ class Goal extends Model
         return $this->hasManyThrough(GoalAtomLog::class, GoalAtom::class)
     }
 
+    // *** goalEvents ***
+    // Relationship - allows us to call $goal->goalEvents
+    public function goalEvents():HasMany {
+        return $this->hasMany(GoalEvent::class);
+    }
+
     protected function casts():array {
         return [
             'achieve_by' => 'datetime',
             'goal_completed_at' => 'datetime',
             'archived_at' => 'datetime',
+            'goal_status' => GoalStatus::class,
         ];
     }
 }
