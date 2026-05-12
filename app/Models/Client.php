@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ClientStatus;
@@ -50,6 +51,15 @@ class Client extends Model
             'created_by_user_id',
             'updated_by_user_id'])
         ->withTimestamps();
+    }
+
+
+    // goals **************************
+
+    // *** goals ***
+    // Relationship - allows us to call $client->goals;
+    public function goals():HasMany {
+        return $this->hasMany(Goal::class, 'client_user_id', 'user_id');
     }
 
     // *** casts() ***

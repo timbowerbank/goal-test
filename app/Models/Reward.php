@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reward extends Model
 {
@@ -19,7 +19,7 @@ class Reward extends Model
 
     // *** goal() ***
     // Relationship - allows us to implement $reward->goal
-    public function goal():HasOne {
-        return $this->hasOne(Goal::class);
+    public function goal():BelongsTo {
+        return $this->belongsTo(Goal::class);
     }
 }
