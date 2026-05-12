@@ -120,6 +120,12 @@ class Goal extends Model
         return $this->hasMany(GoalCostItem::class);
     }
 
+    // *** notes ***
+    // Relationship - Allows us to call $goal->notes
+    public function notes():HasMany {
+        return $this->hasMany(GoalNote::class);
+    }
+
     protected function casts():array {
         return [
             'achieve_by' => 'datetime',
