@@ -107,6 +107,12 @@ class Goal extends Model
         return $this->hasMany(GoalEvent::class);
     }
 
+    // *** goalGuides ***
+    // Relationship - Allows us to call $goal->guides
+    public function guides():HasMany {
+        return $this->hasMany(GoalGuide::class);
+    }
+
     protected function casts():array {
         return [
             'achieve_by' => 'datetime',
