@@ -36,6 +36,12 @@ class GoalTask extends Model
         return $this->hasMany(GoalTaskComment::class);
     }
 
+    // *** taskEvents ***
+    // Relationship - allows us to call $goalTask->taskEvents
+    public function taskEvents():HasMany {
+        return $this->hasMany(GoalTaskEvent::class);
+    }
+
     // *** assignedTo ***
     // Relationship - allows us to call $task->assignedTo->full_name
     public function assignedTo():BelongsTo {
