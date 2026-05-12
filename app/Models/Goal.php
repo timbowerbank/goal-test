@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\GoalStatus;
@@ -124,6 +125,18 @@ class Goal extends Model
     // Relationship - Allows us to call $goal->notes
     public function notes():HasMany {
         return $this->hasMany(GoalNote::class);
+    }
+
+    // *** users ***
+    // Relationship - Allows us to call $goal->users
+    public function users():BelongsToMany {
+        return $this->belongsToMany(User::class)
+        ->withPivot(
+            'assigned_by_user_id',
+            'assigned_at',
+            'ended_by_user_id',
+            'ended_at',
+        );
     }
 
     protected function casts():array {

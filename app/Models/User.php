@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class User extends Authenticatable
@@ -101,6 +102,22 @@ class User extends Authenticatable
     // Relationship - allows us to do $user->familyFriend !== null
     public function familyFriend():HasOne {
         return $this->hasOne(FamilyFriend::class);
+    }
+
+    // ***************************
+    // *** OTHER RELATIONSHIPS ***
+    // ***************************
+
+    // *** assignedToGoals ***
+    // Relationship - allows us to call $user->assignedToGoals
+    public function assignedToGoals():BelongsToMany {
+        return $this->belongsToMany(Goal::class)
+        ->withPivot(
+            'assigned_by_user_id',
+            'assigned_at',
+            'ended_by_user_id',
+            'ended_at',
+        );
     }
 
 }
