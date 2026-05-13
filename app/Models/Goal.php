@@ -140,6 +140,12 @@ class Goal extends Model
         );
     }
 
+    // *** activityTypes ***
+    // Relationship - allows us to call $goal->activityTypes
+    public function activityTypes():BelongsToMany {
+        return $this->belongsToMany(ActivityType::class);
+    }
+
     protected function casts():array {
         return [
             'achieve_by' => 'datetime',

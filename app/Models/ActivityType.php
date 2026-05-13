@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class ActivityType extends Model
@@ -15,4 +16,10 @@ class ActivityType extends Model
     ];
 
     public $timestamps = false;
+
+    // *** goals ***
+    // Relationship - allows us to call $activityType->goals
+    public function goals():BelongsToMany {
+        return $this->belongsToMany(Goal::class);
+    }
 }
