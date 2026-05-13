@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\GoalStatus;
+use App\Enums\GoalType;
 
 class Goal extends Model
 {
@@ -145,6 +146,7 @@ class Goal extends Model
             'goal_completed_at' => 'datetime',
             'archived_at' => 'datetime',
             'goal_status' => GoalStatus::class,
+            'goal_type' => GoalType::class,
         ];
     }
 }
