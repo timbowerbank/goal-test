@@ -13,6 +13,10 @@ use App\Models\Goal;
 use App\Models\GoalTask;
 use App\Models\GoalNote;
 use App\Models\Reward;
+use App\Models\Client;
+use App\Models\GoalAtom;
+use App\Models\ActivityType;
+use App\Enums\GoalStatus;
 
 class GoalsSeeder extends Seeder
 {
@@ -386,15 +390,17 @@ class GoalsSeeder extends Seeder
         $counter = 0;
         foreach($clients as $client) {
 
+            $home = $client->home;
+            $organisation = $home->organisations->first();
+            $manager = $home->managers->first();
+            $carer = $home->carers->first();
+
             if(!$manager || !$carer) {
                 $this->command->warn("Skipping client {$client->user->full_name} - no manager or carer found for {$home->home_name}");
                 $counter++;
                 continue;
             }
-            $home = $client->home;
-            $organisation = $home->organisations->first();
-            $manager = $home->managers->first();
-            $carer = $home->carers->first();
+
             $data = $this->goalData[$counter % count($this->goalData)];
 
             // create a goal
@@ -443,9 +449,9 @@ class GoalsSeeder extends Seeder
         $goal->lead_user_id = $carer->id;
         $goal->home_id = $home->id;
         $goal->organisation_id = $organisation->id;
-        if($data['goal_status'] === GoalStatus::Draft) {
+        if($data['goal_status'] === GoalStatus::Draft->value) {
             $goal->achieve_by = now()->plus(weeks: 4);
-        } else if ($data['goal_status'] === GoalStatus::Active) {
+        } else if ($data['goal_status'] === GoalStatus::Active->value) {
             $goal->achieve_by = now()->plus(weeks: 5);
         } else {
             // must be completed
@@ -515,6 +521,10 @@ class GoalsSeeder extends Seeder
             $goalNote = GoalNote::firstOrCreate(
                 [
                     'goal_id' => $goal->id,
+                    
+                ],
+                [
+                    'note' => $randomText
                 ]
             );
 
@@ -527,7 +537,7 @@ class GoalsSeeder extends Seeder
     private function attachActivityType(Goal $goal, array $data):void {
         $activityType = ActivityType::where('name', $data['activity_type'])->first();
         if($activityType) {
-            $goal->activityTypes()->attach($activityType->id);
+            $goal->activityTypes()->syncWithoutDetaching([$activityType->id]);
         }
     }
 
