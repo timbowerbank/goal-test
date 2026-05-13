@@ -365,14 +365,65 @@ class GoalsSeeder extends Seeder
         ],
     ];
 
-    private $counter = 0;
-
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
+        // get all clients as users
+        $clients = Client::with([
+            'user', 
+            'home',
+            'home.organisations',
+            'home.managers.user',
+            'home.carers.user'    
+        ])->get();
+
+        // validate there is a manager and carer
+        
+
+        // loop through users
+        $counter = 0;
+        foreach($clients as $client) {
+
+            if(!$manager || !$carer) {
+                $this->command->warn("Skipping client {$client->user->full_name} - no manager or carer found for {$home->home_name}");
+                $counter++;
+                continue;
+            }
+            $home = $client->home;
+            $organisation = $home->organisations->first();
+            $manager = $home->managers->first();
+            $carer = $home->carers->first();
+            $data = $this->goalData[$counter % count($this->goalData)];
+
+            // create a goal
+            $goal = $this->createGoal($data, $client->user, $manager->user, $carer->user, $organisation, $home);
+
+            // attach an activity type
+            $this->attachActivityType($goal, $data);
+
+            // attach carer to goal
+            $this->attachGoalUser($carer->user, $goal, $manager->user);
+
+            // create an atom if habit
+            if($data['goal_type'] === 'habit') {
+                $this->createGoalAtom($data['atom'], $goal);
+            }
+
+            // create tasks
+            foreach($data['tasks'] as $taskData) {
+                $this->createGoalTask($taskData, $goal, $manager->user, $carer->user);
+            }
+
+            // create a goal note
+            $this->createGoalNote($goal, $manager->user);
+
+            // create a reward
+            $this->createReward($goal, $manager->user);
+
+            $counter++;
+        }
     }
 
     private function createGoal(array $data, User $client, User $manager, User $carer, Organisation $organisation, Home $home):Goal {
