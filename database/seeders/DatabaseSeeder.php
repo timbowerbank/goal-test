@@ -9,6 +9,7 @@ use Database\Seeders\SuperAdminSeeder;
 use Database\Seeders\OrganisationsSeeder;
 use Database\Seeders\HomesSeeder;
 use Database\Seeders\CarersSeeder;
+use Database\Seeders\ActivityTypesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +27,8 @@ class DatabaseSeeder extends Seeder
             OrganisationsSeeder::class,
             HomesSeeder::class,
             CarersSeeder::class,
-            ClientsSeeder::class
+            ClientsSeeder::class,
+            ActivityTypesSeeder::class,
             ]);
     }
 }
