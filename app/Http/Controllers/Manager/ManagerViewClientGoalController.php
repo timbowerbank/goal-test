@@ -14,7 +14,9 @@ class ManagerViewClientGoalController extends Controller
                 'client.user', 
                 'createdBy',
                 'tasks',
-                'tasks.assignedTo'
+                'tasks.assignedTo',
+                'notes',
+                'notes.createdBy'
             ])->findOrFail($goal_id);
 
 

@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th scope="row">Task Title</th>
-                    <th>Task Description</th>
-                    <th>Assigned To</th>
-                    <th>Goal Task Status</th>
+                    <th class="d-none d-md-table-cell">Task Description</th>
+                    <th class="d-none d-md-table-cell">Assigned To</th>
+                    <th class="d-none d-md-table-cell">Goal Task Status</th>
                     <th>View</th>
                 </tr>
             </thead>
@@ -24,13 +24,13 @@
                     <td scope="row">
                         {{ $task->title }}
                     </td>
-                    <td>
+                    <td class="d-none d-md-table-cell">
                         {{ $task->description }}
                     </td>
-                    <td>
+                    <td class="d-none d-md-table-cell">
                         {{ $task->assignedTo->full_name }}
                     </td>
-                    <td>
+                    <td class="d-none d-md-table-cell">
                         {{ $task->goal_task_status }}
                     </td>
                     <td>
