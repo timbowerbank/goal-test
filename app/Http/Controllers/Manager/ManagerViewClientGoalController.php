@@ -9,9 +9,13 @@ use App\Models\Goal;
 class ManagerViewClientGoalController extends Controller
 {
     public function index($org_id, $home_id, $client_id, $goal_id) {
-        $goal = Goal::findOrFail($goal_id);
-
-        $goal = Goal::with(['client.user', 'createdBy'])->findOrFail($goal_id);
+        $goal = Goal::with(
+            [
+                'client.user', 
+                'createdBy',
+                'tasks',
+                'tasks.assignedTo'
+            ])->findOrFail($goal_id);
 
 
         return view('manager.goal')

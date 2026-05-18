@@ -12,6 +12,8 @@
                 :goal="$goal"
         ></x-goal.summary>
 
+        <x-shared.list-tasks :tasks="$goal->tasks"></x-shared.list-tasks>
+
         <form method="post" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-primary mt-3" type="submit">Logout</button>
