@@ -7,6 +7,11 @@
         :headline="'Viewing Carer: ' . $carer->user->full_name" 
         :sub-headline="'Welcome to ' . $carer->user->first_name . '\'s Dashboard.'"></x-shared.header>
 
+    <x-shared.list-tasks
+        :headline="'Tasks for ' . $carer->user->first_name"
+        :tasks="$carer->tasks"
+        :is-card="true"
+    ></x-shared.list-tasks>
 
     <form method="post" action="{{ route('logout') }}">
         @csrf

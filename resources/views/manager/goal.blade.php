@@ -12,7 +12,10 @@
                 :goal="$goal"
         ></x-goal.summary>
 
-        <x-shared.list-tasks :tasks="$goal->tasks"></x-shared.list-tasks>
+        <x-shared.list-tasks 
+                headline="Goal Tasks"
+                :tasks="$goal->tasks"
+        ></x-shared.list-tasks>
 
         <x-shared.list-notes :notes="$goal->notes"></x-shared.notes>
 

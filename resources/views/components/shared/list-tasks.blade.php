@@ -1,11 +1,12 @@
 @props([
+    'headline',
     'tasks',
     'is-card'
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
     <header>
-        <h2>Goal Tasks</h2>
+        <h2>{{ $headline }}</h2>
     </header>
     @if($tasks)
         <table class="w-100 table table-striped">
