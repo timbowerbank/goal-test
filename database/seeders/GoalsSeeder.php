@@ -21,6 +21,16 @@ use App\Enums\GoalStatus;
 class GoalsSeeder extends Seeder
 {
 
+    private array $homeNames = [
+        'Didbury House',
+        'Purleigh House',
+        'Konnect House',
+        'Bickford House',
+        'Wakefield House',
+        'Prescott House',
+        'Gaskell House',
+        ];
+
     private array $goalData = [
         [
             'title' => 'London Theatre Trip',
@@ -387,7 +397,8 @@ class GoalsSeeder extends Seeder
         
 
         // loop through users
-        $counter = 0;
+        $mockGoalCounter = 0;
+        $maxGoalCounterPerClient = 3;
         foreach($clients as $client) {
 
             $home = $client->home;
@@ -397,38 +408,53 @@ class GoalsSeeder extends Seeder
 
             if(!$manager || !$carer) {
                 $this->command->warn("Skipping client {$client->user->full_name} - no manager or carer found for {$home->home_name}");
-                $counter++;
                 continue;
             }
 
-            $data = $this->goalData[$counter % count($this->goalData)];
+            // create more than 1 goal per client, based on $maxGoalCounterPerClient
+            for($count = 0; $count < $maxGoalCounterPerClient; $count++) {
 
-            // create a goal
-            $goal = $this->createGoal($data, $client->user, $manager->user, $carer->user, $organisation, $home);
+                // guard against this seeder creating goals in a live environment
+                if(!in_array($client->home->home_name, $this->homeNames, true)) {
+                    continue;
+                }
+                
+                $data = $this->goalData[$mockGoalCounter % count($this->goalData)];
+                
+                // create a goal
+                $goal = $this->createGoal($data, $client->user, $manager->user, $carer->user, $organisation, $home);
+    
+                // attach an activity type
+                $this->attachActivityType($goal, $data);
+    
+                // attach carer to goal
+                $this->attachGoalUser($carer->user, $goal, $manager->user);
+    
+                // create an atom if habit
+                if($data['goal_type'] === 'habit') {
+                    $this->createGoalAtom($data['atom'], $goal);
+                }
+    
+                // create tasks
+                foreach($data['tasks'] as $taskData) {
+                    $this->createGoalTask($taskData, $goal, $manager->user, $carer->user);
+                }
+    
+                // create a goal note
+                $this->createGoalNote($goal, $manager->user);
+    
+                // create a reward
+                $this->createReward($goal, $manager->user);
+    
+                // update $mockGoalCounter accordingly
+                if($mockGoalCounter === count($this->goalData) - 1) {
+                    $mockGoalCounter = 0;
+                } else {
+                    $mockGoalCounter++;
+                }
 
-            // attach an activity type
-            $this->attachActivityType($goal, $data);
-
-            // attach carer to goal
-            $this->attachGoalUser($carer->user, $goal, $manager->user);
-
-            // create an atom if habit
-            if($data['goal_type'] === 'habit') {
-                $this->createGoalAtom($data['atom'], $goal);
             }
 
-            // create tasks
-            foreach($data['tasks'] as $taskData) {
-                $this->createGoalTask($taskData, $goal, $manager->user, $carer->user);
-            }
-
-            // create a goal note
-            $this->createGoalNote($goal, $manager->user);
-
-            // create a reward
-            $this->createReward($goal, $manager->user);
-
-            $counter++;
         }
     }
 
