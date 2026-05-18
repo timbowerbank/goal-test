@@ -9,6 +9,14 @@
                 :sub-headline="'Welcome to ' . $client->user->first_name . '\'s Dashboard.'">
         </x-shared.header>
 
+        <x-shared.list-goals
+                :goals="$client->goals"
+                :is-card="true"
+                :org-id="$org_id"
+                :home-id="$home_id"
+                :client-id="$client->user->id"
+        ></x-shared.list-goals>
+
         <form method="post" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-primary mt-3" type="submit">Logout</button>
