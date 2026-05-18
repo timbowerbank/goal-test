@@ -388,7 +388,7 @@ class GoalsSeeder extends Seeder
         $clients = Client::with([
             'user', 
             'home',
-            'home.organisations',
+            'home.organisation',
             'home.managers.user',
             'home.carers.user'    
         ])->get();
@@ -402,7 +402,7 @@ class GoalsSeeder extends Seeder
         foreach($clients as $client) {
 
             $home = $client->home;
-            $organisation = $home->organisations->first();
+            $organisation = $home->organisation->first();
             $manager = $home->managers->first();
             $carer = $home->carers->first();
 
@@ -421,7 +421,7 @@ class GoalsSeeder extends Seeder
                 
                 $data = $this->goalData[$mockGoalCounter % count($this->goalData)];
                 
-                // create a goal
+                // create a goal - array $data, User $client, User $manager, User $carer, Organisation $organisation, Home $home
                 $goal = $this->createGoal($data, $client->user, $manager->user, $carer->user, $organisation, $home);
     
                 // attach an activity type
@@ -460,7 +460,7 @@ class GoalsSeeder extends Seeder
 
     private function createGoal(array $data, User $client, User $manager, User $carer, Organisation $organisation, Home $home):Goal {
 
-        $goal = Goal::firstOrCreate(
+        $goal = Goal::firstOrNew(
             [
                 'title' => $data['title'],
                 'client_user_id' => $client->id
@@ -496,7 +496,7 @@ class GoalsSeeder extends Seeder
     
 
     private function createGoalAtom(array $atom, Goal $goal):GoalAtom {
-        $goalAtom = GoalAtom::firstOrCreate(
+        $goalAtom = GoalAtom::firstOrNew(
             [
                 'goal_id' => $goal->id
             ],
@@ -512,7 +512,7 @@ class GoalsSeeder extends Seeder
 
     private function createGoalTask(array $taskData, Goal $goal, User $manager, User $carer ):GoalTask {
 
-        $goalTask = GoalTask::firstOrCreate(
+        $goalTask = GoalTask::firstOrNew(
             [
                 'title' => $taskData['title'],
                 'goal_id' => $goal->id,
@@ -544,7 +544,7 @@ class GoalsSeeder extends Seeder
             // prepend the goal name to it
             $randomText = "Note for: " . $goal->title . ". " . $randomText;
 
-            $goalNote = GoalNote::firstOrCreate(
+            $goalNote = GoalNote::firstOrNew(
                 [
                     'goal_id' => $goal->id,
                     
@@ -582,7 +582,7 @@ class GoalsSeeder extends Seeder
     private function createReward(Goal $goal, User $manager):Reward {
         $randomRewardMap = $this->rewards[array_rand($this->rewards)];
 
-        $reward = Reward::firstOrCreate(
+        $reward = Reward::firstOrNew(
             [
                 'goal_id' => $goal->id
             ],

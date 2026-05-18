@@ -100,7 +100,7 @@ class Goal extends Model
     // *** goalAtomLog ***
     // Relationship - allows us to call $goal->goalAtomLog
     public function goalAtomLog():HasManyThrough {
-        return $this->hasManyThrough(GoalAtomLog::class, GoalAtom::class)
+        return $this->hasManyThrough(GoalAtomLog::class, GoalAtom::class);
     }
 
     // *** goalEvents ***
