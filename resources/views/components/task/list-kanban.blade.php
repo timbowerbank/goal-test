@@ -10,35 +10,47 @@
         <h2>{{ $headline }}</h2>
     </header>
     <div class="row">
-        <div class="col-md-4 mb-2">
+        <div class="col-lg-4 mb-2">
             <h3>Not Started</h3>
-            @foreach($notStartedTasks as $notStartedTask)
+                @forelse($notStartedTasks as $notStartedTask)
 
-            <x-task.kanban-card
-                :task="$notStartedTask">
-            </x-task.kanban-card>
+                <x-task.kanban-card
+                    :task="$notStartedTask"
+                    :is-completed="false">
+                </x-task.kanban-card>
 
-            @endforeach
+                @empty
+                <p>No tasks present</p>
+
+                @endforelse
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-lg-4 mb-2">
             <h3>In Progress</h3>
-            @foreach($inProgressTasks as $inProgressTask)
+            @forelse($inProgressTasks as $inProgressTask)
 
             <x-task.kanban-card
-                :task="$inProgressTask">
+                :task="$inProgressTask"
+                :is-completed="false">
             </x-task.kanban-card>
 
-            @endforeach
+            @empty
+            <p>No tasks present</p>
+
+            @endforelse
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-lg-4 mb-2">
             <h3>Complete</h3>
-            @foreach($completeTasks as $completeTask)
+            @forelse($completeTasks as $completeTask)
 
             <x-task.kanban-card
-                :task="$completeTask">
+                :task="$completeTask"
+                :is-completed="true">
             </x-task.kanban-card>
 
-            @endforeach
+            @empty
+            <p>No tasks present</p>
+
+            @endforelse
         </div>
         
     </div>

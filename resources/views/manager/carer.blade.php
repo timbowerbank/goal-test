@@ -14,11 +14,11 @@
         :complete-tasks="$completed"
     ></x-task.list-kanban>
 
-    <x-shared.list-tasks
+    {{-- <x-shared.list-tasks
         :headline="'Tasks for ' . $carer->user->first_name"
         :tasks="$carer->tasks"
         :is-card="true"
-    ></x-shared.list-tasks>
+    ></x-shared.list-tasks> --}}
 
     <form method="post" action="{{ route('logout') }}">
         @csrf
