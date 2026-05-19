@@ -7,6 +7,13 @@
         :headline="'Viewing Carer: ' . $carer->user->full_name" 
         :sub-headline="'Welcome to ' . $carer->user->first_name . '\'s Dashboard.'"></x-shared.header>
 
+    <x-task.list-kanban
+        :headline="'Tasks for ' . $carer->user->first_name"
+        :not-started-tasks="$notStarted"
+        :in-progress-tasks="$inProgress"
+        :complete-tasks="$completed"
+    ></x-task.list-kanban>
+
     <x-shared.list-tasks
         :headline="'Tasks for ' . $carer->user->first_name"
         :tasks="$carer->tasks"
