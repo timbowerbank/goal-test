@@ -2,7 +2,8 @@
     'headline',
     'not-started-tasks',
     'in-progress-tasks',
-    'complete-tasks'
+    'complete-tasks',
+    'view-task-url'
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
@@ -16,7 +17,8 @@
 
                 <x-task.kanban-card
                     :task="$notStartedTask"
-                    :is-completed="false">
+                    :is-completed="false"
+                    :view-task-url="$viewTaskUrl . $notStartedTask->id">
                 </x-task.kanban-card>
 
                 @empty
@@ -30,7 +32,8 @@
 
             <x-task.kanban-card
                 :task="$inProgressTask"
-                :is-completed="false">
+                :is-completed="false"
+                :view-task-url="$viewTaskUrl . $inProgressTask->id">
             </x-task.kanban-card>
 
             @empty
@@ -44,7 +47,8 @@
 
             <x-task.kanban-card
                 :task="$completeTask"
-                :is-completed="true">
+                :is-completed="true"
+                :view-task-url="$viewTaskUrl . $completeTask->id">
             </x-task.kanban-card>
 
             @empty

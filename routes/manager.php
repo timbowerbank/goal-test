@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\ManagerViewCarerController;
 use App\Http\Controllers\Manager\ManagerViewClientsController;
 use App\Http\Controllers\Manager\ManagerViewCarersController;
 use App\Http\Controllers\Manager\ManagerViewClientGoalController;
+use App\Http\Controllers\Manager\ManagerViewTaskController;
 
 
 Route::middleware(['auth', 'manager.org.access'])
@@ -36,6 +37,9 @@ Route::middleware(['auth', 'manager.org.access'])
 
         // goals
         Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [ManagerViewClientGoalController::class, 'index'])->name('view-goal');
+
+        // team tasks
+        Route::get('homes/{home_id}/carers/{carer_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'index'])->name('view-task');
 
 
 

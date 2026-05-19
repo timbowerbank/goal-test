@@ -12,6 +12,7 @@
         :not-started-tasks="$notStarted"
         :in-progress-tasks="$inProgress"
         :complete-tasks="$completed"
+        :view-task-url="'/organisations/' . $org_id . '/manager/homes/' . $home_id . '/carers/' . $carer->user_id . '/tasks/'"
     ></x-task.list-kanban>
 
     {{-- <x-shared.list-tasks

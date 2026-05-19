@@ -51,6 +51,6 @@
         </div>
     </div>
     <footer>
-        <a href="#" class="btn btn-secondary btn-sm">View Task</a>
+        <a href="{{ $viewTaskUrl }}" class="btn btn-secondary btn-sm">View Task</a>
     </footer>
 </div>

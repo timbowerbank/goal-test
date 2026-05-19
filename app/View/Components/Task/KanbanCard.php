@@ -18,7 +18,7 @@ class KanbanCard extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public GoalTask $task, public bool $isCompleted
+        public GoalTask $task, public bool $isCompleted, public string $viewTaskUrl
     )
     {
         $now = Carbon::now();
