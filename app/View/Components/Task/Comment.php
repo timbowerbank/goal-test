@@ -6,9 +6,11 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use App\Models\GoalTaskComment;
+use Carbon\Carbon;
 
 class Comment extends Component
 {
+    public int $daysSince = 0;
     /**
      * Create a new component instance.
      */
@@ -16,7 +18,8 @@ class Comment extends Component
         public GoalTaskComment $comment
     )
     {
-        //
+        $now = Carbon::now();
+        $this->daysSince = (int) $now->diffInDays($comment->created_at, absolute: true);
     }
 
     /**

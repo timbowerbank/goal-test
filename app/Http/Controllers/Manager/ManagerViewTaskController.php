@@ -13,6 +13,7 @@ class ManagerViewTaskController extends Controller
            'goal',
            'goal.client.user',
            'comments',
+           'comments.createdBy',
            'assignedTo',
            'completedWith' 
         ])->findOrFail($task_id);

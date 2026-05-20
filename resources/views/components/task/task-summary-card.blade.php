@@ -2,7 +2,9 @@
     <header>
         <h2>Summary</h2>
         @if($isComplete)
+            @if($task->completed_at)
             <p>Completed: {{ $task->completed_at->format('j M Y') }}</p>
+            @endif
             <p>Completed with {{ $task->completedWith->full_name }}</p>
         @else
             @if($isLate)
