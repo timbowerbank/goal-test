@@ -17,6 +17,10 @@
                         </x-shared.task.task-summary-card>
                 </div>
                 <div class="col">
+                        <x-task.list-comments
+                                :comments="$task->comments"
+                        ></x-task.list-comments>
+
                         
                 </div>
         </div>
