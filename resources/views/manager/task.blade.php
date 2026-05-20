@@ -5,7 +5,20 @@
         @section('manager-content')
 
         <x-shared.header 
-        headline="Task Screen" 
-        sub-headline="Add a sub header - remember to add colons for attributes when using variables"></x-shared.header>
+        :headline="'Viewing Task: ' . $task->title" 
+        :sub-headline="'This task is assigned to: ' . $task->assignedTo->full_name"></x-shared.header>
+
+        <div class="row">
+                <div class="col">
+                        <x-task.task-summary-card
+                                :task="$task"
+                                :org-id="$orgId"
+                                :home-id="$homeId">
+                        </x-shared.task.task-summary-card>
+                </div>
+                <div class="col">
+                        
+                </div>
+        </div>
 
         @endsection
