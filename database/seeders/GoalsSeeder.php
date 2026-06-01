@@ -17,6 +17,7 @@ use App\Models\Client;
 use App\Models\GoalAtom;
 use App\Models\ActivityType;
 use App\Enums\GoalStatus;
+use App\Enums\TaskStatus;
 
 class GoalsSeeder extends Seeder
 {
@@ -525,12 +526,22 @@ class GoalsSeeder extends Seeder
             ]);
 
         $goalTask->assigned_to_user_id = $carer->id;
+        // due_at
         if($goal->goal_status === GoalStatus::Active || $goal->goal_status === GoalStatus::Draft) {
             $goalTask->due_at = now();
         }  else {
             // must be completed
-            $goalTask->due_at = $goal->goal_completed_at->copy()->subWeek();
+            $goalTask->due_at = $goal->goal_completed_at->copy()->subWeek(); 
+        }
+
+        // completed_with and completed_at
+        if($taskData['goal_task_status'] === TaskStatus::Complete->value) {
             $goalTask->completed_with_user_id = $carer->id;
+            if($goal->goal_status === GoalStatus::Completed) {
+                $goalTask->completed_at = $goal->goal_completed_at->copy()->subWeek();
+            } else {
+                $goalTask->completed_at = now();
+            }
         }
         
         $goalTask->save();
