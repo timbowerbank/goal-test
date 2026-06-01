@@ -37,9 +37,10 @@ Route::middleware(['auth', 'manager.org.access'])
 
         // goals
         Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [ManagerViewClientGoalController::class, 'index'])->name('view-goal');
+        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'viewTaskForGoal'])->name('view-task-for-goal');
 
         // team tasks
-        Route::get('homes/{home_id}/carers/{carer_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'index'])->name('view-task');
+        Route::get('homes/{home_id}/carers/{carer_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'viewTaskForCarer'])->name('view-task-for-carer');
 
 
 

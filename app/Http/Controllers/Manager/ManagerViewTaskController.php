@@ -8,7 +8,9 @@ use App\Models\GoalTask;
 
 class ManagerViewTaskController extends Controller
 {
-    public function index($org_id, $home_id, $carer_id, $task_id) {
+    // *** viewTaskForCarer() ***
+    // viewing a task for a carer
+    public function viewTaskForCarer($org_id, $home_id, $carer_id, $task_id) {
         $task = GoalTask::with([
            'goal',
            'goal.client.user',
@@ -23,5 +25,11 @@ class ManagerViewTaskController extends Controller
             ->with('orgId', $org_id)
             ->with('homeId', $home_id)
             ->with('carerId', $carer_id);
+    }
+
+    // *** viewTaskForGoal() ***
+    // viewing a task for a goal
+    public function viewTaskForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
+        return view('manager.task');
     }
 }
