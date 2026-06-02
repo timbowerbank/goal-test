@@ -97,7 +97,7 @@ class Home extends Model
     // *******************
 
     // *** currentlyBelongsToOrganisation() ***
-    public function currentlyBelongsToOrganisation($query, $orgId) {
+    public function scopeCurrentlyBelongsToOrganisation($query, $orgId) {
         return $query->whereHas('organisation', function($q) use ($orgId){
             $q  ->where('organisations.id', $orgId)
                 ->where('organisations.organisation_status', OrganisationStatus::Active)

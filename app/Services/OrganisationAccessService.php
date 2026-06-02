@@ -7,6 +7,7 @@ use App\Enums\ManagerStatus;
 use App\Enums\CarerStatus;
 use App\Enums\ClientStatus;
 use App\Enums\OrganisationAdministratorStatus;
+use App\Enums\OrganisationStatus;
 
 class OrganisationAccessService {
 
@@ -34,7 +35,8 @@ class OrganisationAccessService {
         return $manager->homes()
                 ->wherePivotNull('ended_at')
                 ->whereHas('organisation', function($query) use ($org_id){
-                    $query->where('organisations.id', $org_id);
+                    $query  ->where('organisations.id', $org_id)
+                            ->where('organisations.organisation_status', OrganisationStatus::Active);
                 })
                 ->exists();
     }
@@ -54,6 +56,7 @@ class OrganisationAccessService {
             return false;
         }
 
+        // check carer is active
         if($carer->carer_status !== CarerStatus::Active) {
             return false;
         }
@@ -61,7 +64,8 @@ class OrganisationAccessService {
         return $carer->homes()
             ->wherePivotNull('ended_at')
             ->whereHas('organisation', function($query) use ($org_id){
-                    $query->where('organisations.id', $org_id);
+                    $query  ->where('organisations.id', $org_id)
+                            ->where('organisations.organisation_status', OrganisationStatus::Active);
                 })
             ->exists();
     }
@@ -82,14 +86,15 @@ class OrganisationAccessService {
         }
 
         // check that the client is active
-        if($client->clientStatus !== ClientStatus::Active) {
+        if($client->client_status !== ClientStatus::Active) {
             return false;
         }
 
         // check that the client has a home
         return $client->home()
             ->whereHas('organisation', function($query) use ($org_id){
-                $query->where('organisations.id', $org_id);
+                $query  ->where('organisations.id', $org_id)
+                        ->where('organisations.organisation_status', OrganisationStatus::Active);
             })
             ->exists();
     }
