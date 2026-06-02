@@ -65,7 +65,7 @@ class GoalTask extends Model
     // *******************
 
     // *** scopeForGoal() ***
-    public function scopeForeGoal($query, $goalId) {
+    public function scopeForGoal($query, $goalId) {
         return $query->where('goal_id', $goalId);
     }
 

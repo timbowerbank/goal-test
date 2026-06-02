@@ -30,6 +30,24 @@ class ManagerViewTaskController extends Controller
     // *** viewTaskForGoal() ***
     // viewing a task for a goal
     public function viewTaskForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
-        return view('manager.task');
+        // validation checks to stop anyone constructing URLs
+        $home = Home::currentlyBelongsToOrganisation($home_id)->findOfFail($org_id);
+        $goal = Goal::forClient($client_id)->findOrFail($goal_id);
+
+        $task = GoalTask::with([
+            'goal',
+            'goal.client',
+            'goal.home'
+            'comments',
+            'assignedTo',
+            'completedWith'
+        ])->forGoal($goal_id)->findOrFail($task_id);
+
+
+
+        return view('manager.task')
+                ->with('task', $task)
+                ->with('orgId', $org_id)
+                ->with('homeId', $home_id);
     }
 }
