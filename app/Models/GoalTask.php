@@ -60,6 +60,19 @@ class GoalTask extends Model
         return $this->belongsTo(User::class, 'archived_by_user_id');
     }
 
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** scopeForGoal() ***
+    public function scopeForeGoal($query, $goalId) {
+        return $query->where('goal_id', $goalId);
+    }
+
+    // ******************
+    // *** CASTS ********
+    // ******************
+
     protected function casts():array {
         return [
             'completed_at' => 'datetime',

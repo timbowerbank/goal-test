@@ -96,7 +96,7 @@ class Home extends Model
     // *** SCOPES ********
     // *******************
 
-    // *** currentlyBelongsToOrganisation() ***
+    // *** scopeCurrentlyBelongsToOrganisation() ***
     public function scopeCurrentlyBelongsToOrganisation($query, $orgId) {
         return $query->whereHas('organisation', function($q) use ($orgId){
             $q  ->where('organisations.id', $orgId)
@@ -104,6 +104,10 @@ class Home extends Model
                 ->whereNull('home_organisation.ended_at');
         });
     }
+
+    // ******************
+    // *** CASTS ********
+    // ******************
 
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $home->home_status = HomeStatus::Active;

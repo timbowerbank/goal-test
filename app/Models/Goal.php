@@ -146,6 +146,19 @@ class Goal extends Model
         return $this->belongsToMany(ActivityType::class);
     }
 
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** scopeForClient() ***
+    public function scopeForClient($query, $clientId) {
+        return $query->where('client_user_id', $clientId);
+    }
+
+    // ******************
+    // *** CASTS ********
+    // ******************
+
     protected function casts():array {
         return [
             'achieve_by' => 'datetime',
