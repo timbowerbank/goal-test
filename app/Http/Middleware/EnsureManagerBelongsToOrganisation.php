@@ -7,6 +7,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\ManagerStatus;
+use App\Enums\OrganisationStatus;
+use App\Models\Organisation;
 
 class EnsureManagerBelongsToOrganisation {
 
@@ -40,14 +42,17 @@ class EnsureManagerBelongsToOrganisation {
         }
 
         // doesn't belong to an organisation
-        if(!$this->accessService->managerBelongsToOrganisation(Auth::user(), (int)$request->route('org_id'))) {
+        if(!$this->accessService->managerBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
             abort(403, 'You do not belong to this organisation.');
         }
 
-        return $next($request);
+        // check organisation is active
+        $organisation = Organisation::findOrFail($request->route('org_id'));
+        if($organisation->organisation_status !== OrganisationStatus::Active) {
+            return redirect()->route('manager.inactive', ['org_id' => $request->route('org_id')]);
+        }
 
-
-        
+        return $next($request);   
 
     }
 

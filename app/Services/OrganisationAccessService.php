@@ -11,7 +11,7 @@ use App\Enums\OrganisationAdministratorStatus;
 class OrganisationAccessService {
 
     // *** managerBelongsToOrganisation() ***
-    public function managerBelongsToOrganisation(User $user, int $org_id) {
+    public function managerBelongsToOrganisation(User $user, string $org_id) {
 
         $manager = $user->manager;
 
@@ -40,7 +40,7 @@ class OrganisationAccessService {
     }
 
     // *** carerBelongsToOrganisation() ***
-    public function carerBelongsToOrganisation(User $user, int $org_id) {
+    public function carerBelongsToOrganisation(User $user, string $org_id) {
         // get the carer
         $carer = $user->carer;
 
@@ -67,7 +67,7 @@ class OrganisationAccessService {
     }
 
     // *** clientBelongsToOrganisation() ***
-    public function clientBelongsToOrganisation(User $user, int $org_id) {
+    public function clientBelongsToOrganisation(User $user, string $org_id) {
         // get the client
         $client = $user->client;
 
@@ -94,7 +94,7 @@ class OrganisationAccessService {
             ->exists();
     }
 
-    public function adminBelongsToOrganisation(User $user, int $org_id) {
+    public function adminBelongsToOrganisation(User $user, string $org_id) {
         // get the admin
         $admin = $user->organisationAdministrator;
 

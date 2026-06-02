@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Services\OrganisationAccessService;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\OrganisationAdministratorStatus;
+use App\Enums\OrganisationStatus;
+use App\Models\Organisation;
 
 class EnsureAdministratorBelongsToOrganisation
 {
@@ -45,8 +47,14 @@ class EnsureAdministratorBelongsToOrganisation
         }
 
         // use the service
-        if($this->accessService->adminBelongsToOrganisation(Auth::user(), (int)$request->route('org_id'))) {
+        if($this->accessService->adminBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
             abort(403, 'You do not belong to this organisation');
+        }
+
+        // check organisation is active
+        $organisation = Organisation::findOrFail($request->route('org_id'));
+        if($organisation->organisation_status !== OrganisationStatus::Active) {
+            return redirect()->route('manager.inactive', ['org_id' => $request->route('org_id')]);
         }
 
 

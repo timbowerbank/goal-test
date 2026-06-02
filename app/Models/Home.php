@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\HomeStatus;
+use App\Enums\OrganisationStatus;
 use App\Models\Client;
 
 class Home extends Model
@@ -91,6 +92,18 @@ class Home extends Model
         return $this->hasMany(Client::class);
     }
 
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** currentlyBelongsToOrganisation() ***
+    public function currentlyBelongsToOrganisation($query, $orgId) {
+        return $query->whereHas('organisation', function($q) use ($orgId){
+            $q  ->where('organisations.id', $orgId)
+                ->where('organisations.organisation_status', OrganisationStatus::Active)
+                ->whereNull('home_organisation.ended_at');
+        });
+    }
 
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $home->home_status = HomeStatus::Active;
