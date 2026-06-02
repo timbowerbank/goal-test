@@ -31,13 +31,13 @@ class ManagerViewTaskController extends Controller
     // viewing a task for a goal
     public function viewTaskForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
         // validation checks to stop anyone constructing URLs
-        $home = Home::currentlyBelongsToOrganisation($home_id)->findOfFail($org_id);
+        $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
         $goal = Goal::forClient($client_id)->findOrFail($goal_id);
 
         $task = GoalTask::with([
             'goal',
             'goal.client',
-            'goal.home'
+            'goal.home',
             'comments',
             'assignedTo',
             'completedWith'
