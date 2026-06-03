@@ -62,6 +62,20 @@ class Client extends Model
         return $this->hasMany(Goal::class, 'client_user_id', 'user_id');
     }
 
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** scopeConfirmClientBelongsToHome() ***
+    public function scopeConfirmClientBelongsToHome($query, $homeId) {
+        return $query->where('home_id', $homeId);
+    }
+
+
+    // ******************
+    // *** CASTS ********
+    // ******************
+
     // *** casts() ***
     protected function casts():array {
         return [

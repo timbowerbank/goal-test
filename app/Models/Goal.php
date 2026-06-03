@@ -151,8 +151,9 @@ class Goal extends Model
     // *******************
 
     // *** scopeForClient() ***
-    public function scopeForClient($query, $clientId) {
-        return $query->where('client_user_id', $clientId);
+    // checking that this goal has a valid client
+    public function scopeForClient($query, $clientUserId) {
+        return $query->where('client_user_id', $clientUserId);
     }
 
     // ******************

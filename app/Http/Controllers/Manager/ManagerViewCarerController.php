@@ -6,17 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Carer;
 use App\Enums\TaskStatus;
+use App\Models\Home;
 
 class ManagerViewCarerController extends Controller
 {
     public function index($org_id, $home_id, $carer_id) {
+
+        // validate that home belongs to organisation
+        $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
 
         // TODO add a date method to tasks to retrieve latest
         $carer = Carer::with([
             'tasks',
             'tasks.goal',
             'tasks.goal.client.user',
-        ])->findOrFail($carer_id);
+        ])->carerBelongsToHome($home_id)->findOrFail($carer_id);
 
         return view('manager.carer')
             ->with('org_id', $org_id)
