@@ -14,7 +14,7 @@
                 :is-card="true"
                 :org-id="$org_id"
                 :home-id="$home_id"
-                :client-id="$client->user->id"
+                :client-id="$client->id"
         ></x-shared.list-goals>
 
         <form method="post" action="{{ route('logout') }}">
