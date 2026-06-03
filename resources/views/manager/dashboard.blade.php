@@ -4,8 +4,8 @@
 
         @section('manager-content')
         <x-shared.header 
-                :headline="$manager->user->first_name . '\'s Dashboard'" 
-                :sub-headline="'Welcome ' . $manager->user->first_name . ' to J-Goal at '  . $organisation->organisation_name"></x-shared.header>
+                :headline="$user->first_name . '\'s Dashboard'" 
+                :sub-headline="'Welcome ' . $user->first_name . ' to J-Goal at '  . $organisation->organisation_name"></x-shared.header>
 
         <x-shared.list-homes :homes="$homes" :org-id="$org_id"></x-shared.list-homes>
 

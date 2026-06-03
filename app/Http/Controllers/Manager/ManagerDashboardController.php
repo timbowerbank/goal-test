@@ -24,7 +24,7 @@ class ManagerDashboardController extends Controller
                     });
                 },
                 'homes.clients',
-                'homes.carers'
+                'homes.carers',
             ]
         );
 
@@ -34,6 +34,6 @@ class ManagerDashboardController extends Controller
             ->with('homes', $manager->homes)
             ->with('org_id', $org_id)
             ->with('organisation', $organisation)
-            ->with('manager', $manager);
+            ->with('user', Auth::user());
     }
 }
