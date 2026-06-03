@@ -1,6 +1,5 @@
 @props([
     'homes',
-    'is-manager',
     'org-id',
 ])
 <div class="p-4 rounded border mb-2 bg-white">
