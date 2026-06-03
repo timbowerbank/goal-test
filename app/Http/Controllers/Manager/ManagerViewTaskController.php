@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\GoalTask;
 use App\Models\Home;
 use App\Models\Carer;
+use App\Models\Goal;
+use App\Models\Client;
 
 class ManagerViewTaskController extends Controller
 {
@@ -37,9 +39,15 @@ class ManagerViewTaskController extends Controller
     // *** viewTaskForGoal() ***
     // viewing a task for a goal
     public function viewTaskForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
+        
         // validation checks to stop anyone constructing URLs
         $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
-        $goal = Goal::forClient($client_id)->findOrFail($goal_id);
+        
+        // validate whether goal belongs to a client
+        $client = Client::confirmClientBelongsToHome($home_id)->findOrFail($client_id);
+
+        // validate whether goal belongs to client
+        $goal = Goal::forClient($client->user_id)->findOrFail($goal_id);
 
         $task = GoalTask::with([
             'goal',

@@ -1,7 +1,9 @@
 @props([
     'headline',
     'tasks',
-    'is-card'
+    'is-card',
+    'org-id',
+    'home-id',
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
@@ -35,7 +37,14 @@
                         {{ $task->goal_task_status }}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-secondary btn-sm">View</a>
+                        <a href="{{ route('manager.view-task-for-goal', [
+                            'org_id' => $orgId, 
+                            'home_id' => $homeId,
+                            'client_id' => $task->goal->client->id,
+                            'goal_id' => $task->goal->id,
+                            'task_id' => $task->id,
+                            
+                            ]) }}" class="btn btn-secondary btn-sm">View</a>
                     </td>
 
                 </tr>
