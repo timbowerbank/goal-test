@@ -40,7 +40,7 @@
                 [
                     'org_id' => $orgId, 
                     'home_id' => $homeId, 
-                    'client_id' => $task->goal->client_user_id, 
+                    'client_id' => $task->goal->client->id, 
                     'goal_id' => $task->goal->id
                 ]) }}"
                     >
