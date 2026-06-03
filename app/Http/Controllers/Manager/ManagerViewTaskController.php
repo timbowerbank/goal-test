@@ -31,9 +31,9 @@ class ManagerViewTaskController extends Controller
 
         return view('manager.task')
             ->with('task', $task)
-            ->with('orgId', $org_id)
-            ->with('homeId', $home_id)
-            ->with('carerId', $carer_id);
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id)
+            ->with('carer_id', $carer_id);
     }
 
     // *** viewTaskForGoal() ***
@@ -62,7 +62,7 @@ class ManagerViewTaskController extends Controller
 
         return view('manager.task')
                 ->with('task', $task)
-                ->with('orgId', $org_id)
-                ->with('homeId', $home_id);
+                ->with('org_id', $org_id)
+                ->with('home_id', $home_id);
     }
 }

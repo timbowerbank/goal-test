@@ -12,8 +12,8 @@
                 <div class="col">
                         <x-task.task-summary-card
                                 :task="$task"
-                                :org-id="$orgId"
-                                :home-id="$homeId">
+                                :org-id="$org_id"
+                                :home-id="$home_id">
                         </x-shared.task.task-summary-card>
                 </div>
                 <div class="col">

@@ -31,7 +31,7 @@ class ManagerViewClientGoalController extends Controller
 
         return view('manager.goal')
             ->with('goal', $goal)
-            ->with('orgId', $org_id)
-            ->with('homeId', $home_id);
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
     }
 }

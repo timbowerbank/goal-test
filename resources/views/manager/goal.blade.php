@@ -15,8 +15,8 @@
         <x-shared.list-tasks 
                 headline="Goal Tasks"
                 :tasks="$goal->tasks"
-                :org-id="$orgId"
-                :home-id="$homeId"
+                :org-id="$org_id"
+                :home-id="$home_id"
         ></x-shared.list-tasks>
 
         <x-shared.list-notes :notes="$goal->notes"></x-shared.notes>
