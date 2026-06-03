@@ -69,6 +69,12 @@ class GoalTask extends Model
         return $query->where('goal_id', $goalId);
     }
 
+
+    // *** scopeConfirmTaskAssignedTo() ***
+    public function scopeConfirmTaskAssignedTo($query, $userId) {
+        return $query->where('assigned_to_user_id', $userId);
+    }
+
     // ******************
     // *** CASTS ********
     // ******************

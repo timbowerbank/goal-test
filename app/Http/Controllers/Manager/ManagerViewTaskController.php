@@ -5,12 +5,19 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GoalTask;
+use App\Models\Home;
+use App\Models\Carer;
 
 class ManagerViewTaskController extends Controller
 {
     // *** viewTaskForCarer() ***
     // viewing a task for a carer
     public function viewTaskForCarer($org_id, $home_id, $carer_id, $task_id) {
+
+        // validate that the home in the URL belongs to the organisation in the URL
+        $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
+        // check that the carer belongs to this home
+        $carer = Carer::carerBelongsToHome($home_id)->findOrFail($carer_id);
         $task = GoalTask::with([
            'goal',
            'goal.client.user',
@@ -18,7 +25,7 @@ class ManagerViewTaskController extends Controller
            'comments.createdBy',
            'assignedTo',
            'completedWith' 
-        ])->findOrFail($task_id);
+        ])->confirmTaskAssignedTo($carer->user_id)->findOrFail($task_id);
 
         return view('manager.task')
             ->with('task', $task)

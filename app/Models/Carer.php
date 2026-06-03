@@ -54,6 +54,24 @@ class Carer extends Model
         return $this->hasMany(GoalTask::class, 'assigned_to_user_id', 'user_id');
     }
 
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** scopeCarerBelongsToHome() ***
+    public function scopeCarerBelongsToHome($query, $homeId) {
+        return $query->whereHas('homes', function($q) use ($homeId){
+            $q  ->where('carer_home.home_id', $homeId)
+                ->whereNull('carer_home.ended_at');
+
+        });
+    }
+
+
+    // ******************
+    // *** CASTS ********
+    // ******************
+
     // *** casts ***
     protected function casts(): array {
         return [
