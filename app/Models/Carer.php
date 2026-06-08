@@ -103,7 +103,7 @@ class Carer extends Model
             [
                 'tasks' => function($q) use ($homeId){
                     $q->whereHas('goal', function($q2) use ($homeId){
-                        $q2->where('home_id', $homeId)
+                        $q2->where('home_id', $homeId);
                         
                     })
                     ->whereIn('goal_task_status', [

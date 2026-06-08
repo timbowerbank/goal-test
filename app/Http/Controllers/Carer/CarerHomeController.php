@@ -26,6 +26,8 @@ class CarerHomeController extends Controller
 
         return view('carer.home')
             ->with('home', $home)
-            ->with('carer', $carer);
+            ->with('carer', $carer)
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
     }
 }
