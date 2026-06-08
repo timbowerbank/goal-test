@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\HomeStatus;
 use App\Enums\OrganisationStatus;
+use App\Enums\ClientStatus;
 use App\Models\Client;
 
 class Home extends Model
@@ -103,6 +104,18 @@ class Home extends Model
                 ->where('organisations.organisation_status', OrganisationStatus::Active)
                 ->whereNull('home_organisation.ended_at');
         });
+    }
+
+
+    // *** scopeWithActiveClients() ***
+    public function scopeWithActiveClients($query) {
+        return $query->with(
+            [
+                'clients' => function($q) {
+                    $q->where('client_status', ClientStatus::Active);
+                }
+            ]
+        );
     }
 
     // ******************

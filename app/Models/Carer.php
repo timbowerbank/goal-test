@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\CarerStatus;
+use App\Enums\TaskStatus;
 
 
 class Carer extends Model
@@ -54,6 +55,7 @@ class Carer extends Model
         return $this->hasMany(GoalTask::class, 'assigned_to_user_id', 'user_id');
     }
 
+
     // *******************
     // *** SCOPES ********
     // *******************
@@ -65,6 +67,52 @@ class Carer extends Model
                 ->whereNull('carer_home.ended_at');
 
         });
+    }
+
+
+    // *** scopeWithTasksForHome ***
+    public function scopeWithTasksForHome($query, $homeId) {
+        return $query->with(
+            [
+                'tasks' => function($q) use ($homeId) {
+                    $q->whereHas('goal', function($q2) use($homeId){
+                        $q2->where('home_id', $homeId);
+                    });
+                }
+            ]
+        );
+    }
+
+    // *** scopeWithActiveTasks() ***
+    public function scopeWithActiveTasks($query) {
+        return $query->with(
+            [
+                'tasks' => function($q) {
+                    $q->whereIn('goal_task_status', [
+                        TaskStatus::NotStarted,
+                        TaskStatus::InProgress,
+                    ]);
+                }
+            ]
+        );
+    }
+
+    // *** scopeWithActiveTasksForHome() ***
+    public function scopeWithActiveTasksForHome($query, $homeId) {
+        return $query->with(
+            [
+                'tasks' => function($q) use ($homeId){
+                    $q->whereHas('goal', function($q2) use ($homeId){
+                        $q2->where('home_id', $homeId)
+                        
+                    })
+                    ->whereIn('goal_task_status', [
+                            TaskStatus::NotStarted,
+                            TaskStatus::InProgress
+                    ]);
+                }
+            ]
+        );
     }
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Carer\CarerDashboardController;
+use App\Http\Controllers\Carer\CarerHomeController;
 
 Route::middleware(['auth', 'carer.org.access'])
     ->prefix('organisations/{org_id}/carer')
@@ -16,4 +17,6 @@ Route::middleware(['auth', 'carer.org.access'])
         })->name('pending-verification');
 
         Route::get('dashboard', [CarerDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/homes/{home_id}', [CarerHomeController::class, 'index'])->name('home');
     });

@@ -4,9 +4,14 @@
 
         @section('carer-content')
         <x-shared.header 
-                headline="Carer Dashboard: Welcome" 
-                sub-headline="Welcome to J-Goal, as a carer you can help your client achieve their goals">
+                :headline="$carer->user->first_name . '\'s Dashboard'" 
+                :sub-headline="'Welcome ' . $carer->user->first_name .  ' to J-Goal at ' . $organisation->organisation_name . '.'">
         </x-header>
+
+        <x-shared.list-homes 
+                :homes="$homes" 
+                :org-id="$organisation->id"
+                role="carer"></x-shared.list-homes>
 
         <form method="post" action="{{ route('logout') }}">
                 @csrf

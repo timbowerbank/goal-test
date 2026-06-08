@@ -1,6 +1,7 @@
 @props([
     'homes',
     'org-id',
+    'role'
 ])
 <div class="p-4 rounded border mb-2 bg-white">
     <header>
@@ -25,7 +26,11 @@
                 <td class="d-none d-md-table-cell">{{ $home->city }}</td>
                 <td class="d-none d-md-table-cell"><a class="link" href="tel:{{ $home->telephone }}">{{ $home->telephone }}</a></td>
                 <td>
+                    @if($role === 'manager')
                     <a href="{{ route('manager.home', ['org_id' => $orgId, 'home_id' => $home->id]) }}" class="btn btn-secondary btn-sm">View</a>
+                    @elseif($role === 'carer')
+                    <a href="{{ route('carer.home', ['org_id' => $orgId, 'home_id' => $home->id]) }}" class="btn btn-secondary btn-sm">View</a>
+                    @endif
                 </td>
             </tr>
         @endforeach
