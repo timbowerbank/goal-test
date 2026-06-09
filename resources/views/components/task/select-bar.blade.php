@@ -1,3 +1,8 @@
+@props([
+    'tasks',
+    'home',
+])
+
 <div class="bg-white rounded border w-100 p-4">
     <div class="row mb-4">
         <!-- lefthand col -->

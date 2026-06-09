@@ -10,7 +10,8 @@
             >
             </x-shared.header>
 
-            <x-task.select-bar></x-task.select-bar>
-
-
+            <x-task.select-bar
+                tasks=""
+                home="">
+            </x-task.select-bar>
         @endsection
