@@ -3,7 +3,7 @@
     'home',
 ])
 
-<div class="bg-white rounded border w-100 p-4">
+<div class="bg-white rounded border w-100 p-4 mb-4">
     <div class="row mb-4">
         <!-- lefthand col -->
         <div class="col-md-1 d-flex flex-md-row align-items-center">

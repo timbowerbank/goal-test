@@ -5,8 +5,8 @@
         @section('carer-content')
 
             <x-shared.header
-                headline="Viewing Tasks for a Home"
-                sub-headline="Look at these tasks"
+                :headline="'Viewing Tasks for ' . $carer->user->first_name . ' at ' . $home->home_name . '.' "
+                :sub-headline="$carer->user->first_name . ' here are your tasks at ' . $home->home_name"
             >
             </x-shared.header>
 
@@ -14,4 +14,45 @@
                 tasks=""
                 home="">
             </x-task.select-bar>
+
+            <div class="bg-white border rounded p-4">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Task Title</th>
+                            <th class="d-none d-md-table-cell" scope="col">Goal Name</th>
+                            <th class="d-none d-md-table-cell" cope="col">Client</th>
+                            <th class="d-none d-md-table-cell" scope="col">Due At</th>
+                            <th class="d-none d-md-table-cell" scope="col">Priority</th>
+                            <th scope="col">Days To Go</th>
+                            <th class="d-none d-md-table-cell" scope="col">Task Status</th>
+                            <th scope="col">View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($carer->tasks as $task)
+                            <tr>
+                            <th scope="row">{{ $task->title }}</th>
+                            <td class="d-none d-md-table-cell">{{ $task->goal->title }}</td>
+                            <td class="d-none d-md-table-cell">{{ $task->goal->client->user->full_name }}</td>
+                            <td class="d-none d-md-table-cell">{{ $task->due_at->format('j M Y') }}</td>
+                            <td class="d-none d-md-table-cell text-capitalize">{{ $task->priority }}</td>
+                            <td>
+                                <x-task.days-to-go :due-at="$task->due_at"></x-task.days-to-go>
+                            </td>
+                            <td class="d-none d-md-table-cell text-capitalize">{{ $task->goal_task_status }}</td>
+                            <td>
+                                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                            </td>
+                        </tr>
+                        @empty
+
+
+                        @endforelse
+                        
+                    </tbody>
+
+                </table>
+            </div>
+
         @endsection

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\CarerStatus;
 use App\Enums\TaskStatus;
+use App\Enums\GoalStatus;
 
 
 class Carer extends Model
@@ -103,14 +104,18 @@ class Carer extends Model
             [
                 'tasks' => function($q) use ($homeId){
                     $q->whereHas('goal', function($q2) use ($homeId){
-                        $q2->where('home_id', $homeId);
+                        $q2->where('home_id', $homeId)
+                        ->where('goal_status', GoalStatus::Active);
                         
                     })
                     ->whereIn('goal_task_status', [
                             TaskStatus::NotStarted,
                             TaskStatus::InProgress
                     ]);
-                }
+                },
+                'tasks.goal',
+                'tasks.goal.client.user',
+                'tasks.goal.home',
             ]
         );
     }
