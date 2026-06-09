@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Database\Eloquent\Collection;
 
-class TaskSummary extends Component
+class TaskStatsCard extends Component
 {
     public int $overdueTasks = 0;
     public int $dueThisWeek = 0;
@@ -35,6 +35,6 @@ class TaskSummary extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.task.task-summary');
+        return view('components.task.task-stats-card');
     }
 }

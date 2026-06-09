@@ -11,11 +11,11 @@
 
         <div class="row">
             <div class="col-md-6">
-                <x-task.task-summary
+                <x-task.task-stats-card
                     :tasks="$carer->tasks"
                     :org-id="$org_id"
                     :home-id="$home_id">
-            </x-task.task-summary>
+            </x-task.task-stats-card>
                         
             </div>
 
