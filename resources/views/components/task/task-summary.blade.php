@@ -30,7 +30,7 @@
     </table>
 
     <footer>
-        <a href="#" class="btn btn-primary mt-2">View All Tasks</a>
+        <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id]) }}" class="btn btn-primary mt-2">View All Tasks</a>
     </footer>
 
 

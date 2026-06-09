@@ -11,12 +11,17 @@ class TaskSummary extends Component
 {
     public int $overdueTasks = 0;
     public int $dueThisWeek = 0;
+    public string $org_id;
+    public string $home_id;
     /**
      * Create a new component instance.
      */
-    public function __construct(public Collection $tasks)
+    public function __construct(public Collection $tasks, public string $orgId, public string $homeId)
     {
         $this->sortTasks($tasks);
+
+        $this->org_id = $orgId;
+        $this->home_id = $homeId;
     }
 
     // *** sortTasks() ***

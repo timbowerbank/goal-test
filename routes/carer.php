@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Carer\CarerDashboardController;
 use App\Http\Controllers\Carer\CarerHomeController;
+use App\Http\Controllers\Carer\CarerViewTaskController;
 
 Route::middleware(['auth', 'carer.org.access'])
     ->prefix('organisations/{org_id}/carer')
