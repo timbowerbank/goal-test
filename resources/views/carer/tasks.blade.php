@@ -4,7 +4,13 @@
 
         @section('carer-content')
 
-            <p>This is the screen for viewing all tasks for a carer</p>
+            <x-shared.header
+                headline="Viewing Tasks for a Home"
+                sub-headline="Look at these tasks"
+            >
+            </x-shared.header>
+
+            <x-task.select-bar></x-task.select-bar>
 
 
         @endsection
