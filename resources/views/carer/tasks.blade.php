@@ -30,8 +30,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($carer->tasks as $task)
-                            <tr>
+                        @forelse($tasks as $task)
+                        <tr>
                             <th scope="row">{{ $task->title }}</th>
                             <td class="d-none d-md-table-cell">{{ $task->goal->title }}</td>
                             <td class="d-none d-md-table-cell">{{ $task->goal->client->user->full_name }}</td>
@@ -46,7 +46,16 @@
                             </td>
                         </tr>
                         @empty
-
+                        <tr>
+                            <th>There are no tasks to display</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
                         @endforelse
                         

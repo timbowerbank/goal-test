@@ -15,14 +15,14 @@
                 <th>Overdue Tasks</th>
                 <td>{{ $overdueTasks }}</td>
                 <td>
-                    <a href="#" class="btn btn-secondary btn-sm">View</a>
+                    <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id, 'filterType' => 'overdue', 'client'=>'all']) }}" class="btn btn-secondary btn-sm">View</a>
                 </td>
             </tr>
             <tr>
                 <th>Due This Week</th>
                 <td>{{ $dueThisWeek }}</td>
                 <td>
-                    <a href="#" class="btn btn-secondary btn-sm">View</a>
+                    <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id, 'filterType' => 'due', 'client'=>'all']) }}" class="btn btn-secondary btn-sm">View</a>
                 </td>
             </tr>
         </tbody>
@@ -30,7 +30,7 @@
     </table>
 
     <footer>
-        <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id]) }}" class="btn btn-primary mt-2">View All Tasks</a>
+        <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id, 'filterType' => 'all', 'client'=>'all']) }}" class="btn btn-primary mt-2">View All Tasks</a>
     </footer>
 
 
