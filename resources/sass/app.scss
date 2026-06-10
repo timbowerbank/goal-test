@@ -1,6 +1,7 @@
 // Import Bootstrap's source Sass
 @import "bootstrap/scss/bootstrap";
 
+
 // Your custom styles go here
 body {
     font-family: system-ui, sans-serif;
@@ -11,4 +12,18 @@ body {
     height: 300px;
     overflow-y: auto;
     
+}
+
+.pd-sort-ascending {
+    &:after {
+        content: url('/public/images/icons/arrow_drop_up_24dp_1F1F1F_FILL0_wght300_GRAD0_opsz24.svg');
+        position: absolute;
+    }
+}
+
+.pd-sort-descending {
+    &:after {
+        content: url('/public/images/icons/arrow_drop_down_24dp_1F1F1F_FILL0_wght300_GRAD0_opsz24.svg');
+        position: absolute;
+    }
 }

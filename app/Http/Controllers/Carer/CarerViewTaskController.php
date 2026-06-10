@@ -9,6 +9,7 @@ use App\Models\Home;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use App\Enums\TaskPriority;
 
 class CarerViewTaskController extends Controller
 {
@@ -39,19 +40,26 @@ class CarerViewTaskController extends Controller
         $query = $request->query();
         $filterType = $query['filterType'];
         $client = $query['client'];
+        $sortBy = $query['sortBy'] ?? 'due_at';
+        $sortDir = $query['sortDir'] ?? 'asc';
         
         // filter the tasks as per the query params
         $tasksByFilterType = $this->filterTasks($carer->tasks, $query);
         $tasksFilteredByClient = $this->filterByClient($client, $tasksByFilterType);
 
+        // sort as per the query params
+        $tasksSorted = $this->sortTasks($tasksFilteredByClient, $sortBy, $sortDir);
+
         return view('carer.tasks')
                 ->with('carer', $carer)
-                ->with('tasks', $tasksFilteredByClient)
+                ->with('tasks', $tasksSorted)
                 ->with('filter_types', $taskFilterTypes)
                 ->with('filter_selected', $filterType)
                 ->with('client_selected', $client)
                 ->with('org_id', $org_id)
-                ->with('home', $home);
+                ->with('home', $home)
+                ->with('sort_by', $sortBy)
+                ->with('sort_dir', $sortDir);
     }
 
 
@@ -90,6 +98,29 @@ class CarerViewTaskController extends Controller
                 return $task->goal->client->id == $queryString;
             });
         }
+    }
+
+    // private function sortTasks(Collection $tasks, string $sortBy, string $sortDir):Collection {
+    //     if($sortDir === 'asc') {
+    //         return $tasks->sortBy($sortBy);
+    //     } else {
+    //         return $tasks->sortByDesc($sortBy);
+    //     }
+    // }
+
+    private function sortTasks(Collection $tasks, string $sortBy, string $sortDir): Collection {
+    
+        if($sortBy === 'priority') {
+            $priorityOrder = ['high' => 1, 'medium' => 2, 'low' => 3];
+            $sorted = $tasks->sortBy(function($task) use ($priorityOrder) {
+                return $priorityOrder[$task->priority->value] ?? 99;
+            });
+            return $sortDir === 'asc' ? $sorted : $sorted->reverse();
+        }
+
+        return $sortDir === 'asc' 
+            ? $tasks->sortBy($sortBy) 
+            : $tasks->sortByDesc($sortBy);
     }
 
 

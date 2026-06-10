@@ -19,17 +19,30 @@
                 :route="route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home->id])">
             </x-task.select-bar>
 
+            @php
+                $newSortDir = $sort_dir === 'asc' ? 'desc' : 'asc';
+                $baseParams =  
+                    [
+                        'org_id' => $org_id, 
+                        'home_id' => $home->id,
+                        'filterType' => $filter_selected,
+                        'client' => $client_selected,
+                        'sortDir' => $newSortDir
+                    ];
+                $sortClassToAdd = $sort_dir === 'asc' ? 'pd-sort-ascending' : 'pd-sort-descending';
+            @endphp
+
             <div class="bg-white border rounded p-4">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Task Title</th>
                             <th class="d-none d-md-table-cell" scope="col">Goal Name</th>
-                            <th class="d-none d-md-table-cell" cope="col">Client</th>
-                            <th class="d-none d-md-table-cell" scope="col">Due At</th>
-                            <th class="d-none d-md-table-cell" scope="col">Priority</th>
+                            <th class="d-none d-md-table-cell" scope="col">Client</th>
+                            <th class="d-none d-md-table-cell" scope="col"><a class="{{ $sortClassToAdd }} text-decoration-none text-dark position-relative" href="{{ route('carer.view-tasks', array_merge($baseParams, ['sortBy' => 'due_at'])) }}">Due At</a></th>
+                            <th class="d-none d-md-table-cell" scope="col"><a class="{{ $sortClassToAdd }} text-decoration-none text-dark position-relative" href="{{ route('carer.view-tasks', array_merge($baseParams, ['sortBy' => 'priority'])) }}">Priority</a></th>
                             <th scope="col">Days To Go</th>
-                            <th class="d-none d-md-table-cell" scope="col">Task Status</th>
+                            <th class="d-none d-md-table-cell" scope="col"><a class="{{ $sortClassToAdd }} text-decoration-none text-dark position-relative" href="{{ route('carer.view-tasks', array_merge($baseParams, ['sortBy' => 'goal_task_status'])) }}">Task Status</a></th>
                             <th scope="col">View</th>
                         </tr>
                     </thead>
