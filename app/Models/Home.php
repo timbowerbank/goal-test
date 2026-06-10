@@ -112,8 +112,12 @@ class Home extends Model
         return $query->with(
             [
                 'clients' => function($q) {
-                    $q->where('client_status', ClientStatus::Active);
-                }
+                    $q->where('client_status', ClientStatus::Active)
+                    ->join('users', 'users.id', '=', 'clients.user_id')
+                    ->orderBy('users.first_name', 'asc')
+                    ->select('clients.*');
+                },
+                'clients.user',
             ]
         );
     }

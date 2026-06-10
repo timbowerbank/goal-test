@@ -11,8 +11,12 @@
             </x-shared.header>
 
             <x-task.select-bar
-                tasks=""
-                home="">
+                :filter-types="$filter_types"
+                :filter-selected="$filter_selected"
+                :client-selected-id="$client_selected"
+                :all-home-clients="$home->clients"
+                :home-name="$home->home_name"
+                :route="route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home->id])">
             </x-task.select-bar>
 
             <div class="bg-white border rounded p-4">

@@ -23,24 +23,41 @@ class CarerViewTaskController extends Controller
                         ->withActiveTasksForHome($home_id)
                         ->findOrFail(Auth::user()->carer->id);
 
+        // withActiveClients comes with:
+        // clients
+        // clients.user
         $home = Home::currentlyBelongsToOrganisation($org_id)
+                    ->withActiveClients()
                     ->findOrFail($home_id);
 
+        
 
-        $tasks = $this->filterTasks($carer->tasks, $request);
+        // create array of filter types
+        $taskFilterTypes = ['all', 'due', 'overdue'];
+
+        // access the $request object to get query params
+        $query = $request->query();
+        $filterType = $query['filterType'];
+        $client = $query['client'];
+        
+        // filter the tasks as per the query params
+        $tasksByFilterType = $this->filterTasks($carer->tasks, $query);
+        $tasksFilteredByClient = $this->filterByClient($client, $tasksByFilterType);
 
         return view('carer.tasks')
                 ->with('carer', $carer)
-                ->with('tasks', $tasks)
+                ->with('tasks', $tasksFilteredByClient)
+                ->with('filter_types', $taskFilterTypes)
+                ->with('filter_selected', $filterType)
+                ->with('client_selected', $client)
                 ->with('org_id', $org_id)
                 ->with('home', $home);
     }
 
 
     // *** filterTasks() ***
-    private function filterTasks(Collection $tasks, Request $request):Collection {
-        // access the $request object
-        $query = $request->query();
+    private function filterTasks(Collection $tasks, array $query):Collection {
+
         $filterType = $query['filterType'];
         $client = $query['client'];
 
@@ -64,4 +81,17 @@ class CarerViewTaskController extends Controller
         return $filteredTasks;
 
     }
+
+    private function filterByClient(string $queryString, Collection $filteredTasks):Collection {
+        if($queryString === 'all') {
+            return $filteredTasks;
+        } else {
+            return $filteredTasks->filter(function($task) use ($queryString){
+                return $task->goal->client->id == $queryString;
+            });
+        }
+    }
+
+
+
 }
