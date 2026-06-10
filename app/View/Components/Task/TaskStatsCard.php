@@ -11,6 +11,7 @@ class TaskStatsCard extends Component
 {
     public int $overdueTasks = 0;
     public int $dueThisWeek = 0;
+    public int $allTasks = 0;
     public string $org_id;
     public string $home_id;
     /**
@@ -28,6 +29,7 @@ class TaskStatsCard extends Component
     private function sortTasks(Collection $tasks) {
         $this->overdueTasks = $tasks->where('due_at', '<', now())->count();
         $this->dueThisWeek = $tasks->where('due_at', [now(), now()->endOfWeek()])->count();
+        $this->allTasks = $tasks->count();
     }
 
     /**

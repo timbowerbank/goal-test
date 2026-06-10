@@ -25,6 +25,13 @@
                     <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id, 'filterType' => 'due', 'client'=>'all']) }}" class="btn btn-secondary btn-sm">View</a>
                 </td>
             </tr>
+            <tr>
+                <th>Total Tasks</th>
+                <td>{{ $allTasks }}</td>
+                <td>
+                    <a href="{{ route('carer.view-tasks', ['org_id' => $org_id, 'home_id' => $home_id, 'filterType' => 'all', 'client'=>'all']) }}" class="btn btn-secondary btn-sm">View</a>
+                </td>
+            </tr>
         </tbody>
 
     </table>
