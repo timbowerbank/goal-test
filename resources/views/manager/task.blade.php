@@ -13,7 +13,8 @@
                         <x-task.task-summary-card
                                 :task="$task"
                                 :org-id="$org_id"
-                                :home-id="$home_id">
+                                :home-id="$home_id"
+                                role="manager">
                         </x-shared.task.task-summary-card>
                 </div>
                 <div class="col">

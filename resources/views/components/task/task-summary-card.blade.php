@@ -36,6 +36,7 @@
         <tr>
             <th>Goal: </th>
             <td>
+                @if($role === 'manager')
                 <a href="{{ route('manager.view-goal', 
                 [
                     'org_id' => $orgId, 
@@ -45,13 +46,21 @@
                 ]) }}"
                     >
                     {{ $task->goal->title }}
-                </a></td>
+                </a>
+                @elseif($role === 'carer') 
+
+                <a href="#">
+                    {{ $task->goal->title }}
+                </a>
+                @endif
+            </td>
         </tr>
         <tr>
             <th>
                 Client:
             </th>
             <td>
+                @if($role === 'manager')
                 <a href="{{ route('manager.view-client', 
                 [
                     'org_id' => $orgId,
@@ -59,12 +68,14 @@
                     'client_id' => $task->goal->client->id,
                 
                 ]) }}"
-                
                 >
-
                     {{ $task->goal->client->user->full_name }}
                 </a>
-                
+                @elseif($role === 'carer')
+                <a href="#">
+                    {{ $task->goal->client->user->full_name }}
+                </a>
+                @endif
             </td>
 
 

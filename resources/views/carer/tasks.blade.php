@@ -59,7 +59,7 @@
                             </td>
                             <td class="d-none d-md-table-cell text-capitalize">{{ $task->goal_task_status }}</td>
                             <td>
-                                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                                <a href="{{ route('carer.view-task', ['org_id' => $org_id, 'home_id' => $home->id, 'task_id' => $task->id]) }}" class="btn btn-secondary btn-sm">View</a>
                             </td>
                         </tr>
                         @empty

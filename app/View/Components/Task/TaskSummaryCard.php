@@ -22,6 +22,7 @@ class TaskSummaryCard extends Component
         public GoalTask $task,
         public string $orgId,
         public string $homeId,
+        public string $role
         
         )
     {

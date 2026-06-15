@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Carer;
 use App\Models\Home;
+use App\Models\GoalTask;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -62,6 +63,34 @@ class CarerViewTaskController extends Controller
                 ->with('sort_dir', $sortDir);
     }
 
+
+    // *** show() ***
+    public function show($org_id, $home_id, $task_id) {
+
+        // get the Goal task
+        $task = GoalTask::with(
+            [
+                'goal',
+                'goal.client.user',
+                'comments',
+                'comments.createdBy',
+                'completedWith'
+            ]
+        )
+        ->confirmTaskAssignedTo(Auth::user()->id)
+        ->findOrFail($task_id);
+
+        return view('carer.task')
+            ->with('task', $task)
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
+    }
+
+
+
+    // ***********************
+    // *** UTILITY METHODS ***
+    // ***********************
 
     // *** filterTasks() ***
     private function filterTasks(Collection $tasks, array $query):Collection {
