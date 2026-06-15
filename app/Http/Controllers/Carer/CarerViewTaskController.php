@@ -77,8 +77,10 @@ class CarerViewTaskController extends Controller
                 'completedWith'
             ]
         )
-        ->confirmTaskAssignedTo(Auth::user()->id)
         ->findOrFail($task_id);
+
+        // use the read policy for GoalTasks
+        $this->authorize('read', $task);
 
         return view('carer.task')
             ->with('task', $task)
