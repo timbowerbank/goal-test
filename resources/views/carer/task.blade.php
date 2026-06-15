@@ -4,8 +4,8 @@
 
         @section('carer-content')
             <x-shared.header
-                headline="Viewing Task"
-                sub-headline="This is a task for..."
+                :headline="'Viewing Task: ' . $task->title"
+                :sub-headline="'This task is for: ' . $task->goal->client->user->full_name"
                 >
             </x-shared.header>
 
