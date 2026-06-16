@@ -41,6 +41,7 @@
                         </td>
                         <td class="d-none d-md-table-cell">{{ $goal->leadBy->full_name }}</td>
                         <td>
+                            @if($role === 'manager')
                             <a href="
                                 {{ route('manager.view-goal', 
                                 [
@@ -49,6 +50,17 @@
                                     'client_id' => $clientId,
                                     'goal_id' => $goal->id,
                                 ]) }}" class="btn btn-secondary btn-sm">View Goal</a>
+                            @elseif($role === 'carer')
+                                <a href="
+                                {{ route('carer.view-goal', 
+                                [
+                                    'org_id' => $orgId, 
+                                    'home_id' => $homeId, 
+                                    'client_id' => $clientId,
+                                    'goal_id' => $goal->id,
+                                ]) }}" class="btn btn-secondary btn-sm">View Goal</a>
+
+                            @endif
                         </td>
                     </tr>
                 @endforeach

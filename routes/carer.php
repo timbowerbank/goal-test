@@ -5,6 +5,7 @@ use App\Http\Controllers\Carer\CarerDashboardController;
 use App\Http\Controllers\Carer\CarerHomeController;
 use App\Http\Controllers\Carer\CarerViewTaskController;
 use App\Http\Controllers\Carer\CarerClientController;
+use App\Http\Controllers\Carer\CarerGoalController;
 
 Route::middleware(['auth', 'carer.org.access'])
     ->prefix('organisations/{org_id}/carer')
@@ -27,4 +28,6 @@ Route::middleware(['auth', 'carer.org.access'])
         Route::get('homes/{home_id}/tasks/', [CarerViewTaskController::class, 'index'])->name('view-tasks');
 
         Route::get('homes/{home_id}/tasks/{task_id}', [CarerViewTaskController::class, 'show'])->name('view-task');
+
+        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [CarerGoalController::class, 'show'])->name('view-goal');
     });

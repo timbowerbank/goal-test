@@ -1,6 +1,6 @@
         @extends('layouts.manager')
 
-        @section('title', 'Goal Title holder')
+        @section('title', $goal->title)
 
         @section('manager-content')
         <x-shared.header

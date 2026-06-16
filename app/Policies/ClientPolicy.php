@@ -17,7 +17,7 @@ class ClientPolicy
     }
 
     // *** read() ***
-    public function read(User $user, Client $client) {
+    public function read(User $user, Client $client): bool {
         // check role
         if($user->carer) {
 
