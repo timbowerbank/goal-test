@@ -21,7 +21,7 @@ class GoalPolicy
 
 
     // *** read() ***
-    public function read(User $user, Goal $goal):bool {
+    public function read(User $user, Goal $goal, string $home_id):bool {
 
         // check role
         if($user->carer) {
@@ -30,6 +30,7 @@ class GoalPolicy
             // Home must be active
             // Goal must be active or draft
             // client must be active
+            // client must belong to home
             return $user->carer->homes()->where('id', $goal->home_id)->exists()
                     && $goal->home->home_status === HomeStatus::Active
                     && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
