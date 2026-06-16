@@ -15,12 +15,6 @@
         :view-task-url="'/organisations/' . $org_id . '/manager/homes/' . $home_id . '/carers/' . $carer->id . '/tasks/'"
     ></x-task.list-kanban>
 
-    {{-- <x-shared.list-tasks
-        :headline="'Tasks for ' . $carer->user->first_name"
-        :tasks="$carer->tasks"
-        :is-card="true"
-    ></x-shared.list-tasks> --}}
-
     <form method="post" action="{{ route('logout') }}">
         @csrf
         <button class="btn btn-primary mt-3" type="submit">Logout</button>

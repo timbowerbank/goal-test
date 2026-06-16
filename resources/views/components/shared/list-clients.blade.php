@@ -29,8 +29,7 @@
                         @if($role === 'manager')
                         <a href="{{ route('manager.view-client', ['org_id' => $orgId, 'home_id' => $home->id, 'client_id' => $client->id]) }}" class="btn btn-secondary btn-sm">View</a>
                         @elseif($role === 'carer')
-                        <a href="#" class="btn btn-secondary btn-sm">View</a>
-
+                        <a href="{{ route('carer.view-client', ['org_id' => $orgId, 'home_id' => $home->id, 'client_id' => $client->id ]) }}" class="btn btn-secondary btn-sm">View</a>
                         @endif
                     </td>
                 </tr>

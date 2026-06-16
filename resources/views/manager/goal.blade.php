@@ -17,6 +17,7 @@
                 :tasks="$goal->tasks"
                 :org-id="$org_id"
                 :home-id="$home_id"
+                role="manager"
         ></x-shared.list-tasks>
 
         <x-shared.list-notes :notes="$goal->notes"></x-shared.notes>

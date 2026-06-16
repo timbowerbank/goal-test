@@ -4,6 +4,7 @@
     'org-id',
     'home-id',
     'client-id',
+    'role'
 ])
 
 

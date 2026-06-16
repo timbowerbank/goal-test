@@ -4,6 +4,7 @@
     'is-card',
     'org-id',
     'home-id',
+    'role'
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
@@ -37,6 +38,7 @@
                         {{ $task->goal_task_status }}
                     </td>
                     <td>
+                        @if($role === 'manager')
                         <a href="{{ route('manager.view-task-for-goal', [
                             'org_id' => $orgId, 
                             'home_id' => $homeId,
@@ -45,6 +47,10 @@
                             'task_id' => $task->id,
                             
                             ]) }}" class="btn btn-secondary btn-sm">View</a>
+                        @elseif($role === 'carer')
+
+                            <a class="btn btn-secondary btn-sm" href="">View</a>
+                        @endif
                     </td>
 
                 </tr>

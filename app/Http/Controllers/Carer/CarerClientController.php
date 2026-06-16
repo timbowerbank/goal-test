@@ -26,7 +26,7 @@ class CarerClientController extends Controller
                 'goals' => function($query){
                     $query->where('goal_status', GoalStatus::Active);
                 },
-                'goals.tasks' => function($query) use ($home_id) {
+                'goals.tasks' => function($query) use ($user) {
                     $query->where('assigned_to_user_id', $user->id);
                 },
                 'home'
@@ -35,12 +35,15 @@ class CarerClientController extends Controller
             ->confirmClientBelongsToHome($home_id)
             ->findOrFail($client_id);
 
+        // flatten the tasks into a variable
+        $tasks = $client->goals->flatMap(fn($goal) => $goal->tasks);
 
         // check policy to authorise carer to view client
         $this->authorize('read', $client);
 
-        return view('carer.view-client')
+        return view('carer.client')
             ->with('client', $client)
+            ->with('tasks', $tasks)
             ->with('org_id', $org_id)
             ->with('home_id', $home_id);
     }
