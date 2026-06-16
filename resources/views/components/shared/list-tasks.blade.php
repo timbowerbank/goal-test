@@ -48,8 +48,7 @@
                             
                             ]) }}" class="btn btn-secondary btn-sm">View</a>
                         @elseif($role === 'carer')
-
-                            <a class="btn btn-secondary btn-sm" href="">View</a>
+                            <a class="btn btn-secondary btn-sm" href="#">View</a>
                         @endif
                     </td>
 

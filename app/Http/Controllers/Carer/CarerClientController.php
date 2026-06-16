@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\GoalStatus;
+use App\Enums\TaskStatus;
 
 
 // middleware guarantees
@@ -27,7 +28,8 @@ class CarerClientController extends Controller
                     $query->where('goal_status', GoalStatus::Active);
                 },
                 'goals.tasks' => function($query) use ($user) {
-                    $query->where('assigned_to_user_id', $user->id);
+                    $query->where('assigned_to_user_id', $user->id)
+                     ->whereIn('goal_task_status', [TaskStatus::NotStarted, TaskStatus::InProgress]);
                 },
                 'home'
             ]
