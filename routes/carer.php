@@ -23,6 +23,8 @@ Route::middleware(['auth', 'carer.org.access'])
 
         Route::get('homes/{home_id}', [CarerHomeController::class, 'index'])->name('home');
 
+        Route::get('homes/{home_id}/clients', [CarerClientController::class, 'index'])->name('view-clients');
+
         Route::get('homes/{home_id}/clients/{client_id}', [CarerClientController::class, 'show'])->name('view-client');
 
         Route::get('homes/{home_id}/tasks/', [CarerViewTaskController::class, 'index'])->name('view-tasks');

@@ -40,7 +40,11 @@
     </div>
         @if($isCard)
         <footer>
+            @if($role === 'manager')
             <a href="{{ route('manager.view-clients', ['org_id' => $orgId, 'home_id' => $home->id])  }}" class="mt-2 btn btn-primary">View All Clients</a>
+            @elseif($role === 'carer')
+            <a href="{{ route('carer.view-clients', ['org_id' => $orgId, 'home_id' => $home->id])  }}" class="mt-2 btn btn-primary">View All Clients</a>
+            @endif
         </footer>
         @endif
     @else

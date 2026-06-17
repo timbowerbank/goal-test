@@ -5,16 +5,50 @@ namespace App\Http\Controllers\Carer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Home;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\GoalStatus;
 use App\Enums\TaskStatus;
+use App\Enums\ClientStatus;
 
-
-// middleware guarantees
-// carer is authenticated, verified and active
-// carer belongs to the organisation
 class CarerClientController extends Controller
 {
+
+    // middleware guarantees
+    // carer is authenticated, verified and active
+    // carer belongs to the organisation
+
+    // policy ensures that
+    // carer must belong to the home
+    // home must be active
+
+    // scope checks whether home belongs to an organisation
+    // filters ensure only active clients are listed
+    public function index($org_id, $home_id) {
+        
+        // eagerly load home with clients
+        $home = Home::with([
+                'clients' => function($query) {
+                    $query->where('client_status', ClientStatus::Active);
+                },
+                'clients.user'
+            ])
+                ->currentlyBelongsToOrganisation($org_id)
+                ->findOrFail($home_id);
+        
+        // invoke authorize to ensure that user is allowed
+        $this->authorize('readClients', $home);
+
+        return view('carer.clients')
+            ->with('home', $home)
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
+    }
+
+
+    // middleware guarantees
+    // carer is authenticated, verified and active
+    // carer belongs to the organisation
     public function show($org_id, $home_id, $client_id) {
 
         // get the user which is a carer

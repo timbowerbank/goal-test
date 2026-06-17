@@ -49,7 +49,14 @@
                 </a>
                 @elseif($role === 'carer') 
 
-                <a href="#">
+                <a href="{{ route('carer.view-goal', 
+                    [
+                        'org_id' => $orgId, 
+                        'home_id' => $homeId, 
+                        'client_id' => $task->goal->client->id, 
+                        'goal_id' => $task->goal->id
+                        
+                    ]) }}">
                     {{ $task->goal->title }}
                 </a>
                 @endif
@@ -72,7 +79,13 @@
                     {{ $task->goal->client->user->full_name }}
                 </a>
                 @elseif($role === 'carer')
-                <a href="#">
+                <a href="{{ route('carer.view-client', 
+                    [
+                        'org_id' => $orgId,
+                        'home_id' => $homeId,
+                        'client_id' => $task->goal->client->id,
+                    
+                    ]) }}">
                     {{ $task->goal->client->user->full_name }}
                 </a>
                 @endif
