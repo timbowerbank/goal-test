@@ -68,16 +68,20 @@ class CarerViewTaskController extends Controller
     public function show($org_id, $home_id, $task_id) {
 
         // get the Goal task
-        $task = GoalTask::with(
-            [
-                'goal',
-                'goal.client.user',
-                'comments',
-                'comments.createdBy',
-                'completedWith'
-            ]
-        )
-        ->findOrFail($task_id);
+        $task = $this->getTask($task_id);
+
+        // use the read policy for GoalTasks
+        $this->authorize('read', $task);
+
+        return view('carer.task')
+            ->with('task', $task)
+            ->with('org_id', $org_id)
+            ->with('home_id', $home_id);
+    }
+
+    // *** showForGoal() ***
+    public function showForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
+        $task = $this->getTask($task_id);
 
         // use the read policy for GoalTasks
         $this->authorize('read', $task);
@@ -155,5 +159,17 @@ class CarerViewTaskController extends Controller
     }
 
 
+    private function getTask(string $task_id) {
+        return $task = GoalTask::with(
+            [
+                'goal',
+                'goal.client.user',
+                'comments',
+                'comments.createdBy',
+                'completedWith'
+            ]
+        )
+        ->findOrFail($task_id);
+    }
 
 }

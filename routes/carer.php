@@ -30,4 +30,8 @@ Route::middleware(['auth', 'carer.org.access'])
         Route::get('homes/{home_id}/tasks/{task_id}', [CarerViewTaskController::class, 'show'])->name('view-task');
 
         Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [CarerGoalController::class, 'show'])->name('view-goal');
+
+        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [CarerViewTaskController::class, 'showForGoal'])->name('view-goal-task');
+
+
     });
