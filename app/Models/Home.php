@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\HomeStatus;
 use App\Enums\OrganisationStatus;
 use App\Enums\ClientStatus;
+use App\Enums\CarerStatus;
 use App\Models\Client;
 
 class Home extends Model
@@ -120,6 +121,19 @@ class Home extends Model
                 'clients.user',
             ]
         );
+    }
+
+
+
+    // *** scopeWithActiveCarers() ***
+    public function scopeWithActiveCarers($query) {
+        return $query->with([
+            'carers' => function($q) {
+                $q  ->where('carer_status', CarerStatus::Active)
+                    ->join('users', 'users.id', '=', 'carers.user_id')
+                    ->orderBy('users.first_name', 'asc');
+            }
+        ]);
     }
 
     // ******************

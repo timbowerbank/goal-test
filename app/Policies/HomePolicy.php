@@ -16,8 +16,8 @@ class HomePolicy
         //
     }
 
-    // *** readClients() ***
-    public function readClients(User $user, Home $home):bool {
+    // *** read() ***
+    public function read(User $user, Home $home):bool {
         // check role
         if($user->carer) {
 
@@ -26,7 +26,8 @@ class HomePolicy
 
         } else if ($user->manager) {
 
-            return true;
+            return $user->manager->homes()->where('id', $home->id)->exists()
+                    && $home->home_status === HomeStatus::Active;
         } else {
 
             return true;

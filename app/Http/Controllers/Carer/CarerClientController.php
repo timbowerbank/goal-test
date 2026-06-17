@@ -37,7 +37,7 @@ class CarerClientController extends Controller
                 ->findOrFail($home_id);
         
         // invoke authorize to ensure that user is allowed
-        $this->authorize('readClients', $home);
+        $this->authorize('read', $home);
 
         return view('carer.clients')
             ->with('home', $home)
