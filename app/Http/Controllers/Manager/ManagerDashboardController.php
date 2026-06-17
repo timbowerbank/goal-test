@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 
 class ManagerDashboardController extends Controller
 {
-    
+    // middleware guarantees
+    // manager is authenticated, verified and active
+    // manager belongs to the organisation
+    // The organisation is active
     // *** index() ***
     public function index($org_id) {
 
@@ -23,8 +26,6 @@ class ManagerDashboardController extends Controller
                             ->whereNull('home_organisation.ended_at');
                     });
                 },
-                'homes.clients',
-                'homes.carers',
             ]
         );
 
