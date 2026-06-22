@@ -16,8 +16,8 @@ class CarerPolicy
         //
     }
 
-    // *** read() ***
-    public function read(User $user, Carer $carer, string $home_id):bool {
+    // *** view() ***
+    public function view(User $user, Carer $carer, string $home_id):bool {
 
         // check for roles
         if($user->carer) {

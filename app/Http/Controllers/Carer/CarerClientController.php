@@ -37,7 +37,7 @@ class CarerClientController extends Controller
                 ->findOrFail($home_id);
         
         // invoke authorize to ensure that user is allowed
-        $this->authorize('read', $home);
+        $this->authorize('view', $home);
 
         return view('carer.clients')
             ->with('home', $home)
@@ -75,7 +75,7 @@ class CarerClientController extends Controller
         $tasks = $client->goals->flatMap(fn($goal) => $goal->tasks);
 
         // check policy to authorise carer to view client
-        $this->authorize('read', $client);
+        $this->authorize('view', $client);
 
         return view('carer.client')
             ->with('client', $client)

@@ -16,8 +16,8 @@ class HomePolicy
         //
     }
 
-    // *** read() ***
-    public function read(User $user, Home $home):bool {
+    // *** view() ***
+    public function view(User $user, Home $home):bool {
         // check role
         if($user->carer) {
 

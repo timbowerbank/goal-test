@@ -49,7 +49,7 @@ class ManagerViewClientGoalController extends Controller
         // goal is active or draft
         // client is active
         // client belongs to home
-        $this->authorize('read', [$goal, $goal->home->id]);
+        $this->authorize('view', [$goal, $goal->home->id]);
 
 
         return view('manager.goal')

@@ -70,8 +70,8 @@ class CarerViewTaskController extends Controller
         // get the Goal task
         $task = $this->getTask($task_id);
 
-        // use the read policy for GoalTasks
-        $this->authorize('read', $task);
+        // use the view policy for GoalTasks
+        $this->authorize('view', $task);
 
         return view('carer.task')
             ->with('task', $task)
@@ -83,8 +83,8 @@ class CarerViewTaskController extends Controller
     public function showForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
         $task = $this->getTask($task_id);
 
-        // use the read policy for GoalTasks
-        $this->authorize('read', $task);
+        // use the view policy for GoalTasks
+        $this->authorize('view', $task);
 
         return view('carer.task')
             ->with('task', $task)

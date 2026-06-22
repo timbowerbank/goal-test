@@ -40,9 +40,9 @@ class ManagerViewClientController extends Controller
             ->findOrFail($client_id);
 
         // only authorize if home is active
-        $this->authorize('read', $home);            
+        $this->authorize('view', $home);            
         // authorize if client belongs to same home and client is active
-        $this->authorize('read', $client);
+        $this->authorize('view', $client);
         
 
 

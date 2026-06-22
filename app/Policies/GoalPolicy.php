@@ -20,8 +20,8 @@ class GoalPolicy
     }
 
 
-    // *** read() ***
-    public function read(User $user, Goal $goal, string $home_id):bool {
+    // *** view() ***
+    public function view(User $user, Goal $goal, string $home_id):bool {
 
         // check role
         if($user->carer) {

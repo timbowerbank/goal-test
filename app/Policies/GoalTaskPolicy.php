@@ -19,8 +19,8 @@ class GoalTaskPolicy
     }
 
 
-    // *** read() ***
-    public function read(User $user, GoalTask $task):bool {
+    // *** view() ***
+    public function view(User $user, GoalTask $task):bool {
 
         // check role
         if($user->carer) {

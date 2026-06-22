@@ -26,7 +26,7 @@ class ManagerViewHomeController extends Controller
                     ->findOrFail($home_id);
 
         // check that manager is authorised to view home
-        $this->authorize('read', $home);
+        $this->authorize('view', $home);
 
         return view('manager.home')
             ->with('home', $home)

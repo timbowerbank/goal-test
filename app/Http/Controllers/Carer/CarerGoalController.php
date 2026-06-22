@@ -48,7 +48,7 @@ class CarerGoalController extends Controller
             ->findOrFail($goal_id);
 
         // check that carer is authorized to view
-        $this->authorize('read', [$goal, $home_id]);
+        $this->authorize('view', [$goal, $home_id]);
 
         return view('carer.goal')
             ->with('org_id', $org_id)

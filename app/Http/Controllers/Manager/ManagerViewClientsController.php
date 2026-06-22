@@ -25,7 +25,7 @@ class ManagerViewClientsController extends Controller
             ->findOrFail($home_id);
 
         // authorise the manager
-        $this->authorize('read', $home);
+        $this->authorize('view', $home);
 
         return view('manager.clients')
             ->with('home', $home)

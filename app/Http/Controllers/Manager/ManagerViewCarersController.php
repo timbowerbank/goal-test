@@ -24,7 +24,7 @@ class ManagerViewCarersController extends Controller
             ->findOrFail($home_id);
 
         // authorize the manager to view the carers
-        $this->authorize('read', $home);
+        $this->authorize('view', $home);
 
         return view('manager.carers')
             ->with('home', $home)

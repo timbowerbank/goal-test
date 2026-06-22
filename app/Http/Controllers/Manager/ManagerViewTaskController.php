@@ -55,7 +55,7 @@ class ManagerViewTaskController extends Controller
         ])->confirmTaskAssignedTo($carer->user_id)->findOrFail($task_id);
 
         // authorise the manager to view the task
-        $this->authorize('read', $task);
+        $this->authorize('view', $task);
 
         return view('manager.task')
             ->with('task', $task)
@@ -100,7 +100,7 @@ class ManagerViewTaskController extends Controller
 
 
         // authorize the GoalTaskPolicy for manager
-        $this->authorize('read', $task);
+        $this->authorize('view', $task);
 
         return view('manager.task')
                 ->with('task', $task)

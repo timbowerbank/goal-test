@@ -36,7 +36,7 @@ class ManagerViewCarerController extends Controller
         ])->carerBelongsToHome($home_id)->findOrFail($carer_id);
 
         // authorize the manager
-        $this->authorize('read', [$carer, $home->id]);
+        $this->authorize('view', [$carer, $home->id]);
 
         return view('manager.carer')
             ->with('org_id', $org_id)
