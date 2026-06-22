@@ -22,6 +22,7 @@ class ManagerViewHomeController extends Controller
         $home = Home::withActiveClients()
                     ->withActiveCarers()
                     ->currentlyBelongsToOrganisation($org_id)
+                    ->activeHome()
                     ->findOrFail($home_id);
 
         // check that manager is authorised to view home

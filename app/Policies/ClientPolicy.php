@@ -31,8 +31,10 @@ class ClientPolicy
 
         } else if ($user->manager) {
 
-            // needs updating
-            return true;
+            // only authorise:
+            // if manager belongs to same home
+            return $user->manager->homes()->where('id', $client->home_id)->exists()
+                    && $client->client_status === ClientStatus::Active;
 
         } else {
 

@@ -107,6 +107,11 @@ class Home extends Model
         });
     }
 
+    // *** scopeActiveHome() ***
+    public function scopeActiveHome($query) {
+        return $query->where('home_status', HomeStatus::Active);
+    }
+
 
     // *** scopeWithActiveClients() ***
     public function scopeWithActiveClients($query) {
