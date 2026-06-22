@@ -38,7 +38,14 @@ class GoalPolicy
 
         } else if ($user->manager) {
 
-            return true;
+            // check that goal must belong to same home as manager
+            // Home must be active
+            // Goal must be active or draft
+            // client must be active
+            return $user->manager->homes()->where('id', $goal->home_id)->exists()
+                    && $goal->home->home_status === HomeStatus::Active
+                    && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
+                    && $goal->client->client_status === ClientStatus::Active;
 
         } else {
 

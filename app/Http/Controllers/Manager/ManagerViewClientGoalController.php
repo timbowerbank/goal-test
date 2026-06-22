@@ -8,6 +8,22 @@ use App\Models\Goal;
 use App\Models\Home;
 use App\Models\Client;
 
+// middleware guarantees that
+// manager is authenticated
+// belongs to the organisation
+// is validated and active
+
+// scopes ensure that
+// home belongs to the organisation
+// client belongs to the home
+// goal belongs to the client
+
+// policies ensure that
+// goal belongs to same home as manager
+// home is active
+// goal is active or draft
+// client is active
+
 class ManagerViewClientGoalController extends Controller
 {
     public function index($org_id, $home_id, $client_id, $goal_id) {
@@ -22,11 +38,18 @@ class ManagerViewClientGoalController extends Controller
             [
                 'client.user', 
                 'createdBy',
+                'home',
                 'tasks',
                 'tasks.assignedTo',
                 'notes',
                 'notes.createdBy'
             ])->forClient($client->user_id)->findOrFail($goal_id);
+        
+        // authorize home is active, manager belongs to home, 
+        // goal is active or draft
+        // client is active
+        // client belongs to home
+        $this->authorize('read', [$goal, $goal->home->id]);
 
 
         return view('manager.goal')
