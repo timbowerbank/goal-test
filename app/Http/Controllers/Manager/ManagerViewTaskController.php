@@ -10,6 +10,13 @@ use App\Models\Carer;
 use App\Models\Goal;
 use App\Models\Client;
 
+// middleware guarantees that
+// manager is authenticated
+// belongs to the organisation
+// is validated and active
+
+
+
 class ManagerViewTaskController extends Controller
 {
     // *** viewTaskForCarer() ***
@@ -38,6 +45,18 @@ class ManagerViewTaskController extends Controller
 
     // *** viewTaskForGoal() ***
     // viewing a task for a goal
+
+    // scopes ensure that
+    // home belongs to organisation
+    // client belongs to home
+    // goal belongs to the client
+    // task belongs to the goal
+
+    // policies ensure that
+    // manager belongs to the home of the task
+    // if the goal is active
+    // if the home is active
+    // if client is active
     public function viewTaskForGoal($org_id, $home_id, $client_id, $goal_id, $task_id) {
         
         // validation checks to stop anyone constructing URLs
@@ -59,6 +78,8 @@ class ManagerViewTaskController extends Controller
         ])->forGoal($goal_id)->findOrFail($task_id);
 
 
+        // authorize the GoalTaskPolicy for manager
+        $this->authorize('read', $task);
 
         return view('manager.task')
                 ->with('task', $task)

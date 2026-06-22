@@ -43,7 +43,17 @@ class GoalTaskPolicy
                     && $task->goal->client->client_status === ClientStatus::Active;
 
         } else if ($user->manager) {
-            return true; 
+            
+            // Only authorise reading:
+            // If manager belongs to same home as goal
+            // If goal is active
+            // If home is active
+            // If Client is active at the home
+            return $user->manager->homes()->where('id', $task->goal->home_id)->exists()
+                    && $task->goal->goal_status === GoalStatus::Active
+                    && $task->goal->home->home_status === HomeStatus::Active
+                    && $task->goal->client->client_status === ClientStatus::Active;
+
         } else {
             return true;
         }
