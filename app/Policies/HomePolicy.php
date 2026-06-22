@@ -30,7 +30,7 @@ class HomePolicy
                     && $home->home_status === HomeStatus::Active;
         } else {
 
-            return true;
+            return false;
         }
         
 

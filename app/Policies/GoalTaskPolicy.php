@@ -55,7 +55,7 @@ class GoalTaskPolicy
                     && $task->goal->client->client_status === ClientStatus::Active;
 
         } else {
-            return true;
+            return false;
         }
         
         

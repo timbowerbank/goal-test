@@ -21,20 +21,41 @@ class ManagerViewTaskController extends Controller
 {
     // *** viewTaskForCarer() ***
     // viewing a task for a carer
+
+    // middleware guarantees that
+    // manager is authenticated
+    // belongs to the organisation
+    // is validated and active
+
+    // scopes check that
+    // home belongs to organisation
+    // carer belongs to home
+    // confirm that the task is assigned to the carer
+
+    // policy checks that
+    // manager belongs to same home as goal
+    // goal is active
+    // home is active
+    // client is active at the home
     public function viewTaskForCarer($org_id, $home_id, $carer_id, $task_id) {
 
         // validate that the home in the URL belongs to the organisation in the URL
         $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
+
         // check that the carer belongs to this home
         $carer = Carer::carerBelongsToHome($home_id)->findOrFail($carer_id);
         $task = GoalTask::with([
            'goal',
            'goal.client.user',
+           'goal.home',
            'comments',
            'comments.createdBy',
            'assignedTo',
            'completedWith' 
         ])->confirmTaskAssignedTo($carer->user_id)->findOrFail($task_id);
+
+        // authorise the manager to view the task
+        $this->authorize('read', $task);
 
         return view('manager.task')
             ->with('task', $task)

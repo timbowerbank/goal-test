@@ -8,8 +8,21 @@ use App\Models\Carer;
 use App\Enums\TaskStatus;
 use App\Models\Home;
 
+
+// middleware guarantees that
+// manager is authenticated
+// belongs to the organisation
+// is validated and active
+
 class ManagerViewCarerController extends Controller
 {
+    // scopes check that
+    // home belongs to organisation
+    // carer belongs to the home
+
+    // policy checks that
+    // carer is active
+    // manager belongs to home  
     public function index($org_id, $home_id, $carer_id) {
 
         // validate that home belongs to organisation
@@ -21,6 +34,9 @@ class ManagerViewCarerController extends Controller
             'tasks.goal',
             'tasks.goal.client.user',
         ])->carerBelongsToHome($home_id)->findOrFail($carer_id);
+
+        // authorize the manager
+        $this->authorize('read', [$carer, $home->id]);
 
         return view('manager.carer')
             ->with('org_id', $org_id)
