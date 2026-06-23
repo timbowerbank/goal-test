@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\DashboardController;
 use App\Http\Controllers\Manager\ManagerViewHomeController;
-use App\Http\Controllers\Manager\ManagerViewClientController;
-use App\Http\Controllers\Manager\ManagerViewClientsController;
+use App\Http\Controllers\Manager\ClientController;
+// use App\Http\Controllers\Manager\ManagerViewClientsController;
 use App\Http\Controllers\Manager\CarerController;
 use App\Http\Controllers\Manager\ManagerViewClientGoalController;
 use App\Http\Controllers\Manager\ManagerViewTaskController;
@@ -26,9 +26,9 @@ Route::middleware(['auth', 'manager.org.access'])
 
         Route::get('homes/{home_id}', [ManagerViewHomeController::class, 'index'])->name('home');
 
-        Route::get('homes/{home_id}/clients', [ManagerViewClientsController::class, 'index'])->name('view-clients');
-
-        Route::get('homes/{home_id}/clients/{client_id}', [ManagerViewClientController::class, 'index'])->name('view-client');
+        // clients
+        Route::get('homes/{home_id}/clients', [ClientController::class, 'index'])->name('view-clients');
+        Route::get('homes/{home_id}/clients/{client_id}', [ClientController::class, 'show'])->name('view-client');
 
         // carers
         Route::get('homes/{home_id}/carers', [CarerController::class, 'index'])->name('view-carers');

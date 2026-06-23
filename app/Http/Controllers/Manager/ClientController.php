@@ -7,8 +7,43 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Home;
 
-class ManagerViewClientController extends Controller
+class ClientController extends Controller
 {
+
+    // *** index() ***
+    // Show all clients
+    // middleware guarantees that
+    // manager is authenticated
+    // belongs to the organisation
+    // is validated and active
+
+    // scopes only provide active clients
+    // checks whether home belongs to organisation
+    
+    // policy checks manager belongs to the home
+    // and whether the Home is active
+    public function index($org_id, $home_id) {
+        $home = Home::withActiveClients()
+            ->currentlyBelongsToOrganisation($org_id)
+            ->findOrFail($home_id);
+
+        // authorise the manager
+        $this->authorize('view', $home);
+
+        return view('manager.clients')
+            ->with('home', $home)
+            ->with('org_id', $org_id);
+    }
+
+
+
+
+
+
+
+
+    // **** show() ***
+    // show one client
     // middleware guarantees that
     // manager is authenticated, verified and active
     // and belong to the organisation
@@ -23,7 +58,7 @@ class ManagerViewClientController extends Controller
     // CLIENT policy
     // policy ensures that client and manager belong to the same home
     // policy ensure that client is active
-    public function index($org_id, $home_id, $client_id) {
+    public function show($org_id, $home_id, $client_id) {
 
         // validate whether the home belongs to the organisation
         $home = Home::currentlyBelongsToOrganisation($org_id)
