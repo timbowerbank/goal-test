@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Manager;
 use App\Models\Organisation;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
-class ManagerDashboardController extends Controller
+class DashboardController extends Controller
 {
     // middleware guarantees
     // manager is authenticated, verified and active

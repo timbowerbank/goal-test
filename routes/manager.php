@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Manager\ManagerDashboardController;
+use App\Http\Controllers\Manager\DashboardController;
 use App\Http\Controllers\Manager\ManagerViewHomeController;
 use App\Http\Controllers\Manager\ManagerViewClientController;
 use App\Http\Controllers\Manager\ManagerViewClientsController;
@@ -22,7 +22,7 @@ Route::middleware(['auth', 'manager.org.access'])
             return view('manager.pending-verification');
         })->name('pending-verification');
 
-        Route::get('dashboard', [ManagerDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('homes/{home_id}', [ManagerViewHomeController::class, 'index'])->name('home');
 
