@@ -10,14 +10,7 @@ use App\Models\Carer;
 use App\Models\Goal;
 use App\Models\Client;
 
-// middleware guarantees that
-// manager is authenticated
-// belongs to the organisation
-// is validated and active
-
-
-
-class ManagerViewTaskController extends Controller
+class TaskController extends Controller
 {
     // *** viewTaskForCarer() ***
     // viewing a task for a carer
@@ -63,6 +56,7 @@ class ManagerViewTaskController extends Controller
             ->with('home_id', $home_id)
             ->with('carer_id', $carer_id);
     }
+
 
     // *** viewTaskForGoal() ***
     // viewing a task for a goal

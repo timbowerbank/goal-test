@@ -6,7 +6,7 @@ use App\Http\Controllers\Manager\HomeController;
 use App\Http\Controllers\Manager\ClientController;
 use App\Http\Controllers\Manager\CarerController;
 use App\Http\Controllers\Manager\ClientGoalController;
-use App\Http\Controllers\Manager\ManagerViewTaskController;
+use App\Http\Controllers\Manager\TaskController;
 
 
 Route::middleware(['auth', 'manager.org.access'])
@@ -35,10 +35,10 @@ Route::middleware(['auth', 'manager.org.access'])
 
         // goals
         Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [ClientGoalController::class, 'show'])->name('view-goal');
-        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'viewTaskForGoal'])->name('view-task-for-goal');
+        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [TaskController::class, 'viewTaskForGoal'])->name('view-task-for-goal');
 
         // team tasks
-        Route::get('homes/{home_id}/carers/{carer_id}/tasks/{task_id}', [ManagerViewTaskController::class, 'viewTaskForCarer'])->name('view-task-for-carer');
+        Route::get('homes/{home_id}/carers/{carer_id}/tasks/{task_id}', [TaskController::class, 'viewTaskForCarer'])->name('view-task-for-carer');
 
 
 
