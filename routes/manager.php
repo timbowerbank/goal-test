@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\DashboardController;
-use App\Http\Controllers\Manager\ManagerViewHomeController;
+use App\Http\Controllers\Manager\HomeController;
 use App\Http\Controllers\Manager\ClientController;
 use App\Http\Controllers\Manager\CarerController;
 use App\Http\Controllers\Manager\ClientGoalController;
@@ -23,7 +23,7 @@ Route::middleware(['auth', 'manager.org.access'])
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('homes/{home_id}', [ManagerViewHomeController::class, 'index'])->name('home');
+        Route::get('homes/{home_id}', [HomeController::class, 'show'])->name('home');
 
         // clients
         Route::get('homes/{home_id}/clients', [ClientController::class, 'index'])->name('view-clients');
