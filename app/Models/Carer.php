@@ -71,6 +71,21 @@ class Carer extends Model
     }
 
 
+    // *** scopeWithTasksForActiveGoals() ***
+    // retrieve Carer with tasks for active goals only
+    public function scopeWithTasksForActiveGoals($query) {
+        return $query->with([
+            'tasks' => function($q){
+                $q->whereHas('goal', function($q2){
+                    $q2->whereIn('goal_status', [GoalStatus::Active, GoalStatus::Draft]);
+                });
+            },
+            'tasks.goal',
+            'tasks.goal.client.user',
+        ]);
+    }
+
+
     // *** scopeWithTasksForHome ***
     public function scopeWithTasksForHome($query, $homeId) {
         return $query->with(

@@ -51,11 +51,15 @@ class CarerController extends Controller
         $home = Home::currentlyBelongsToOrganisation($org_id)->findOrFail($home_id);
 
         // TODO add a date method to tasks to retrieve latest
-        $carer = Carer::with([
-            'tasks',
-            'tasks.goal',
-            'tasks.goal.client.user',
-        ])->carerBelongsToHome($home_id)->findOrFail($carer_id);
+        // $carer = Carer::with([
+        //     'tasks',
+        //     'tasks.goal',
+        //     'tasks.goal.client.user',
+        // ])->carerBelongsToHome($home_id)->findOrFail($carer_id);
+
+        $carer = Carer::carerBelongsToHome($home_id)
+            ->withTasksForActiveGoals()
+            ->findOrFail($carer_id);
 
         // authorize the manager
         $this->authorize('view', [$carer, $home->id]);

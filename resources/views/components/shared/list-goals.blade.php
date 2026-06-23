@@ -19,9 +19,10 @@
             <thead>
                 <tr>
                     <th scope="col">Goal Name</th>
-                    <th class="d-none d-md-table-cell">Goal Description</th>
+                    {{-- <th class="d-none d-md-table-cell">Goal Description</th> --}}
                     <th class="d-none d-md-table-cell">Goal Type</th>
                     <th class="d-none d-md-table-cell">Activity Type</th>
+                    <th class="d-none d-md-table-cell">Goal Status</th>
                     <th class="d-none d-md-table-cell">Goal Lead</th>
                     <th>View</th>
                 </tr>
@@ -31,7 +32,7 @@
                 @foreach($goals as $goal)
                     <tr>
                         <td scope="row">{{ $goal->title }}</td>
-                        <td class="d-none d-md-table-cell">{{ $goal->description }}</td>
+                        {{-- <td class="d-none d-md-table-cell">{{ $goal->description }}</td> --}}
                         <td class="d-none d-md-table-cell">{{ $goal->goal_type }}</td>
                         <td class="d-none d-md-table-cell">
                             @foreach($goal->activityTypes as $activityType)
@@ -39,6 +40,7 @@
 
                             @endforeach
                         </td>
+                        <td class="d-none d-md-table-cell">{{ $goal->goal_status }}</td>
                         <td class="d-none d-md-table-cell">{{ $goal->leadBy->full_name }}</td>
                         <td>
                             @if($role === 'manager')

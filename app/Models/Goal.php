@@ -156,6 +156,13 @@ class Goal extends Model
         return $query->where('client_user_id', $clientUserId);
     }
 
+
+    // *** scopeActiveAndDraftGoals() ***
+    // retrieve only active and draft goals
+    public function scopeActiveAndDraftGoals($query) {
+        return $query->whereIn('goal_status', [GoalStatus::Active, GoalStatus::Draft]);
+    }
+
     // ******************
     // *** CASTS ********
     // ******************

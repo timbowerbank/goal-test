@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ClientStatus;
+use App\Enums\GoalStatus;
 
 class Client extends Model
 {
@@ -69,6 +70,18 @@ class Client extends Model
     // *** scopeConfirmClientBelongsToHome() ***
     public function scopeConfirmClientBelongsToHome($query, $homeId) {
         return $query->where('home_id', $homeId);
+    }
+
+    // *** scopeWithActiveAndDraftGoals() ***
+    // return the client with active and draft goals
+    public function scopeWithActiveAndDraftGoals($query) {
+        return $query->with([
+            'goals' => function($q) {
+                $q->whereIn('goal_status', [GoalStatus::Active, GoalStatus::Draft]);
+            },
+            'goals.activityTypes',
+            'goals.leadBy'
+        ]);
     }
 
 

@@ -65,13 +65,8 @@ class ClientController extends Controller
             ->findOrFail($home_id);
 
         // load client and eagerly load their goals on client
-        $client = Client::with(
-            [
-                'goals', 
-                'goals.activityTypes', 
-                'goals.leadBy'
-            ])
-            ->confirmClientBelongsToHome($home_id)
+        $client = Client::confirmClientBelongsToHome($home_id)
+            ->withActiveAndDraftGoals()
             ->findOrFail($client_id);
 
         // only authorize if home is active
