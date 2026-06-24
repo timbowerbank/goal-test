@@ -11,9 +11,8 @@ use App\Enums\GoalStatus;
 use App\Enums\TaskStatus;
 use App\Enums\ClientStatus;
 
-class CarerClientController extends Controller
+class ClientController extends Controller
 {
-
     // middleware guarantees
     // carer is authenticated, verified and active
     // carer belongs to the organisation
