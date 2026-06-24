@@ -5,12 +5,30 @@
         @section('client-content')
             
             <x-shared.header
-                headline="Welcome to the Client Dashboard"
-                sub-headline="This is the client dashboard for...">
+                :headline="'Welcome ' . $client->user->first_name . ' to your dashboard'"
+                :sub-headline="'Below are your goals and tasks at ' . $client->home->home_name . '.'">
             </x-shared.header>
 
-            {{-- <x-shared.list-goals></x-shared.list-goals>
-            <x-shared.list-tasks></x-shared.list-tasks> --}}
+            <x-shared.list-goals
+                :headline="'Goals for ' . $client->user->first_name"
+                :goals="$client->goals"
+                :has-headline="true"
+                :org-id="$org_id"
+                home-id=""
+                :client-id="$client->id"
+                role="client"
+
+            ></x-shared.list-goals>
+
+            <x-shared.list-tasks
+                :headline="'Tasks for ' . $client->user->first_name"
+                :tasks="$tasks"
+                :is-card="false"
+                :org-id="$org_id"
+                home-id=""
+                role="client"
+            >
+            </x-shared.list-tasks>
 
             <form method="post" action="{{ route('logout') }}">
                 @csrf

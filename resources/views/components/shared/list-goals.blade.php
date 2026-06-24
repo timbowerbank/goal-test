@@ -1,6 +1,7 @@
 @props([
+    'headline',
     'goals',
-    'is-card',
+    'has-headline',
     'org-id',
     'home-id',
     'client-id',
@@ -9,9 +10,9 @@
 
 
 <div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
-    @if($isCard)
+    @if($hasHeadline)
     <header>
-        <h2>Goals</h2>
+        <h2>{{ $headline }}</h2>
     </header>
     @endif
     @if($goals)
@@ -61,6 +62,8 @@
                                     'client_id' => $clientId,
                                     'goal_id' => $goal->id,
                                 ]) }}" class="btn btn-secondary btn-sm">View Goal</a>
+                            @elseif($role === 'client')
+                                <a href="#" class="btn btn-secondary btn-sm">View Goal</a>
 
                             @endif
                         </td>

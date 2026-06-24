@@ -12,8 +12,9 @@
 
             <!-- Add in a list of goals -->
             <x-shared.list-goals
+                :headline="'Goals for ' . $client->user->first_name"
                 :goals="$client->goals"
-                :is-card="false"
+                :has-headline="false"
                 :org-id="$org_id"
                 :home-id="$home_id"
                 :client-id="$client->id"

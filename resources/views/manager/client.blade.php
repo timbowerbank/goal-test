@@ -10,8 +10,9 @@
         </x-shared.header>
 
         <x-shared.list-goals
+                :headline="'Goals for ' . $client->user->first_name"
                 :goals="$client->goals"
-                :is-card="true"
+                :has-headline="true"
                 :org-id="$org_id"
                 :home-id="$home_id"
                 :client-id="$client->id"

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Client\ClientDashboardController;
+use App\Http\Controllers\Client\DashboardController;
 
 Route::middleware(['auth', 'client.org.access'])
     ->prefix('organisations/{org_id}/client')
@@ -15,6 +15,6 @@ Route::middleware(['auth', 'client.org.access'])
             return view('client.inactive');
         })->name('inactive');
 
-        Route::get('dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     });

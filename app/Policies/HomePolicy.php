@@ -28,6 +28,11 @@ class HomePolicy
 
             return $user->manager->homes()->where('id', $home->id)->exists()
                     && $home->home_status === HomeStatus::Active;
+
+        } else if ($user->client) {
+
+            return $user->client->home->home_status === HomeStatus::Active;
+
         } else {
 
             return false;

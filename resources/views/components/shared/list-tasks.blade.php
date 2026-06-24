@@ -56,6 +56,8 @@
                                 'task_id' => $task->id,
                             
                             ]) }}" class="btn btn-secondary btn-sm">View</a>
+                        @elseif($role === 'client')
+                            <a href="#" class="btn btn-secondary btn-sm">View Task</a>
                         @endif
                     </td>
 

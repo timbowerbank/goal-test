@@ -28,7 +28,7 @@ class GoalPolicy
         // check role
         if($user->carer) {
 
-            // check that goal must belong to same home as carer
+            // check that clients home is the same home as the carer
             // Home must be active
             // Goal must be active or draft
             // client must be active
