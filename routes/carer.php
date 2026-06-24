@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Carer\DashboardController;
 use App\Http\Controllers\Carer\HomeController;
-use App\Http\Controllers\Carer\CarerViewTaskController;
+use App\Http\Controllers\Carer\TaskController;
 use App\Http\Controllers\Carer\ClientController;
 use App\Http\Controllers\Carer\ClientGoalController;
 
@@ -27,13 +27,13 @@ Route::middleware(['auth', 'carer.org.access'])
 
         Route::get('homes/{home_id}/clients/{client_id}', [ClientController::class, 'show'])->name('view-client');
 
-        Route::get('homes/{home_id}/tasks/', [CarerViewTaskController::class, 'index'])->name('view-tasks');
+        Route::get('homes/{home_id}/tasks/', [TaskController::class, 'index'])->name('view-tasks');
 
-        Route::get('homes/{home_id}/tasks/{task_id}', [CarerViewTaskController::class, 'show'])->name('view-task');
+        Route::get('homes/{home_id}/tasks/{task_id}', [TaskController::class, 'show'])->name('view-task');
 
         Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}', [ClientGoalController::class, 'show'])->name('view-goal');
 
-        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [CarerViewTaskController::class, 'showForGoal'])->name('view-goal-task');
+        Route::get('homes/{home_id}/clients/{client_id}/goals/{goal_id}/tasks/{task_id}', [TaskController::class, 'showForGoal'])->name('view-goal-task');
 
 
     });

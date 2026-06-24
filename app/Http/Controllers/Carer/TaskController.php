@@ -12,9 +12,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use App\Enums\TaskPriority;
 
-class CarerViewTaskController extends Controller
+class TaskController extends Controller
 {
-    public function index(Request $request, $org_id, $home_id) {
+     public function index(Request $request, $org_id, $home_id) {
 
         // withActiveTasksForHome comes with:
         // tasks, 
@@ -171,5 +171,4 @@ class CarerViewTaskController extends Controller
         )
         ->findOrFail($task_id);
     }
-
 }
