@@ -11,7 +11,7 @@
 
             <x-shared.list-goals
                 :headline="'Goals for ' . $client->user->first_name"
-                :goals="$client->goals"
+                :goals="$goals"
                 :has-headline="true"
                 :org-id="$org_id"
                 home-id=""

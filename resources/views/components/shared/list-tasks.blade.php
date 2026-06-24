@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th scope="row">Task Title</th>
-                    <th class="d-none d-md-table-cell">Task Description</th>
+                    <th class="d-none d-md-table-cell">Task Due Date</th>
                     <th class="d-none d-md-table-cell">Assigned To</th>
                     <th class="d-none d-md-table-cell">Goal Task Status</th>
                     <th>View</th>
@@ -29,7 +29,7 @@
                         {{ $task->title }}
                     </td>
                     <td class="d-none d-md-table-cell">
-                        {{ $task->description }}
+                        {{ $task->due_at->format('j M Y') }}
                     </td>
                     <td class="d-none d-md-table-cell">
                         {{ $task->assignedTo->full_name }}

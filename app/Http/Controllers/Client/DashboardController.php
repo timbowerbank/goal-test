@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Models\Client;
 use App\Models\Home;
 use App\Enums\GoalStatus;
@@ -29,6 +30,9 @@ class DashboardController extends Controller
         $home = Home::currentlyBelongsToOrganisation($org_id)
         ->findOrFail($user->client->home->id);
 
+        // check that the client's home is active
+        $this->authorize('view', $home);
+
         // get the client
         $client = Client::with([
             'user',
@@ -43,15 +47,19 @@ class DashboardController extends Controller
         ->confirmClientBelongsToHome($home->id)
         ->findOrFail($user->client->id);
 
-        // check that the client's home is active
-        $this->authorize('view', $home);
-
-        // flatten the tasks into a variable
+        // flatten the tasks into a variable and then sort by due_at
         $tasks = $client->goals->flatMap(fn($goal) => $goal->tasks);
+        $sortedTasks = $tasks->sortBy(fn($task) => $task->due_at ?? Carbon::maxValue());
+
+        // sort the goals
+        $goals = $client->goals;
+        $sortedGoals = $goals->sortBy(fn($goal) => $goal->achieve_by ?? Carbon::maxValue());
+
 
         return view('client.dashboard')
             ->with('client', $client)
-            ->with('tasks', $tasks)
+            ->with('tasks', $sortedTasks)
+            ->with('goals', $sortedGoals)
             ->with('org_id', $org_id);
     }
 }
