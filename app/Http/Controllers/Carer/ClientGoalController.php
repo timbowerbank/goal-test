@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Goal;
 use App\Models\Client;
 
-// middleware guarantees
-// carer is authenticated, verified and active
-// carer belongs to the organisation
-class CarerGoalController extends Controller
+class ClientGoalController extends Controller
 {
-    
     // *** show() ***
     // middleware guarantees
     // carer is authenticated, verified and active
@@ -55,6 +51,4 @@ class CarerGoalController extends Controller
             ->with('home_id', $home_id)
             ->with('goal', $goal);
     }
-
-
 }
