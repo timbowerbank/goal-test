@@ -47,7 +47,7 @@ class EnsureClientBelongsToOrganisation
         }
 
         // check if the client belongs to the organisation
-        if($this->accessService->clientBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
+        if(!$this->accessService->clientBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
             abort(403, 'You do not belong to this organisation');
         }
 
