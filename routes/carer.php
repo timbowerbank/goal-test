@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Carer\CarerDashboardController;
+use App\Http\Controllers\Carer\DashboardController;
 use App\Http\Controllers\Carer\CarerHomeController;
 use App\Http\Controllers\Carer\CarerViewTaskController;
 use App\Http\Controllers\Carer\CarerClientController;
@@ -19,7 +19,7 @@ Route::middleware(['auth', 'carer.org.access'])
             return view('carer.pending-verification');
         })->name('pending-verification');
 
-        Route::get('dashboard', [CarerDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('homes/{home_id}', [CarerHomeController::class, 'index'])->name('home');
 

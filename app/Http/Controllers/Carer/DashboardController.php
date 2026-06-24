@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Carer;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Carer;
 use App\Models\Organisation;
 
-class CarerDashboardController extends Controller
+
+class DashboardController extends Controller
 {
     public function index($org_id) {
 
