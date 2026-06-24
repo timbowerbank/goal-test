@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Carer\DashboardController;
-use App\Http\Controllers\Carer\CarerHomeController;
+use App\Http\Controllers\Carer\HomeController;
 use App\Http\Controllers\Carer\CarerViewTaskController;
 use App\Http\Controllers\Carer\ClientController;
 use App\Http\Controllers\Carer\CarerGoalController;
@@ -21,7 +21,7 @@ Route::middleware(['auth', 'carer.org.access'])
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('homes/{home_id}', [CarerHomeController::class, 'index'])->name('home');
+        Route::get('homes/{home_id}', [HomeController::class, 'show'])->name('home');
 
         Route::get('homes/{home_id}/clients', [ClientController::class, 'index'])->name('view-clients');
 
