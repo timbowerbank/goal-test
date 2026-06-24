@@ -3,8 +3,14 @@
         @section('title', 'Client Dashboard')
 
         @section('client-content')
-            <h1>This is the Client Dashboard</h1>
-            <p>It will mostly use components that are pulled in from sub folders</p>
+            
+            <x-shared.header
+                headline="Welcome to the Client Dashboard"
+                sub-headline="This is the client dashboard for...">
+            </x-shared.header>
+
+            {{-- <x-shared.list-goals></x-shared.list-goals>
+            <x-shared.list-tasks></x-shared.list-tasks> --}}
 
             <form method="post" action="{{ route('logout') }}">
                 @csrf

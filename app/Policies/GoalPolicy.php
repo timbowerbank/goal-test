@@ -23,6 +23,8 @@ class GoalPolicy
     // *** view() ***
     public function view(User $user, Goal $goal, string $home_id):bool {
 
+        $currentHome = $goal->client->home; 
+
         // check role
         if($user->carer) {
 
@@ -31,10 +33,10 @@ class GoalPolicy
             // Goal must be active or draft
             // client must be active
             // client must belong to home
-            return $user->carer->homes()->where('id', $goal->home_id)->exists()
-                    && $goal->home->home_status === HomeStatus::Active
-                    && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
-                    && $goal->client->client_status === ClientStatus::Active;
+            return $user->carer->homes()->where('id', $home_id)->exists()
+                && $currentHome->home_status === HomeStatus::Active
+                && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
+                && $goal->client->client_status === ClientStatus::Active;
 
         } else if ($user->manager) {
 
@@ -42,14 +44,14 @@ class GoalPolicy
             // Home must be active
             // Goal must be active or draft
             // client must be active
-            return $user->manager->homes()->where('id', $goal->home_id)->exists()
-                    && $goal->home->home_status === HomeStatus::Active
-                    && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
-                    && $goal->client->client_status === ClientStatus::Active;
+            return $user->manager->homes()->where('id', $home_id)->exists()
+                && $currentHome->home_status === HomeStatus::Active
+                && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
+                && $goal->client->client_status === ClientStatus::Active;
 
         } else {
 
-            return true;
+            return false;
 
         }
 

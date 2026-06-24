@@ -32,15 +32,17 @@ class GoalTaskPolicy
                 'goal.client'
             ]);
 
+            $currentHome = $task->goal->client->home;
+
             // Only authorise reading:
             // If the carer belongs to the home. 
             // If the task belongs to an active goal at the home 
             // If the home is active. 
             // The goal belongs to an active client at the home.
-            return $user->carer->homes()->where('id', $task->goal->home_id)->exists()
-                    && $task->goal->goal_status === GoalStatus::Active
-                    && $task->goal->home->home_status === HomeStatus::Active
-                    && $task->goal->client->client_status === ClientStatus::Active;
+            return $user->carer->homes()->where('id', $currentHome->id)->exists()
+                && $task->goal->goal_status === GoalStatus::Active
+                && $currentHome->home_status === HomeStatus::Active
+                && $task->goal->client->client_status === ClientStatus::Active;
 
         } else if ($user->manager) {
             
@@ -49,11 +51,10 @@ class GoalTaskPolicy
             // If goal is active, or draft
             // If home is active
             // If Client is active at the home
-            return $user->manager->homes()->where('id', $task->goal->home_id)->exists()
-                    // && $task->goal->goal_status === GoalStatus::Active
-                    && in_array($task->goal->goal_status, [GoalStatus::Active, GoalStatus::Draft], true)
-                    && $task->goal->home->home_status === HomeStatus::Active
-                    && $task->goal->client->client_status === ClientStatus::Active;
+            return $user->manager->homes()->where('id', $currentHome->id)->exists()
+                && in_array($task->goal->goal_status, [GoalStatus::Active, GoalStatus::Draft], true)
+                && $currentHome->home_status === HomeStatus::Active
+                && $task->goal->client->client_status === ClientStatus::Active;
 
         } else {
             return false;
