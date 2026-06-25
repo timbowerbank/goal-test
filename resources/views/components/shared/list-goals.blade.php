@@ -63,7 +63,13 @@
                                     'goal_id' => $goal->id,
                                 ]) }}" class="btn btn-secondary btn-sm">View Goal</a>
                             @elseif($role === 'client')
-                                <a href="#" class="btn btn-secondary btn-sm">View Goal</a>
+                                <a href="
+                                    {{ route('client.view-goal', [
+                                        'org_id' => $orgId,
+                                        'goal_id' => $goal->id,
+                                    
+                                    ]) }}
+                                " class="btn btn-secondary btn-sm">View Goal</a>
 
                             @endif
                         </td>

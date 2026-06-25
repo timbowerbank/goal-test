@@ -49,6 +49,12 @@ class GoalPolicy
                 && in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft])
                 && $goal->client->client_status === ClientStatus::Active;
 
+
+        } else if($user->client) {
+
+            // check that the goal is active
+            return $goal->goal_status === GoalStatus::Active;
+
         } else {
 
             return false;
