@@ -28,6 +28,7 @@
                 :org-id="$org_id"
                 home-id=""
                 role="client"
+                :has-footer-button="true"
             >
             </x-shared.list-tasks>
 

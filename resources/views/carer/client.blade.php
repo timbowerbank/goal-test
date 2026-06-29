@@ -30,6 +30,7 @@
                 :org-id="$org_id"
                 :home-id="$home_id"
                 role="carer"
+                :has-footer-button="false"
             ></x-shared.list-tasks>
 
 

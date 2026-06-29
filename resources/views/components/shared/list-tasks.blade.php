@@ -4,7 +4,8 @@
     'is-card',
     'org-id',
     'home-id',
-    'role'
+    'role',
+    'has-footer-button',
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
@@ -74,6 +75,21 @@
     @else
     <p>No tasks set.</p>
 
+    @endif
+
+    @if($hasFooterButton)
+    <footer>
+        @if($role === 'manager')
+            <a href="#" class="btn btn-primary mt-3">View All Tasks</a>
+
+        @elseif($role === 'carer')
+            <a href="#" class="btn btn-primary mt-3">View All Tasks</a>
+        @elseif($role === 'client')
+            <a href="{{ route('client.view-tasks', ['org_id' => $orgId]) }}" class="btn btn-primary mt-3">View All Tasks</a>
+        @else
+            <a href="#" class="btn btn-primary mt-3">View All Tasks</a>
+        @endif
+    </footer>
     @endif
 
 </div>

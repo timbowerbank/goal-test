@@ -23,6 +23,8 @@ Route::middleware(['auth', 'client.org.access'])
 
         Route::get('goals/{goal_id}', [ClientGoalController::class, 'show'])->name('view-goal');
 
+        Route::get('tasks', [TaskController::class, 'index'])->name('view-tasks');
+
         Route::get('goals/{goal_id}/tasks/{task_id}', [TaskController::class, 'show'])->name('view-task');
 
     });

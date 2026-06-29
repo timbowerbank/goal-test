@@ -9,9 +9,68 @@ use App\Models\Home;
 use App\Models\Goal;
 use App\Models\GoalTask;
 use App\Models\User;
+use App\Models\Client;
+use App\Enums\TaskStatus;
+use App\Enums\GoalStatus;
 
 class TaskController extends Controller
 {
+
+    // *** index() ***
+    // show all tasks for a client
+
+    // middleware guarantees that
+    // user is authenticated
+    // and verified and active
+    // and belongs to the active organisation
+
+    // scopes ensure that 
+    // home belongs to organisation
+    // client belongs to home
+
+    // policies ensure that
+    // home is active
+    // client is active - this double-checking
+    public function index($org_id) {
+
+        // get the user
+        $user = Auth::user();
+
+        // check home belongs to organisation and user belongs to home
+        $home = Home::currentlyBelongsToOrganisation($org_id)
+            ->findOrFail($user->client->home_id);
+            
+        // authorize that the home is active
+        $this->authorize('view', $home);
+
+        // get the client with tasks
+        $client = Client::with([
+            'goals' => function($query){
+                return $query->where('goal_status', GoalStatus::Active);
+            },
+            'goals.tasks' => function($query){
+                return $query->whereIn('goal_task_status', [TaskStatus::NotStarted, TaskStatus::InProgress]);
+            },
+            'user',
+        ])->findOrFail($user->client->id);
+        
+        // authorise the client
+        $this->authorize('view', $client);
+
+
+        // flatten the tasks into a variable and then sort by due_at
+        $tasks = $client->goals->flatMap(fn($goal) => $goal->tasks);
+        $sortedTasks = $tasks->sortBy(fn($task) => $task->due_at ?? Carbon::maxValue());
+
+        // return the view
+        return view('client.tasks')
+            ->with('org_id', $org_id)
+            ->with('client', $client)
+            ->with('tasks', $sortedTasks);
+
+    }
+
+
     // *** show() ***
     // show a task for a client
     // middleware guarantees that client is

@@ -18,6 +18,7 @@
                 :org-id="$org_id"
                 :home-id="$home_id"
                 role="manager"
+                :has-footer-button="false"
         ></x-shared.list-tasks>
 
         <x-shared.list-notes :notes="$goal->notes"></x-shared.notes>
