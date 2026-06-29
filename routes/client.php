@@ -19,6 +19,8 @@ Route::middleware(['auth', 'client.org.access'])
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+        Route::get('goals', [ClientGoalController::class, 'index'])->name('view-goals');
+
         Route::get('goals/{goal_id}', [ClientGoalController::class, 'show'])->name('view-goal');
 
         Route::get('goals/{goal_id}/tasks/{task_id}', [TaskController::class, 'show'])->name('view-task');

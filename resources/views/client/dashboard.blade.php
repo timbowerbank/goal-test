@@ -17,6 +17,7 @@
                 home-id=""
                 :client-id="$client->id"
                 role="client"
+                :has-footer-button="true"
 
             ></x-shared.list-goals>
 

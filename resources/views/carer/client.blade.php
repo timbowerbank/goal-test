@@ -19,6 +19,7 @@
                 :home-id="$home_id"
                 :client-id="$client->id"
                 role="carer"
+                :has-footer-button="true"
             ></x-shared.list-goals>
 
             <!-- Add in a list of carer tasks -->

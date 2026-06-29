@@ -36,10 +36,9 @@ class ClientPolicy
             return $user->manager->homes()->where('id', $client->home_id)->exists()
                     && $client->client_status === ClientStatus::Active;
 
-        } else {
-
-        // needs updating
-            return true;
+        } else if ($user->client){
+            
+            return $user->client->client_status === ClientStatus::Active;
         }
 
 

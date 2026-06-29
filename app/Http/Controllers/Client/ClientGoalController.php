@@ -7,12 +7,63 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Enums\TaskStatus;
+use App\Enums\GoalStatus;
 use App\Models\User;
 use App\Models\Home;
 use App\Models\Goal;
+use App\Models\Client;
 
 class ClientGoalController extends Controller
 {
+
+    // *** index() ***
+    // show all the clients goals
+    // middleware guarantees that 
+    // user is authenticated
+    // verified and active
+    // and belongs to an organisation
+
+    // scopes confirm that
+    // home belongs to organisation
+    // client belongs to home
+    // goals are active
+
+    // policies confirm that
+    // home is active
+    public function index($org_id) {
+
+        // get the user
+        $user = Auth::user();
+
+        // get the client
+        $client = $user->client;
+
+        // verify the home and check that the user belongs to the home
+        $home = Home::currentlyBelongsToOrganisation($org_id)
+            ->findOrFail($client->home_id);
+
+        // run policy on the home
+        $this->authorize('view', $home);
+
+        // get the goals
+        $client = Client::with([
+                'goals' => function($query){
+                    return $query->where('goal_status', GoalStatus::Active);
+                },
+                'user'
+            ])
+            ->findOrFail($client->id);
+
+        // run the Client policy - this double-checks that the client is active
+        $this->authorize('view', $client);
+
+
+        return view('client.goals')
+            ->with('org_id', $org_id)
+            ->with('client', $client);
+    }
+
+
     // *** show() ***
     // show a goal for a client
     // middleware guarantees that

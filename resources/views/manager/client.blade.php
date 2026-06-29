@@ -17,6 +17,7 @@
                 :home-id="$home_id"
                 :client-id="$client->id"
                 role="manager"
+                :has-footer-button="true"
         ></x-shared.list-goals>
 
         <form method="post" action="{{ route('logout') }}">

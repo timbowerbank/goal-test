@@ -5,7 +5,9 @@
     'org-id',
     'home-id',
     'client-id',
-    'role'
+    'role',
+    'has-footer-button'
+
 ])
 
 
@@ -77,12 +79,19 @@
                 @endforeach
             </tbody>
         </table>
+    @if($hasFooterButton)
     <footer>
-        <a href="" class="btn btn-primary mt-3">View All Goals</a>
+        @if($role === 'client')
+        <a href="{{ route('client.view-goals', ['org_id' => $orgId]) }}" class="btn btn-primary mt-3">View All Goals</a>
+        @else
+        <a href="#" class="btn btn-primary mt-3">View All Goals</a>
+        @endif
     </footer>
+    @endif
 
     @else 
     <p>Sorry, there are no goals to show.</p>
     @endif
+    
 
 </div>
