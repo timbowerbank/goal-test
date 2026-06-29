@@ -57,7 +57,11 @@
                             
                             ]) }}" class="btn btn-secondary btn-sm">View</a>
                         @elseif($role === 'client')
-                            <a href="#" class="btn btn-secondary btn-sm">View Task</a>
+                            <a href="{{ route('client.view-task', [
+                                'org_id' => $orgId,
+                                'goal_id' => $task->goal->id,
+                                'task_id' => $task->id,
+                            ]) }}" class="btn btn-secondary btn-sm">View Task</a>
                         @endif
                     </td>
 

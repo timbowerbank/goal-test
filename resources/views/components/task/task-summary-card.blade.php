@@ -59,12 +59,22 @@
                     ]) }}">
                     {{ $task->goal->title }}
                 </a>
+                @elseif($role === 'client')
+
+                    <a href="{{ route('client.view-goal', [
+                        'org_id' => $orgId, 
+                        'goal_id' => $task->goal->id
+                        ]) }}">{{ $task->goal->title }}</a>
                 @endif
             </td>
         </tr>
         <tr>
             <th>
+                @if($role === 'client')
+                Assigned To:    
+                @else
                 Client:
+                @endif
             </th>
             <td>
                 @if($role === 'manager')
@@ -88,6 +98,8 @@
                     ]) }}">
                     {{ $task->goal->client->user->full_name }}
                 </a>
+                @elseif($role === 'client')
+                    {{ $task->assignedTo->full_name }}
                 @endif
             </td>
 
