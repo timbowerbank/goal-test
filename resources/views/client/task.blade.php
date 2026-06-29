@@ -1,6 +1,6 @@
         @extends('layouts.client')
 
-        @section('title', 'title tage for view task')
+        @section('title', $task->title)
 
         @section('client-content')
             <x-shared.header
