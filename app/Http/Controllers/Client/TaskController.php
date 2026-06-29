@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Models\Home;
 use App\Models\Goal;
 use App\Models\GoalTask;
@@ -36,6 +37,12 @@ class TaskController extends Controller
         // get the user
         $user = Auth::user();
 
+        // find or fail the client
+        $client = $user->client;
+
+        // authorise the client
+        $this->authorize('view', $client);
+
         // check home belongs to organisation and user belongs to home
         $home = Home::currentlyBelongsToOrganisation($org_id)
             ->findOrFail($user->client->home_id);
@@ -43,8 +50,8 @@ class TaskController extends Controller
         // authorize that the home is active
         $this->authorize('view', $home);
 
-        // get the client with tasks
-        $client = Client::with([
+        // load tasks, goals and user on client
+        $client->load([
             'goals' => function($query){
                 return $query->where('goal_status', GoalStatus::Active);
             },
@@ -52,11 +59,7 @@ class TaskController extends Controller
                 return $query->whereIn('goal_task_status', [TaskStatus::NotStarted, TaskStatus::InProgress]);
             },
             'user',
-        ])->findOrFail($user->client->id);
-        
-        // authorise the client
-        $this->authorize('view', $client);
-
+        ]);
 
         // flatten the tasks into a variable and then sort by due_at
         $tasks = $client->goals->flatMap(fn($goal) => $goal->tasks);

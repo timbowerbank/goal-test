@@ -38,7 +38,10 @@ class ClientPolicy
 
         } else if ($user->client){
             
-            return $user->client->client_status === ClientStatus::Active;
+            return $client->id === $user->client->id
+                && $client->client_status === ClientStatus::Active;
+        } else {
+            return false;
         }
 
 
