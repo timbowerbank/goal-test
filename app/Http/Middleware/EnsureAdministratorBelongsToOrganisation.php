@@ -47,7 +47,7 @@ class EnsureAdministratorBelongsToOrganisation
         }
 
         // use the service
-        if($this->accessService->adminBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
+        if(!$this->accessService->adminBelongsToOrganisation(Auth::user(), $request->route('org_id'))) {
             abort(403, 'You do not belong to this organisation');
         }
 

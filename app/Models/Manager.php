@@ -40,6 +40,7 @@ class Manager extends Model
     // Relationship - allows us to use $manager->homes
     public function homes(): BelongsToMany {
         return $this->belongsToMany(Home::class, 'home_manager', 'manager_id', 'home_id')
+        ->wherePivotNull('ended_at')
         ->withPivot(
             'started_at', 
             'ended_at',

@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $manager->load(
             [
                 'homes' => function($query) use ($org_id){
-                    $query->whereHas('organisation', function($q) use ($org_id){
+                    $query->whereHas('organisations', function($q) use ($org_id){
                         $q  ->where('organisations.id', $org_id)
                             ->whereNull('home_organisation.ended_at');
                     });

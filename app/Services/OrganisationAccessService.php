@@ -34,7 +34,7 @@ class OrganisationAccessService {
         // must have an active home in the requested organisation
         return $manager->homes()
                 ->wherePivotNull('ended_at')
-                ->whereHas('organisation', function($query) use ($org_id){
+                ->whereHas('organisations', function($query) use ($org_id){
                     $query  ->where('organisations.id', $org_id)
                             ->where('organisations.organisation_status', OrganisationStatus::Active);
                 })
@@ -63,7 +63,7 @@ class OrganisationAccessService {
 
         return $carer->homes()
             ->wherePivotNull('ended_at')
-            ->whereHas('organisation', function($query) use ($org_id){
+            ->whereHas('organisations', function($query) use ($org_id){
                     $query  ->where('organisations.id', $org_id)
                             ->where('organisations.organisation_status', OrganisationStatus::Active);
                 })
@@ -92,7 +92,7 @@ class OrganisationAccessService {
 
         // check that the client has a home
         return $client->home()
-            ->whereHas('organisation', function($query) use ($org_id){
+            ->whereHas('organisations', function($query) use ($org_id){
                 $query  ->where('organisations.id', $org_id)
                         ->where('organisations.organisation_status', OrganisationStatus::Active);
             })

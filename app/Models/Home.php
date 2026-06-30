@@ -49,10 +49,11 @@ class Home extends Model
         return $this->belongsTo(User::class, 'updated_by_user_id');
     }
 
-    // *** organisation ***
+    // *** organisations ***
     // Relationship - allows us to use $home->organisation
-    public function organisation():BelongsToMany {
+    public function organisations():BelongsToMany {
         return $this->belongsToMany(Organisation::class, 'home_organisation', 'home_id', 'organisation_id')
+        ->wherePivotNull('ended_at')
         ->withPivot(
             'started_at',
             'ended_at',
@@ -62,10 +63,19 @@ class Home extends Model
         ->withTimestamps();
     }
 
+    // *** organisation ***
+    // Accessor to refelct real world home will only ever belong to one organisation
+    public function organisation(): ?Organisation {
+        return $this->organisations->first();
+    }
+
+
+
     // *** managers ***
     // Relationship - allows us to implement $home->managers
     public function managers():BelongsToMany {
         return $this->belongsToMany(Manager::class, 'home_manager', 'home_id', 'manager_id')
+        ->wherePivotNull('ended_at')
         ->withPivot(
             'started_at',
             'ended_at',
@@ -100,7 +110,7 @@ class Home extends Model
 
     // *** scopeCurrentlyBelongsToOrganisation() ***
     public function scopeCurrentlyBelongsToOrganisation($query, $orgId) {
-        return $query->whereHas('organisation', function($q) use ($orgId){
+        return $query->whereHas('organisations', function($q) use ($orgId){
             $q  ->where('organisations.id', $orgId)
                 ->where('organisations.organisation_status', OrganisationStatus::Active)
                 ->whereNull('home_organisation.ended_at');

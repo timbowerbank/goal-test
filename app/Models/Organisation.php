@@ -53,7 +53,8 @@ class Organisation extends Model
     // *** homes ***
     // Relationship - via pivot table
     public function homes():BelongsToMany {
-        return $this->belongsToMany(Home::class)
+        return $this->belongsToMany(Home::class, 'home_organisation', 'organisation_id', 'home_id')
+        ->wherePivotNull('ended_at')
         ->withPivot(
             'started_at',
             'ended_at',

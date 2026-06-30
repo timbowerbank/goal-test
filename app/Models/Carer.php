@@ -41,6 +41,7 @@ class Carer extends Model
     // Relationship - allows us to use $carer->homes
     public function homes():BelongsToMany {
         return $this->belongsToMany(Home::class, 'carer_home', 'carer_id', 'home_id' )
+        ->wherePivotNull('ended_at')
         ->withPivot(
            'started_at',
            'ended_at',

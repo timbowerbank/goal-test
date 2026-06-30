@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::middleware(['auth', 'administrator.org.access'])
     ->prefix('organisations/{org_id}/organisation-admin')
@@ -15,6 +15,6 @@ Route::middleware(['auth', 'administrator.org.access'])
             return view('organisation-admin.pending-verification');
         })->name('pending-verification');
 
-        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     });
