@@ -3,11 +3,11 @@
         @section('content')
 
         <div class="row">
-            <div class="col-2">
+            <div class="col-md-2">
                 @include('organisation-admin.navigation')
             </div>
 
-            <div class="col-10">
+            <div class="col-md-10">
                 @yield('organisation-content')
             </div>
 

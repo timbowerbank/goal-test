@@ -10,11 +10,13 @@ use App\Models\Manager;
 use App\Models\Client;
 use App\Models\Goal;
 use App\Models\Carer;
+use App\Models\Home;
 
 use App\Enums\ManagerStatus;
 use App\Enums\ClientStatus;
 use App\Enums\GoalStatus;
 use App\Enums\CarerStatus;
+use App\Enums\HomeStatus;
 
 class DashboardController extends Controller
 {
@@ -36,9 +38,9 @@ class DashboardController extends Controller
         })->where('client_status', ClientStatus::Active)->count();
 
         // goals
-        $activeGoalCount = Goal::whereHas('client.home.organisations', function($query) use($organisation){
+        $activeGoals = Goal::whereHas('client.home.organisations', function($query) use($organisation){
             return $query->where('organisations.id', $organisation->id);
-        })->where('goal_status', GoalStatus::Active)->count();
+        })->where('goal_status', GoalStatus::Active)->get();
 
 
         // Carers
@@ -46,11 +48,18 @@ class DashboardController extends Controller
             return $query->where('organisations.id', $organisation->id);
         })->where('carer_status', CarerStatus::Active)->distinct()->count();
 
+        // Homes
+        $activeHomesCount = Home::whereHas('organisations', function($query) use ($organisation){
+            return $query->where('organisations.id', $organisation->id);
+        })->count();
+
 
         return view('organisation-admin.dashboard')
+            ->with('organisation', $organisation)
+            ->with('homeCount', $activeHomesCount)
             ->with('managerCount', $activeManagerCount)
             ->with('clientCount', $activeClientCount)
-            ->with('goalCount', $activeGoalCount)
+            ->with('goals', $activeGoals)
             ->with('carerCount', $activeCarerCount);
     }
 }
