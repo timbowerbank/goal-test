@@ -4,14 +4,14 @@
 
     @section('organisation-content')
     <x-shared.header
-        headline="Org Admin Dashboard"
-        sub-headline="This is for organisation admins only"
+        :headline="'Dashboard for: ' . $organisation->organisation_name"
+        :sub-headline="'Welcome to the administration portal for J-Goal at ' . $organisation->organisation_name"
     ></x-shared.header>
 
     <div class="row">
         <div class="col">
             <x-goal.card-metric-count-goals
-                headline="Latest Goal Data"
+                headline="Latest Goal Statistics"
                 :goals="$goals"
                 button-url="#"
             ></x-goal.card-metric-count-goals>
@@ -57,19 +57,6 @@
             ></x-shared.card-metric-simple>
         </div>
     </div>
-
-
-
-    
-
-    {{-- 
-
-        Add in... 
-        
-    
-        <x-shared.card-metric-count></x-shared.card-metric-count>
-    
-    --}}
 
     <form method="post" action="{{ route('logout') }}">
         @csrf
