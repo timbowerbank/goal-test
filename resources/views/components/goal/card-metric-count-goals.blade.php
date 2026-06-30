@@ -26,7 +26,7 @@
     </div>
 
     <footer>
-        <a href="#" class="btn btn-primary mt-3">View All Goals</a>
+        <a href="{{ $buttonUrl }}" class="btn btn-primary mt-3">View All Goals</a>
     </footer>
   
 </div>

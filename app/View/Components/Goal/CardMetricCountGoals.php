@@ -23,7 +23,8 @@ class CardMetricCountGoals extends Component
      */
     public function __construct(
         public string $headline,
-        public Collection $goals
+        public Collection $goals,
+        public string $buttonUrl
         )
     {
         $this->totalOverdueGoals = $this->calcOverdueGoals($goals);

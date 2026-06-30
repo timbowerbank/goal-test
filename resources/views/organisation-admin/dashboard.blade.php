@@ -13,6 +13,7 @@
             <x-goal.card-metric-count-goals
                 headline="Latest Goal Data"
                 :goals="$goals"
+                button-url="#"
             ></x-goal.card-metric-count-goals>
 
         </div>
