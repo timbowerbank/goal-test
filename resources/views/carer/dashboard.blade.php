@@ -11,7 +11,8 @@
         <x-shared.list-homes 
                 :homes="$homes" 
                 :org-id="$organisation->id"
-                role="carer"></x-shared.list-homes>
+                role="carer"></x-shared.list-homes
+                :has-footer-button="true">
 
         <form method="post" action="{{ route('logout') }}">
                 @csrf
