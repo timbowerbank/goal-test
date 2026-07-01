@@ -13,7 +13,7 @@
             <x-goal.card-metric-count-goals
                 headline="Latest Goal Statistics"
                 :goals="$goals"
-                button-url="#"
+                button-url="{{ route('organisation-admin.view-goals', ['org_id' => $organisation->id]) }}"
             ></x-goal.card-metric-count-goals>
 
         </div>

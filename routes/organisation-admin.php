@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\GoalController;
+
 
 Route::middleware(['auth', 'administrator.org.access'])
     ->prefix('organisations/{org_id}/organisation-admin')
@@ -20,5 +22,8 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         // homes
         Route::get('homes', [HomeController::class, 'index'])->name('view-homes');
+
+        // goals
+        Route::get('goals', [GoalController::class, 'index'])->name('view-goals');
 
     });
