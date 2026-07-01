@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\ManagerController;
 
 
 Route::middleware(['auth', 'administrator.org.access'])
@@ -29,5 +30,8 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         // clients
         Route::get('clients', [ClientController::class, 'index'])->name('view-clients');
+
+        // managers
+        Route::get('managers', [ManagerController::class, 'index'])->name('view-managers');
 
     });

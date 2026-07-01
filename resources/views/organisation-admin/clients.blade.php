@@ -41,6 +41,9 @@
 
 
                     </table>
+
+                @else
+                    <p>There are no clietns to show</p>
                 @endif
 
             </div>
