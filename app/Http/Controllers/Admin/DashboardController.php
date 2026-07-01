@@ -20,7 +20,15 @@ use App\Enums\HomeStatus;
 
 class DashboardController extends Controller
 {
+    // *** index() ***
     // dashboard for the Organisation Administrator
+
+    // middleware guarantees that
+    // org admin is authenticated
+    // and verified and active
+    // is an org admin
+    // and that they belong to the organisation
+    // the organisation is active
     public function index($org_id) {
 
         $organisation = Organisation::findOrFail($org_id);
