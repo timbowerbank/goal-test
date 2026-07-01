@@ -34,7 +34,7 @@
             <x-shared.card-metric-simple
                 headline="Total Active Clients"
                 :metric="$clientCount"
-                button-url="#"
+                button-url="{{ route('organisation-admin.view-clients', ['org_id' => $organisation->id]) }}"
                 button-label="View All Clients"
             ></x-shared.card-metric-simple>
         </div>

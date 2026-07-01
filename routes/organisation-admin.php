@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GoalController;
+use App\Http\Controllers\Admin\ClientController;
 
 
 Route::middleware(['auth', 'administrator.org.access'])
@@ -25,5 +26,8 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         // goals
         Route::get('goals', [GoalController::class, 'index'])->name('view-goals');
+
+        // clients
+        Route::get('clients', [ClientController::class, 'index'])->name('view-clients');
 
     });
