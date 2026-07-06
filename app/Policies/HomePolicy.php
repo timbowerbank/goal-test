@@ -33,6 +33,13 @@ class HomePolicy
 
             return $user->client->home->home_status === HomeStatus::Active;
 
+        } else if ($user->organisationAdministrator) {
+
+            return $user->organisationAdministrator->organisation->homes()
+                        ->where('id', $home->id)->exists()
+                        
+                    && $home->home_status === HomeStatus::Active;
+
         } else {
 
             return false;

@@ -5,7 +5,7 @@ namespace App\View\Components\Goal;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use App\Enums\GoalStatus;
 

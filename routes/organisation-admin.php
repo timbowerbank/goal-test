@@ -23,8 +23,9 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // homes
+        // homes and home
         Route::get('homes', [HomeController::class, 'index'])->name('view-homes');
+        Route::get('homes/{home_id}', [HomeController::class, 'show'])->name('view-home');
 
         // goals
         Route::get('goals', [GoalController::class, 'index'])->name('view-goals');
