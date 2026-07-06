@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\CarerController;
 
 
 Route::middleware(['auth', 'administrator.org.access'])
@@ -30,6 +31,9 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         // clients
         Route::get('clients', [ClientController::class, 'index'])->name('view-clients');
+
+        // carers
+        Route::get('carers', [CarerController::class, 'index'])->name('view-carers');
 
         // managers
         Route::get('managers', [ManagerController::class, 'index'])->name('view-managers');

@@ -52,7 +52,7 @@
             <x-shared.card-metric-simple
                 headline="Total Active Carers"
                 :metric="$carerCount"
-                button-url="#"
+                button-url="{{ route('organisation-admin.view-carers', ['org_id' => $organisation->id]) }}"
                 button-label="View All Carers"
             ></x-shared.card-metric-simple>
         </div>
