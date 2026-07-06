@@ -32,19 +32,19 @@
 
         <div class="col-md-6">
             <x-shared.card-metric-simple
-                headline="Total Active Clients"
-                :metric="$clientCount"
-                button-url="{{ route('organisation-admin.view-clients', ['org_id' => $organisation->id]) }}"
-                button-label="View All Clients"
+                headline="Total Active Managers"
+                :metric="$managerCount"
+                button-url="{{ route('organisation-admin.view-managers', ['org_id' => $organisation->id]) }}"
+                button-label="View All Managers"
             ></x-shared.card-metric-simple>
         </div>
 
         <div class="col-md-6">
             <x-shared.card-metric-simple
-                headline="Total Active Managers"
-                :metric="$managerCount"
-                button-url="{{ route('organisation-admin.view-managers', ['org_id' => $organisation->id]) }}"
-                button-label="View All Managers"
+                headline="Total Active Clients"
+                :metric="$clientCount"
+                button-url="{{ route('organisation-admin.view-clients', ['org_id' => $organisation->id]) }}"
+                button-label="View All Clients"
             ></x-shared.card-metric-simple>
         </div>
 

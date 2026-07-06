@@ -11,6 +11,14 @@ use App\Enums\CarerStatus;
 class CarerController extends Controller
 {
     // *** index() ***
+    // see all carers who work at the organisation
+
+    // middleware guarantees that
+    // org admin is authenticated
+    // and verified and active
+    // is an org admin
+    // and that they belong to the organisation
+    // the organisation is active
     public function index($org_id) {
 
         // get the organisation
