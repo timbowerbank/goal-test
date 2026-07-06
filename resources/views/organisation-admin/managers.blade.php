@@ -22,7 +22,11 @@
                                 <tr>
                                     <td scope="row">{{ $manager->user->full_name }}</td>
                                     <td>
-                                        <a class="btn btn-secondary btn-sm" href="#">View</a>
+                                        <a class="btn btn-secondary btn-sm" href="{{ route('organisation-admin.view-manager', 
+                                            [
+                                                'org_id' => $organisation->id, 
+                                                'manager_id' => $manager->id]) }}"
+                                        >View</a>
                                     </td>
                                 </tr>
                             @endforeach

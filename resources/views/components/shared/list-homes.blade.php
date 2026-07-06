@@ -1,5 +1,6 @@
 @props([
     'homes',
+    'headline',
     'org-id',
     'role',
     'has-footer-button'
@@ -7,7 +8,7 @@
 ])
 <div class="p-4 rounded border mb-2 bg-white">
     <header>
-        <h2>My Homes</h2>
+        <h2>{{ $headline }}</h2>
     </header>
     @if($homes !== null)
         <table class="table">

@@ -9,6 +9,7 @@
 
         <x-shared.list-homes 
                 :homes="$homes" 
+                headline="My Homes"
                 :org-id="$org_id"
                 role="manager"
                 :has-footer-button="true"></x-shared.list-homes>

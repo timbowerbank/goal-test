@@ -51,6 +51,16 @@ class Manager extends Model
     }
 
 
+    // *** SCOPES ***
+
+    // *** scopeCurrentlyBelongsToOrganisation() ***
+    public function scopeCurrentlyBelongsToOrganisation($query, $orgId) {
+        return $query->whereHas('homes.organisations', function($q) use($orgId){
+            return $q->where('organisations.id', $orgId);
+        });
+    }
+
+
     // *** casts ***
     protected function casts(): array {
         return [

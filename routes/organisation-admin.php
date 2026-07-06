@@ -38,5 +38,6 @@ Route::middleware(['auth', 'administrator.org.access'])
 
         // managers
         Route::get('managers', [ManagerController::class, 'index'])->name('view-managers');
+        Route::get('managers/{manager_id}', [ManagerController::class, 'show'])->name('view-manager');
 
     });
