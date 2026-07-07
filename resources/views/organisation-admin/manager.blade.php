@@ -20,7 +20,10 @@
                 :has-footer-button="false"
             ></x-shared.list-homes>
 
-            {{-- add new <x-shared.staff-metrics-card></x-shared.staff-metrics-card> --}}
-
+            <x-shared.staff-metric-goals-tasks-card
+                :headline="'Key Metrics For ' . $manager->user->first_name"
+                :goal-count="$completedGoalsCount"
+                :task-count="$completedTasksCount"
+            ></x-shared.staff-metric-goals-tasks-card>
 
         @endsection
