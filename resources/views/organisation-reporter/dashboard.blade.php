@@ -2,7 +2,7 @@
 
         @section('title', 'Organisation Reporter Dashboard')
 
-        @section('manager-content')
+        @section('organisation-reporter-content')
         <x-shared.header 
                 headline="Organisation Reporter Dashboard" 
                 sub-headline="You are logged in as an organisation reporter"></x-shared.header>
