@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\HomeStatus;
 use App\Enums\OrganisationStatus;
 use App\Enums\ClientStatus;
@@ -72,9 +73,12 @@ class Home extends Model
 
 
     // *** organisation ***
-    // Accessor (not a real relationship) to refelct real world home will only ever belong to one organisation
-    public function organisation(): ?Organisation {
-        return $this->organisations->first();
+    // Accessor (not a real relationship) to reflect real world home will only ever belong to one organisation
+    protected function organisation(): Attribute
+{
+        return Attribute::make(
+            get: fn () => $this->organisations->first(),
+        );
     }
 
     

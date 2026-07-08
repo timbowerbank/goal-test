@@ -8,6 +8,7 @@ use App\Enums\CarerStatus;
 use App\Enums\ClientStatus;
 use App\Enums\OrganisationAdministratorStatus;
 use App\Enums\OrganisationStatus;
+use App\Enums\RegionalOperatorStatus;
 
 class OrganisationAccessService {
 
@@ -124,7 +125,34 @@ class OrganisationAccessService {
         }
 
         return true;
+    }
 
+    public function regionalOperatorBelongsToOrganisation(User $user, string $org_id) {
+        // get the regionalOperator
+        $regionalOperator = $user->regionalOperator;
+
+        // check regionalOperator is valid
+        if(!$regionalOperator) {
+            return false;
+        }
+
+        // check the regionalOperator is verified
+        if(!$regionalOperator->is_verified) {
+            return false;
+        }
+
+        // check the status of the regionalOperator
+        if($regionalOperator->ro_status !== RegionalOperatorStatus::Active) {
+            return false;
+        }
+
+        // check that the regionalOperator has an organisation
+        return $regionalOperator->regions()
+            ->whereHas('organisation', function($query) use ($org_id){
+                $query  ->where('organisations.id', $org_id)
+                        ->where('organisations.organisation_status', OrganisationStatus::Active);
+            })
+            ->exists();
 
     }
 }

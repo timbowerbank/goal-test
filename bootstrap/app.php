@@ -20,6 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/organisation-admin.php'));
             Route::middleware('web')
                 ->group(base_path('routes/family-friend.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/regional-operator.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
@@ -30,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'client.org.access' => \App\Http\Middleware\EnsureClientBelongsToOrganisation::class,
             'administrator.org.access' => \App\Http\Middleware\EnsureAdministratorBelongsToOrganisation::class,
             'family-friend.access' =>\App\Http\Middleware\EnsureFamilyFriendHasClient::class,
+            'regional-operator.org.access' => \App\Http\Middleware\EnsureRegionalOperatorBelongsToOrganisation::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

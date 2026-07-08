@@ -403,7 +403,7 @@ class GoalsSeeder extends Seeder
         foreach($clients as $client) {
 
             $home = $client->home;
-            $organisation = $home->organisation->first();
+            $organisation = $home->organisations->first();
             $manager = $home->managers->first();
             $carer = $home->carers->first();
 

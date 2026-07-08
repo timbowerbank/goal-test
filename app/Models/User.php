@@ -80,6 +80,18 @@ class User extends Authenticatable
         return $this->hasOne(OrganisationAdministrator::class);
     }
 
+    // *** organisationReporter ***
+    // Relationship - allows us to call $user->regionalOperator !== null
+    public function organisationReporter():HasOne {
+        return $this->hasOne(OrganisationReporter::class);
+    }
+
+    // *** regionalOperator ***
+    // Relationship - allows us to call $user->regionalOperator !== null
+    public function regionalOperator():HasOne {
+        return $this->hasOne(RegionalOperator::class);
+    }
+
     // *** manager ***
     // Relationship - allows us to do $user->manager !== null
     public function manager(): HasOne {

@@ -29,9 +29,22 @@ class LoginResponse implements LoginResponseContract
             ]);
         }
 
+        if($user->regionalOperator) {
+            $region = $user->regionalOperator->regions()->first();
+            if (!$region) {
+                // no region assigned yet — decide what should happen here
+                abort(403, 'No region has been assigned to your account yet.');
+            }
+
+            $org = $region->organisation;
+            return redirect()->route('regional-operator.dashboard', [
+                'org_id' => $org->id,
+            ]);
+        }
+
         if($user->manager) {
             $home = $user->manager->homes()->first();
-            $org = $home->organisation()->first();
+            $org = $home->organisations()->first();
             
             return redirect()->route('manager.dashboard', [
                 'org_id' => $org->id
@@ -40,7 +53,7 @@ class LoginResponse implements LoginResponseContract
 
         if($user->carer) {
             $home = $user->carer->homes()->first();
-            $org = $home->organisation()->first();
+            $org = $home->organisations()->first();
             return redirect()->route('carer.dashboard', [
                 'org_id' => $org->id 
             ]);
@@ -48,7 +61,7 @@ class LoginResponse implements LoginResponseContract
 
         if($user->client) {
             $home = $user->client->home;
-            $org = $home->organisation()->first();
+            $org = $home->organisations()->first();
             return redirect()->route('client.dashboard', [
                 'org_id' => $org->id
             ]);
