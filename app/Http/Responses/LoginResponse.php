@@ -42,6 +42,11 @@ class LoginResponse implements LoginResponseContract
             ]);
         }
 
+        if($user->organisationReporter) {
+            $org = $user->organisationReporter->organisation;
+            return redirect()->route('organisation-reporter.dashboard', ['org_id' => $org->id]);
+        }
+
         if($user->manager) {
             $home = $user->manager->homes()->first();
             $org = $home->organisations()->first();

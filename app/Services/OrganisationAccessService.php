@@ -9,6 +9,7 @@ use App\Enums\ClientStatus;
 use App\Enums\OrganisationAdministratorStatus;
 use App\Enums\OrganisationStatus;
 use App\Enums\RegionalOperatorStatus;
+use App\Enums\OrganisationReporterStatus;
 
 class OrganisationAccessService {
 
@@ -153,6 +154,32 @@ class OrganisationAccessService {
                         ->where('organisations.organisation_status', OrganisationStatus::Active);
             })
             ->exists();
+
+    }
+
+
+    public function organisationReporterBelongsToOrganisation(User $user, string $org_id) {
+        // get the organisationReporter
+        $organisationReporter = $user->organisationReporter;
+
+        // check organisationReporter is valid
+        if(!$organisationReporter) {
+            return false;
+        }
+
+        // check the organisationReporter is verified
+        if(!$organisationReporter->is_verified) {
+            return false;
+        }
+
+        // check the status of the organisationReporter
+        if($organisationReporter->org_reporter_status !== OrganisationReporterStatus::Active) {
+            return false;
+        }
+
+        // check that the organisationReporter has an active organisation
+        return $organisationReporter->organisation->id === $org_id
+            && $organisationReporter->organisation->organisation_status === OrganisationStatus::Active;
 
     }
 }
