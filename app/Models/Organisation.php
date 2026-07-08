@@ -64,6 +64,12 @@ class Organisation extends Model
         ->withTimestamps();
     }
 
+    // *** organisationReporters ***
+    // Relationship - allows us to call $organisation->organisationReporters
+    public function organisationReporters():HasMany {
+        return $this->hasMany(OrganisationReporter::class);
+    }
+
 
     // cast organisation_status to enum OrganisationStatus
     // so we can use: $organisation->organisation_status = OrganisationStatus::Active;
