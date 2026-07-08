@@ -64,6 +64,12 @@ class Organisation extends Model
         ->withTimestamps();
     }
 
+    // *** regions ***
+    // Relationship - allows us to call $organisation->regions
+    public function regions():HasMany {
+        return $this->hasMany(Region::class);
+    }
+
     // *** organisationReporters ***
     // Relationship - allows us to call $organisation->organisationReporters
     public function organisationReporters():HasMany {

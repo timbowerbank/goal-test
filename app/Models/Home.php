@@ -63,11 +63,22 @@ class Home extends Model
         ->withTimestamps();
     }
 
+    // *** region ***
+    // Relationship - allows us to call $home->region->name
+    public function region():BelongsTo {
+        return $this->belongsTo(Region::class);
+    }
+
+
+
     // *** organisation ***
-    // Accessor to refelct real world home will only ever belong to one organisation
+    // Accessor (not a real relationship) to refelct real world home will only ever belong to one organisation
     public function organisation(): ?Organisation {
         return $this->organisations->first();
     }
+
+    
+    
 
 
 
