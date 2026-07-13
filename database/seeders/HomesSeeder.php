@@ -15,6 +15,8 @@ class HomesSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    // Please note: region_id was added after this original HomesSeeder functionality was created
+    // hence separated out
     public function run(): void
     {
         
@@ -47,12 +49,6 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         $this->attachHomeToOrganisation($home1, $organisation1, $user);
-        // $organisation1->homes()->syncWithoutDetaching([
-        //     $home1->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home1 = $this->addRegionIdToHome($home1, $region1);
 
@@ -74,14 +70,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home2, $organisation1, $user);
-        // $organisation1->homes()->syncWithoutDetaching([
-        //     $home2->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home2 = $this->addRegionIdToHome($home2, $region1);
 
@@ -103,13 +92,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home3, $organisation1, $user);
-        // $organisation1->homes()->syncWithoutDetaching([
-        //     $home3->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
 
         // add the region id
         $home3 = $this->addRegionIdToHome($home3, $region1);
@@ -132,14 +115,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home4, $organisation1, $user);
-        // $organisation1->homes()->syncWithoutDetaching([
-        //     $home4->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home4 = $this->addRegionIdToHome($home4, $region1);
 
@@ -161,14 +137,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home5, $organisation2, $user);
-        // $organisation2->homes()->syncWithoutDetaching([
-        //     $home5->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home5 = $this->addRegionIdToHome($home5, $region2);
 
@@ -190,14 +159,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home6, $organisation2, $user);
-        // $organisation2->homes()->syncWithoutDetaching([
-        //     $home6->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home6 = $this->addRegionIdToHome($home6, $region2);
 
@@ -219,14 +181,7 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
         $this->attachHomeToOrganisation($home7, $organisation2, $user);
-        // $organisation2->homes()->syncWithoutDetaching([
-        //     $home7->id => [
-        //     'started_at' => now(),
-        //     'created_by_user_id' => $user->id,
-        // ]]);
-
         // add the region id
         $home7 = $this->addRegionIdToHome($home7, $region2);
 
