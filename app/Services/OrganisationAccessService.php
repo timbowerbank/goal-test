@@ -149,6 +149,7 @@ class OrganisationAccessService {
 
         // check that the regionalOperator has an organisation
         return $regionalOperator->regions()
+            ->wherePivotNull('ended_at')
             ->whereHas('organisation', function($query) use ($org_id){
                 $query  ->where('organisations.id', $org_id)
                         ->where('organisations.organisation_status', OrganisationStatus::Active);

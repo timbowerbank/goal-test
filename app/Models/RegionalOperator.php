@@ -37,9 +37,12 @@ class RegionalOperator extends Model
     // Relationship - allows us to use $regionalOperator->regions
     public function regions():BelongsToMany {
         return $this->belongsToMany(Region::class)
+            ->wherePivotNull('ended_at')
             ->withPivot([
                 'created_by_user_id',
-                'updated_by_user_id'
+                'updated_by_user_id',
+                'started_at',
+                'ended_at',
             ])
             ->withTimestamps();
     }

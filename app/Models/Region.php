@@ -42,7 +42,9 @@ class Region extends Model
             ->withPivot(
                 [
                     'created_by_user_id',
-                    'updated_by_user_id'
+                    'updated_by_user_id',
+                    'started_at',
+                    'ended_at'
                     ]
             )
             ->withTimestamps();

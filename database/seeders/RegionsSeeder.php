@@ -26,8 +26,8 @@ class RegionsSeeder extends Seeder
         $org2AdminUser = $organisation2->administrators()->first();
 
         // invoke createRegion
-        $this->createRegion($organisation1, 'South East', $org1AdminUser);
-        $this->createRegion($organisation2, 'North West', $org2AdminUser);
+        $this->createRegion($organisation2, 'South East', $org1AdminUser);
+        $this->createRegion($organisation1, 'North West', $org2AdminUser);
     }
 
 
