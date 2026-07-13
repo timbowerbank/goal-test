@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Organisation;
 use App\Models\Home;
+use App\Models\Region;
 use App\Enums\HomeStatus;
 
 class HomesSeeder extends Seeder
@@ -22,6 +23,9 @@ class HomesSeeder extends Seeder
         $organisation1 = Organisation::where('organisation_name', 'Achieve More')->first();
         // organisation 2 - Happy to Help
         $organisation2 = Organisation::where('organisation_name', 'Happy to Help')->first();
+
+        $region1 = Region::where('organisation_id', $organisation1->id)->first();
+        $region2 = Region::where('organisation_id', $organisation2->id)->first();
 
         
 
@@ -42,12 +46,15 @@ class HomesSeeder extends Seeder
         ]);
 
         // attach home to organisation
-        // avoid duplicate rows by using syncWithoutDetaching
-        $organisation1->homes()->syncWithoutDetaching([
-            $home1->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home1, $organisation1, $user);
+        // $organisation1->homes()->syncWithoutDetaching([
+        //     $home1->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home1 = $this->addRegionIdToHome($home1, $region1);
 
 
         // home 2 - belongs to Achieve More
@@ -68,11 +75,15 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation1->homes()->syncWithoutDetaching([
-            $home2->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home2, $organisation1, $user);
+        // $organisation1->homes()->syncWithoutDetaching([
+        //     $home2->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home2 = $this->addRegionIdToHome($home2, $region1);
 
         
         // home 3 - belongs to Achieve More
@@ -93,11 +104,15 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation1->homes()->syncWithoutDetaching([
-            $home3->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home3, $organisation1, $user);
+        // $organisation1->homes()->syncWithoutDetaching([
+        //     $home3->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home3 = $this->addRegionIdToHome($home3, $region1);
 
 
         // home 4 - belongs to Achieve More
@@ -118,11 +133,15 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation1->homes()->syncWithoutDetaching([
-            $home4->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home4, $organisation1, $user);
+        // $organisation1->homes()->syncWithoutDetaching([
+        //     $home4->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home4 = $this->addRegionIdToHome($home4, $region1);
 
 
         // home 5 - belongs to Happy to Help
@@ -143,11 +162,15 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation2->homes()->syncWithoutDetaching([
-            $home5->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home5, $organisation2, $user);
+        // $organisation2->homes()->syncWithoutDetaching([
+        //     $home5->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home5 = $this->addRegionIdToHome($home5, $region2);
 
 
         // home 6 - belongs to Happy to Help
@@ -168,11 +191,15 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation2->homes()->syncWithoutDetaching([
-            $home6->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home6, $organisation2, $user);
+        // $organisation2->homes()->syncWithoutDetaching([
+        //     $home6->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home6 = $this->addRegionIdToHome($home6, $region2);
 
 
         // home 7 - belongs to Happy to Help
@@ -193,13 +220,43 @@ class HomesSeeder extends Seeder
 
         // attach home to organisation
         // avoid duplicate rows by using syncWithoutDetaching
-        $organisation2->homes()->syncWithoutDetaching([
-            $home7->id => [
-            'started_at' => now(),
-            'created_by_user_id' => $user->id,
-        ]]);
+        $this->attachHomeToOrganisation($home7, $organisation2, $user);
+        // $organisation2->homes()->syncWithoutDetaching([
+        //     $home7->id => [
+        //     'started_at' => now(),
+        //     'created_by_user_id' => $user->id,
+        // ]]);
+
+        // add the region id
+        $home7 = $this->addRegionIdToHome($home7, $region2);
 
 
 
+    }
+
+    // *** addRegionIdToHome() ***
+    private function addRegionIdToHome($home, $region):Home {
+        if($home->region_id === null) {
+            $home->region_id = $region->id;
+            $home->save();
+            return $home;
+
+        } else {
+            return $home;
+        }
+    }
+
+    // *** attachHomeToOrganisation() ***
+    private function attachHomeToOrganisation(Home $home, Organisation $organisation, User $user): void {
+        $alreadyAttached = $organisation->homes()
+            ->where('home_id', $home->id)
+            ->exists();
+
+        if (!$alreadyAttached) {
+            $organisation->homes()->attach($home->id, [
+                'started_at' => now(),
+                'created_by_user_id' => $user->id,
+            ]);
+        }
     }
 }
