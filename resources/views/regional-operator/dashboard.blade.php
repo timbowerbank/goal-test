@@ -4,8 +4,16 @@
 
         @section('regional-operator-content')
         <x-shared.header 
-                headline="Regional operator Dashboard" 
-                sub-headline="You are logged in as a regional operator"></x-shared.header>
+                :headline="'Dashboard for ' . $regionalOperator->user->full_name" 
+                :sub-headline="'You are logged in as a Regional Operator at ' . $organisation->organisation_name . '.'"></x-shared.header>
+
+        <x-shared.list-regions
+                :regions="$regionalOperator->regions"
+                :org-id="$organisation->id"
+                :headline="'Regions Allocated to ' . $regionalOperator->user->first_name"
+                :has-headline="true"
+                :has-footer="true"
+        ></x-shared.list-regions>
 
         <form method="post" action="{{ route('logout') }}">
                 @csrf
