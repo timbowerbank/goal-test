@@ -1,6 +1,6 @@
         @extends('layouts.regional-operator')
 
-        @section('title', 'Regional Operator Dashboard')
+        @section('title', 'Regional Operator Dashboard for ' . $regionalOperator->user->full_name)
 
         @section('regional-operator-content')
         <x-shared.header 
