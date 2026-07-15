@@ -132,6 +132,11 @@ class Home extends Model
         });
     }
 
+    // *** scopeCurrentlyBelongsToRegion() ***
+    public function scopeCurrentlyBelongsToRegion($query, $regionId){
+        return $query->where('region_id', $regionId);
+    }
+
     // *** scopeActiveHome() ***
     public function scopeActiveHome($query) {
         return $query->where('home_status', HomeStatus::Active);

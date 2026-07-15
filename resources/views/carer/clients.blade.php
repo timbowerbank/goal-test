@@ -12,6 +12,8 @@
 
             <x-shared.list-clients
                 :clients="$home->clients"
+                :headline="'Clients at ' . $home->home_name"
+                :has-header="true"
                 :home="$home"
                 :org-id="$org_id"
                 :is-card="false"

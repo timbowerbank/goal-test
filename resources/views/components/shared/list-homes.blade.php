@@ -36,7 +36,7 @@
                         @elseif($role === 'organisation-administrator')
                         <a class="btn btn-secondary btn-sm" href="{{ route('organisation-admin.view-home', ['org_id' => $orgId, 'home_id' => $home->id]) }}">View</a>
                         @elseif($role === 'regional-operator')
-                        <a class="btn btn-secondary btn-sm" href="#">View</a>
+                        <a class="btn btn-secondary btn-sm" href="{{ route('regional-operator.view-home', ['org_id' => $orgId, 'region_id' => $home->region_id, 'home_id' => $home->id]) }}">View</a>
                         @endif
                     </td>
                 </tr>

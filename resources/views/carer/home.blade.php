@@ -22,6 +22,8 @@
             <div class="col-md-6">
                 <x-shared.list-clients
                     :clients="$home->clients"
+                    :headline="'Clients at ' . $home->home_name"
+                    :has-headline="true"
                     :home="$home"
                     :org-id="$org_id"
                     :is-card="true"

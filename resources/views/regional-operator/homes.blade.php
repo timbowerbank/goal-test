@@ -11,7 +11,7 @@
                 <x-shared.list-homes
                     :homes="$region->homes"
                     headline="Active Homes"
-                    org-id="$org_id"
+                    :org-id="$org_id"
                     role="regional-operator"
                     :has-footer-button="false"
                 ></x-shared.list-homes>

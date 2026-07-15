@@ -13,6 +13,8 @@
         <x-shared.list-carers
             :carers="$home->carers"
             :home="$home"
+            headline=""
+            :has-headline="false"
             :org-id="$org_id"
             :is-card="false"></x-shared.list-carers>
 

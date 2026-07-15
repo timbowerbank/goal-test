@@ -27,5 +27,6 @@ Route::middleware(['auth', 'regional-operator.org.access'])
 
         // homes in region
         Route::get('regions/{region_id}/homes', [HomeController::class, 'index'])->name('view-homes');
+        Route::get('regions/{region_id}/homes/{home_id}', [HomeController::class, 'show'])->name('view-home');
 
 });

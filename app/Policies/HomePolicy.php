@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Home;
 use App\Enums\HomeStatus;
+use App\Enums\RegionalOperatorStatus;
 
 class HomePolicy
 {
@@ -31,7 +32,8 @@ class HomePolicy
 
         } else if ($user->client) {
 
-            return $user->client->home->home_status === HomeStatus::Active;
+            return $user->client->home_id === $home->id 
+                    && $user->client->home->home_status === HomeStatus::Active;
 
         } else if ($user->organisationAdministrator) {
 
@@ -45,9 +47,10 @@ class HomePolicy
 
             $regionalOperator = $user->regionalOperator;
 
-            return $regionalOperator->regions()->where('id', $regionId)->exists()
-                    && $user->is_verified
-                    && $user->ro_status === RegionalOperatorStatus::Active;
+            return $home->region_id === $regionId 
+                    && $regionalOperator->regions()->where('id', $regionId)->exists()
+                    && $regionalOperator->is_verified
+                    && $regionalOperator->ro_status === RegionalOperatorStatus::Active;
 
 
         } else {

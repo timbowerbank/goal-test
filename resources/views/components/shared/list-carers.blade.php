@@ -1,19 +1,25 @@
 @props([
     'carers',
     'home',
+    'headline',
+    'has-headline',
     'org-id',
     'is-card'
 ])
 
 <div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
-    @if($isCard)
+    @if($hasHeadline)
     <header>
-        <h2>Carers at {{ $home->home_name }}</h2>
+        <h2>{{ $headline }}</h2>
     </header>
     @endif
     @if($carers !== null)
     <div @if($isCard) class="pd-table-scroll-outer" @endif>
         <table class="w-100 table table-striped">
+            <colgroup>
+                <col style="width: 75%">
+                <col style="width: 25%">
+            </colgroup>
             <thead>
                 <tr>
                     <th scope="col">Carer Name</th>

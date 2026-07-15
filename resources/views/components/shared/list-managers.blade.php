@@ -1,5 +1,5 @@
 @props([
-    'clients',
+    'managers',
     'home',
     'headline',
     'has-headline',
@@ -13,7 +13,7 @@
         <h2>{{ $headline }}</h2>
     </header>
     @endif
-    @if($clients !== null)
+    @if($managers !== null)
     <div @if($isCard) class="pd-table-scroll-outer" @endif>
         <table class="w-100 table table-striped">
             <colgroup>
@@ -27,9 +27,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($clients as $client)
+                @foreach($managers as $manager)
                 <tr>
-                    <td scope="row">{{ $client->user->full_name }}</td>
+                    <td scope="row">{{ $manager->user->full_name }}</td>
                     <td>
                         @if($role === 'manager')
                         <a href="{{ route('manager.view-client', ['org_id' => $orgId, 'home_id' => $home->id, 'client_id' => $client->id]) }}" class="btn btn-secondary btn-sm">View</a>
@@ -48,14 +48,16 @@
         @if($isCard)
         <footer>
             @if($role === 'manager')
-            <a href="{{ route('manager.view-clients', ['org_id' => $orgId, 'home_id' => $home->id])  }}" class="mt-2 btn btn-primary">View All Clients</a>
+            <a href="#" class="mt-2 btn btn-primary">View All Managers</a>
             @elseif($role === 'carer')
-            <a href="{{ route('carer.view-clients', ['org_id' => $orgId, 'home_id' => $home->id])  }}" class="mt-2 btn btn-primary">View All Clients</a>
+            <a href="#" class="mt-2 btn btn-primary">View All Managers</a>
+            @elseif($role === 'regional-operator')
+            <a href="#" class="btn btn-secondary btn-sm">View</a>
             @endif
         </footer>
         @endif
     @else
-    <p>Sorry, there aren't any clients at this home.</p>
+    <p>Sorry, there aren't any managers at this home.</p>
 
     @endif
 </div>

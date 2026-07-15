@@ -7,10 +7,25 @@
 
         <div class="row">
             <div class="col-md-6">
-                <x-shared.list-clients :clients="$home->clients" :home="$home" :org-id="$org_id" is-card="true" role="manager"></x-shared.list-clients>
+                <x-shared.list-clients 
+                    :clients="$home->clients" 
+                    :home="$home"
+                    :headline="'Clients at ' . $home->home_name"
+                    :has-headline="true" 
+                    :org-id="$org_id" 
+                    :is-card="true" 
+                    role="manager">
+                </x-shared.list-clients>
             </div>
             <div class="col-md-6">
-                <x-shared.list-carers :carers="$home->carers" :home="$home" :org-id="$org_id" :is-card="true"></x-shared.list-carers>
+                <x-shared.list-carers 
+                    :carers="$home->carers" 
+                    :home="$home"
+                    headline=""
+                    :has-headline="false" 
+                    :org-id="$org_id" 
+                    :is-card="true"
+                ></x-shared.list-carers>
             </div>
         </div>
 
