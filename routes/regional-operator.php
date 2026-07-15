@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegionalOperator\DashboardController;
+use App\Http\Controllers\RegionalOperator\RegionController;
+
 
 
 Route::middleware(['auth', 'regional-operator.org.access'])
@@ -17,5 +19,8 @@ Route::middleware(['auth', 'regional-operator.org.access'])
         })->name('pending-verification');
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // region
+        Route::get('regions/{region_id}', [RegionController::class, 'show'])->name('view-region');
 
 });

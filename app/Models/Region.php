@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Enums\OrganisationStatus;
 
 class Region extends Model
 {
@@ -54,6 +55,18 @@ class Region extends Model
     // Relationship - allows us to call $region->homes
     public function homes():HasMany {
         return $this->hasMany(Home::class);
+    }
+
+    // *******************
+    // *** SCOPES ********
+    // *******************
+
+    // *** scopeRegionBelongsToOrganisation() ***
+    public function scopeRegionBelongsToOrganisation($query, $orgId) {
+        return $query->whereHas('organisation', function($q2) use ($orgId){
+            return $q2  ->where('organisations.id', $orgId)
+                        ->where('organisations.organisation_status', OrganisationStatus::Active);
+        });
     }
 
     // ******************

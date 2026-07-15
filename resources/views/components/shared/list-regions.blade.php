@@ -26,7 +26,7 @@
                 <tr>
                     <th scope="row">{{ $region->name }}</th>
                     <td>
-                        <a class="btn btn-secondary btn-sm" href="#">View Region</a>
+                        <a class="btn btn-secondary btn-sm" href="{{ route('regional-operator.view-region', ['org_id' => $orgId, 'region_id' => $region->id]) }}">View Region</a>
                     </td>
 
                 </tr>
