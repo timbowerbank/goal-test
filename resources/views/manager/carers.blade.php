@@ -16,7 +16,8 @@
             headline=""
             :has-headline="false"
             :org-id="$org_id"
-            :is-card="false"></x-shared.list-carers>
+            :is-card="false"
+            role="manager"></x-shared.list-carers>
 
         
         @endsection

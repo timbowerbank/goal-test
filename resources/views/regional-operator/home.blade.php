@@ -36,7 +36,8 @@
                 :headline="'Carers at ' . $home->home_name"
                 :has-headline="true"
                 :org-id="$org_id"
-                :is-card="false"            
+                :is-card="false"
+                role="regional-operator"            
             ></x-shared.list-carers>
 
             <x-shared.list-clients

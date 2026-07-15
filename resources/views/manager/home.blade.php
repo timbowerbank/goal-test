@@ -25,6 +25,7 @@
                     :has-headline="false" 
                     :org-id="$org_id" 
                     :is-card="true"
+                    role="manager"
                 ></x-shared.list-carers>
             </div>
         </div>

@@ -4,7 +4,9 @@
     'headline',
     'has-headline',
     'org-id',
-    'is-card'
+    'is-card',
+    'role'
+
 ])
 
 <div class="p-4 rounded border mb-2 pd-list-card-with-scroll bg-white">
@@ -31,7 +33,12 @@
                 <tr>
                     <td scope="row">{{ $carer->user->full_name }}</td>
                     <td>
+                        @if($role === 'manager')
                         <a href="{{ route('manager.view-carer', ['org_id' => $orgId, 'home_id' => $home->id, 'carer_id' => $carer->id]) }}" class="btn btn-secondary btn-sm">View</a>
+                        @elseif($role === 'regional-operator')
+                        <a href="#" class="btn btn-secondary btn-sm">View</a>
+
+                        @endif
                     </td>
                 </tr>
                 @endforeach
