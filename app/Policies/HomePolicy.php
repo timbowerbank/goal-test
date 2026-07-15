@@ -17,7 +17,7 @@ class HomePolicy
     }
 
     // *** view() ***
-    public function view(User $user, Home $home):bool {
+    public function view(User $user, Home $home, string $regionId =""):bool {
         // check role
         if($user->carer) {
 
@@ -39,6 +39,16 @@ class HomePolicy
                         ->where('id', $home->id)->exists()
                         
                     && $home->home_status === HomeStatus::Active;
+
+
+        } else if($user->regionalOperator) {
+
+            $regionalOperator = $user->regionalOperator;
+
+            return $regionalOperator->regions()->where('id', $regionId)->exists()
+                    && $user->is_verified
+                    && $user->ro_status === RegionalOperatorStatus::Active;
+
 
         } else {
 

@@ -25,7 +25,7 @@
                     <x-shared.card-metric-simple
                         headline="Active Homes"
                         :metric="$homeCount"
-                        button-url="#"
+                        button-url="{{ route('regional-operator.view-homes', ['org_id' => $org_id, 'region_id' => $region->id]) }}"
                         button-label="View All Homes"
                     />
                 </div>

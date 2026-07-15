@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegionalOperator\DashboardController;
 use App\Http\Controllers\RegionalOperator\RegionController;
+use App\Http\Controllers\RegionalOperator\HomeController;
+
 
 
 
@@ -22,5 +24,8 @@ Route::middleware(['auth', 'regional-operator.org.access'])
 
         // region
         Route::get('regions/{region_id}', [RegionController::class, 'show'])->name('view-region');
+
+        // homes in region
+        Route::get('regions/{region_id}/homes', [HomeController::class, 'index'])->name('view-homes');
 
 });
