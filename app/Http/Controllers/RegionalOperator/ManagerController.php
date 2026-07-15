@@ -33,17 +33,15 @@ class ManagerController extends Controller
         // authorise the user to view the region
         $this->authorize('view', $region);
 
-        // get the managers
+        // get the managers and eager load the user
         $managers = Manager::where('manager_status', ManagerStatus::Active)
                     ->whereHas('homes', function($q) use ($region_id){
                         return $q   ->where('homes.region_id', $region_id)
                                     ->where('homes.home_status', HomeStatus::Active);
-                    })->get();
+                    })
+                    ->with(['user'])
+                    ->get();
 
-        // load user on managers
-        $managers->load([
-            'user'
-        ]);
 
         return view('regional-operator.managers')
                     ->with('region', $region)
