@@ -43,7 +43,7 @@
                     <x-shared.card-metric-simple
                         headline="Active Clients"
                         :metric="$clientCount"
-                        button-url="#"
+                        button-url="{{ route('regional-operator.view-clients', ['org_id' => $org_id, 'region_id' => $region->id]) }}"
                         button-label="View All Clients"
                     />
                 </div>
