@@ -34,11 +34,14 @@ class ManagerController extends Controller
         $this->authorize('view', $region);
 
         // get the managers and eager load the user
-        $managers = Manager::where('manager_status', ManagerStatus::Active)
+        $managers = Manager::join('users', 'managers.user_id', 'users.id')        
+                    ->where('manager_status', ManagerStatus::Active)
                     ->whereHas('homes', function($q) use ($region_id){
                         return $q   ->where('homes.region_id', $region_id)
                                     ->where('homes.home_status', HomeStatus::Active);
                     })
+                    ->orderBy('users.surname')
+                    ->select('managers.*')
                     ->with(['user'])
                     ->get();
 
