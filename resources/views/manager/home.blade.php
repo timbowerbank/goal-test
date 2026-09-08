@@ -21,8 +21,8 @@
                 <x-shared.list-carers 
                     :carers="$home->carers" 
                     :home="$home"
-                    headline=""
-                    :has-headline="false" 
+                    :headline="'Carers at ' . $home->home_name"
+                    :has-headline="true" 
                     :org-id="$org_id" 
                     :is-card="true"
                     role="manager"
