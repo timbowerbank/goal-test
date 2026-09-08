@@ -11,6 +11,7 @@
                 <x-shared.list-managers
                     :managers="$managers"
                     home=""
+                    :region-id="$region->id"
                     headline=""
                     :has-headline="false"
                     :org-id="$org_id"

@@ -32,6 +32,7 @@ Route::middleware(['auth', 'regional-operator.org.access'])
 
         // managers in region
         Route::get('regions/{region_id}/managers', [ManagerController::class, 'index'])->name('view-managers');
+        Route::get('regions/{region_id}/managers/{manager_id}', [ManagerController::class, 'show'])->name('view-manager');
 
         // clients in region
         Route::get('regions/{region_id}/clients', [ClientController::class, 'index'])->name('view-clients');

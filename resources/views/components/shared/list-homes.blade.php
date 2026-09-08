@@ -10,7 +10,7 @@
     <header>
         <h2>{{ $headline }}</h2>
     </header>
-    @if($homes !== null)
+    @if($homes->isNotEmpty())
         <table class="table">
             <thead>
                 <tr>

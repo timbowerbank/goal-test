@@ -23,6 +23,7 @@
             <x-shared.list-managers
                 :managers="$home->managers"
                 :home="$home"
+                :region-id="$region->id"
                 :headline="'Managers at ' . $home->home_name"
                 :has-headline="true"
                 :org-id="$org_id"

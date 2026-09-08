@@ -1,6 +1,7 @@
 @props([
     'managers',
     'home',
+    'region-id',
     'headline',
     'has-headline',
     'org-id',
@@ -36,7 +37,7 @@
                         @elseif($role === 'carer')
                         <a href="{{ route('carer.view-client', ['org_id' => $orgId, 'home_id' => $home->id, 'client_id' => $client->id ]) }}" class="btn btn-secondary btn-sm">View</a>
                         @elseif($role === 'regional-operator')
-                        <a href="#" class="btn btn-secondary btn-sm">View</a>
+                        <a href="{{ route('regional-operator.view-manager', ['org_id' => $orgId, 'region_id' => $regionId, 'manager_id' => $manager->id]) }}" class="btn btn-secondary btn-sm">View</a>
                         @endif
                     </td>
                 </tr>
