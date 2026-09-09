@@ -72,6 +72,9 @@
                                     
                                     ]) }}
                                 " class="btn btn-secondary btn-sm">View Goal</a>
+                            @elseif($role === 'regional-operator')
+                                <a href="#" class="btn btn-secondary btn-sm">View Goal</a>
+
 
                             @endif
                         </td>

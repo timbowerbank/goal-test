@@ -15,6 +15,7 @@
             headline=""
             :has-headline="false"
             :org-id="$org_id"
+            :region-id="$region->id"
             :is-card="false"
             role="regional-operator"
         ></x-shared.list-clients>

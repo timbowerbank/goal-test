@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Client;
 use App\Enums\ClientStatus;
+use App\Enums\RegionalOperatorStatus;
 
 class ClientPolicy
 {
@@ -40,6 +41,17 @@ class ClientPolicy
             
             return $client->id === $user->client->id
                 && $client->client_status === ClientStatus::Active;
+
+        } else if ($user->regionalOperator) {
+
+            $regionalOperator = $user->regionalOperator;
+            $clientHome = $client->home;
+            return  $regionalOperator->is_verified &&
+                    $regionalOperator->ro_status === RegionalOperatorStatus::Active &&
+                    $regionalOperator->regions()->where('id', $clientHome->region_id)->exists() &&
+                    $client->client_status === ClientStatus::Active;
+
+
         } else {
             return false;
         }
