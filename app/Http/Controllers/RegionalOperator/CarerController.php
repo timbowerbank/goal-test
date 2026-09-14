@@ -99,6 +99,7 @@ class CarerController extends Controller
                                         })
                                         ->orderBy('due_at');
                     },
+                    'tasks.goal.client.user',
                     'user',
                     'homes' => function($query) use($region_id) {
                         return $query->where('homes.region_id', $region_id)
@@ -113,7 +114,7 @@ class CarerController extends Controller
 
         // get params from request object
         $query = $request->query();
-        $filterType = $query['filterType'];
+        $filterType = $query['filterType'] ?? 'all';
         $sortBy = $query['sortBy'] ?? 'due_at';
         $sortDir = $query['sortDir'] ?? 'asc';
 
@@ -123,12 +124,9 @@ class CarerController extends Controller
         // sort the tasks
         $tasksSorted = $this->sortTasks($tasksByFilterType, $sortBy, $sortDir);
 
-
         // create array of filter types
         $filterTypes = ['all', 'due', 'overdue'];
         $filterSelected = $filterType;
-
-
 
 
         return view('regional-operator.carer')
@@ -148,21 +146,21 @@ class CarerController extends Controller
     // ***********************
 
     // *** filterTasks() ***
-    private function filterTasks(Collection $tasks, string $nFilterBy):Collection {
+    private function filterTasks(Collection $tasks, string $filterBy):Collection {
         // get the carbon date for now
         $now = Carbon::now();
 
-        if($nFilterBy === 'all') {
+        if($filterBy === 'all') {
             // simply return all tasks
             $filteredTasks = $tasks;
 
-        } else if ($nFilterBy === 'overdue') {
+        } else if ($filterBy === 'overdue') {
             // use Carbon and where to filter tasks 
             $filteredTasks = $tasks->where('due_at',  '<', $now);
 
         } else {
             // must be due
-            $filteredTasks = $tasks->whereBetween('due_at', [$now->copy()->endOfWeek()]);
+            $filteredTasks = $tasks->whereBetween('due_at', [$now, $now->copy()->endOfWeek()]);
 
         }
 
