@@ -40,4 +40,5 @@ Route::middleware(['auth', 'regional-operator.org.access'])
 
         // carers in region
         Route::get('regions/{region_id}/carers', [CarerController::class, 'index'])->name('view-carers');
+        Route::get('regions/{region_id}/carers/{carer_id}', [CarerController::class, 'show'])->name('view-carer');
 });

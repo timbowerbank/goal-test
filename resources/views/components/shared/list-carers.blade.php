@@ -4,6 +4,7 @@
     'headline',
     'has-headline',
     'org-id',
+    'region-id' => null,
     'is-card',
     'role'
 
@@ -36,7 +37,7 @@
                         @if($role === 'manager')
                         <a href="{{ route('manager.view-carer', ['org_id' => $orgId, 'home_id' => $home->id, 'carer_id' => $carer->id]) }}" class="btn btn-secondary btn-sm">View</a>
                         @elseif($role === 'regional-operator')
-                        <a href="#" class="btn btn-secondary btn-sm">View</a>
+                        <a href="{{ route('regional-operator.view-carer', ['org_id' => $orgId, 'region_id' => $regionId, 'carer_id' => $carer->id, 'filterType' => 'all', 'sortDir' => 'asc', 'sortBy' => 'due_at']) }}" class="btn btn-secondary btn-sm">View</a>
 
                         @endif
                     </td>
