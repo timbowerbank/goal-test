@@ -51,6 +51,7 @@ class TaskController extends Controller
                                         });
                         })
                         ->with([
+                            'comments',
                             'goal.home',
                             'goal.client.user'
                         ])

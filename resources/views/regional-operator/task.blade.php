@@ -13,16 +13,25 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    {{-- 
-                    <x-task.task-summary-card></x-task.task-summary-card>
-                    --}}
+                    
+                    <x-task.task-summary-card
+                        :task="$task"
+                        :org-id="$org_id"
+                        :home-id="$task->goal->home->id"
+                        role="regionalOperator"
+                    ></x-task.task-summary-card>
+                    
 
                 </div>
 
                 <div class="col-md-6">
-                    {{-- 
-                    <x-task.list-comments></x-task.list-comments>
-                    --}}
+                    
+                    <x-task.list-comments
+                        :comments="$task->comments"
+                        >
+                    </x-task.list-comments>
+
+
                 </div>
 
             </div>

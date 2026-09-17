@@ -65,6 +65,10 @@
                         'org_id' => $orgId, 
                         'goal_id' => $task->goal->id
                         ]) }}">{{ $task->goal->title }}</a>
+
+                @elseif($role==='regionalOperator')
+                    <a href="#">{{ $task->goal->title }}</a>
+
                 @endif
             </td>
         </tr>
@@ -100,6 +104,11 @@
                 </a>
                 @elseif($role === 'client')
                     {{ $task->assignedTo->full_name }}
+
+                @elseif($role==='regionalOperator')
+
+                    <a href="#">{{ $task->goal->client->user->full_name }}</a>
+                    
                 @endif
             </td>
 
