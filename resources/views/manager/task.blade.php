@@ -15,7 +15,7 @@
                                 :org-id="$org_id"
                                 :home-id="$home_id"
                                 role="manager">
-                        </x-shared.task.task-summary-card>
+                        </x-task.task-summary-card>
                 </div>
                 <div class="col">
                         <x-task.list-comments

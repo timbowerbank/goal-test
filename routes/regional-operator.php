@@ -7,6 +7,7 @@ use App\Http\Controllers\RegionalOperator\HomeController;
 use App\Http\Controllers\RegionalOperator\ManagerController;
 use App\Http\Controllers\RegionalOperator\ClientController;
 use App\Http\Controllers\RegionalOperator\CarerController;
+use App\Http\Controllers\RegionalOperator\TaskController;
 
 
 Route::middleware(['auth', 'regional-operator.org.access'])
@@ -41,4 +42,5 @@ Route::middleware(['auth', 'regional-operator.org.access'])
         // carers in region
         Route::get('regions/{region_id}/carers', [CarerController::class, 'index'])->name('view-carers');
         Route::get('regions/{region_id}/carers/{carer_id}', [CarerController::class, 'show'])->name('view-carer');
+        Route::get('regions/{region_id}/carers/{carer_id}/tasks/{task_id}', [TaskController::class, 'show'])->name('view-task');
 });

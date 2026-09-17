@@ -7,6 +7,8 @@ use App\Models\GoalTask;
 use App\Enums\GoalStatus;
 use App\Enums\HomeStatus;
 use App\Enums\ClientStatus;
+use App\Enums\RegionalOperatorStatus;
+
 
 class GoalTaskPolicy
 {
@@ -20,7 +22,7 @@ class GoalTaskPolicy
 
 
     // *** view() ***
-    public function view(User $user, GoalTask $task):bool {
+    public function view(User $user, GoalTask $task, string $regionId = null):bool {
         
         // eager load any missing relationships
         $task->loadMissing([
@@ -60,7 +62,16 @@ class GoalTaskPolicy
             return $task->goal->goal_status === GoalStatus::Active
                 && $task->goal->client->client_status === ClientStatus::Active;
 
+        } else if($user->regionalOperator) {
 
+            $homeRegionId = $currentHome->region_id;
+            $regionalOperator = $user->regionalOperator;
+
+            return $regionalOperator->regions()->where('id', $homeRegionId)->exists() &&
+                    $regionalOperator->ro_status === RegionalOperatorStatus::Active &&
+                    $regionalOperator->is_verified &&
+                    in_array($task->goal->goal_status, [GoalStatus::Active, GoalStatus::Draft], true) &&
+                    $task->goal->client->client_status === ClientStatus::Active;
         } else {
             return false;
         }
