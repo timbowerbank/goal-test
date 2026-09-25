@@ -63,6 +63,10 @@
                                 'goal_id' => $task->goal->id,
                                 'task_id' => $task->id,
                             ]) }}" class="btn btn-secondary btn-sm">View Task</a>
+
+                        @elseif($role === 'regional-operator')
+
+                            <a href="#" class="btn btn-secondary btn-sm">View Task</a>
                         @endif
                     </td>
 

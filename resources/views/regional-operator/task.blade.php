@@ -18,7 +18,7 @@
                         :task="$task"
                         :org-id="$org_id"
                         :home-id="$task->goal->home->id"
-                        role="regionalOperator"
+                        role="regional-operator"
                     ></x-task.task-summary-card>
                     
 

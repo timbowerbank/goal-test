@@ -15,6 +15,7 @@
                     :has-headline="true"
                     :org-id="$org_id"
                     :home-id="$client->home_id"
+                    :region-id="$region->id"
                     :client-id="$client->id"
                     role="regional-operator"
                     :has-footer-button="false"

@@ -7,6 +7,7 @@ use App\Http\Controllers\RegionalOperator\HomeController;
 use App\Http\Controllers\RegionalOperator\ManagerController;
 use App\Http\Controllers\RegionalOperator\ClientController;
 use App\Http\Controllers\RegionalOperator\CarerController;
+use App\Http\Controllers\RegionalOperator\GoalController;
 use App\Http\Controllers\RegionalOperator\TaskController;
 
 
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'regional-operator.org.access'])
         // clients in region
         Route::get('regions/{region_id}/clients', [ClientController::class, 'index'])->name('view-clients');
         Route::get('regions/{region_id}/clients/{client_id}', [ClientController::class, 'show'])->name('view-client');
+        Route::get('regions/{region_id}/clients/{client_id}/goals/{goal_id}', [GoalController::class, 'show'])->name('view-goal');
 
         // carers in region
         Route::get('regions/{region_id}/carers', [CarerController::class, 'index'])->name('view-carers');

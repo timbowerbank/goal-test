@@ -8,6 +8,7 @@ use App\Models\Home;
 use App\Enums\HomeStatus;
 use App\Enums\GoalStatus;
 use App\Enums\ClientStatus;
+use App\Enums\RegionalOperatorStatus;
 
 class GoalPolicy
 {
@@ -55,6 +56,16 @@ class GoalPolicy
             // check that the goal is active
             return $goal->goal_status === GoalStatus::Active;
 
+        } else if($user->regionalOperator) {
+
+            $regionalOperator = $user->regionalOperator;
+
+            return $regionalOperator->regions()->where('id', $currentHome->region_id)->exists() &&
+                    $currentHome->home_status === HomeStatus::Active &&
+                    $regionalOperator->ro_status === RegionalOperatorStatus::Active &&
+                    $regionalOperator->is_verified &&
+                    in_array($goal->goal_status, [GoalStatus::Active, GoalStatus::Draft], true) &&
+                    $goal->client->client_status === ClientStatus::Active;
         } else {
 
             return false;

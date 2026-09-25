@@ -66,7 +66,7 @@
                         'goal_id' => $task->goal->id
                         ]) }}">{{ $task->goal->title }}</a>
 
-                @elseif($role==='regionalOperator')
+                @elseif($role==='regional-operator')
                     <a href="#">{{ $task->goal->title }}</a>
 
                 @endif

@@ -4,6 +4,7 @@
     'has-headline',
     'org-id',
     'home-id',
+    'region-id' => null,
     'client-id',
     'role',
     'has-footer-button'
@@ -73,7 +74,7 @@
                                     ]) }}
                                 " class="btn btn-secondary btn-sm">View Goal</a>
                             @elseif($role === 'regional-operator')
-                                <a href="#" class="btn btn-secondary btn-sm">View Goal</a>
+                                <a href="{{ route('regional-operator.view-goal', ['org_id' => $orgId, 'region_id' => $regionId, 'client_id' => $clientId, 'goal_id' => $goal->id]) }}" class="btn btn-secondary btn-sm">View Goal</a>
 
 
                             @endif
