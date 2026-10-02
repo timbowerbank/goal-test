@@ -105,7 +105,7 @@
                 @elseif($role === 'client')
                     {{ $task->assignedTo->full_name }}
 
-                @elseif($role==='regionalOperator')
+                @elseif($role==='regional-operator')
 
                     <a href="#">{{ $task->goal->client->user->full_name }}</a>
                     
