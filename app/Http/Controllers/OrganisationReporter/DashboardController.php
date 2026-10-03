@@ -67,7 +67,7 @@ class DashboardController extends Controller
         // client count
         $clientCount = Client::where('client_status', ClientStatus::Active)
                             ->whereHas('home', function($query) use ($org_id){
-                                return $query   ->where('home_status', HomeStatus::Active)
+                                return $query   ->where('homes.home_status', HomeStatus::Active)
                                                 ->whereHas('organisations', function($q2) use ($org_id){
                                                     return $q2->where('organisations.id', $org_id);
                                                 });
