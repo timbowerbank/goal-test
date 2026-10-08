@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrganisationReporter\DashboardController;
+use App\Http\Controllers\OrganisationReporter\RegionController;
+
 
 
 Route::middleware(['auth', 'organisation-reporter.org.access'])
@@ -17,5 +19,7 @@ Route::middleware(['auth', 'organisation-reporter.org.access'])
         })->name('pending-verification');
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('regions/{region_id}', [RegionController::class, 'show'])->name('view-region');
 
 });

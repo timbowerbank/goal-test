@@ -13,6 +13,7 @@
                 :headline="'Regions Allocated to ' . $regionalOperator->user->first_name"
                 :has-headline="true"
                 :has-footer="true"
+                role="regional-operator"
         ></x-shared.list-regions>
 
         <form method="post" action="{{ route('logout') }}">

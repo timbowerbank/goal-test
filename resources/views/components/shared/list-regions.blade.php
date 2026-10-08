@@ -4,6 +4,7 @@
     'headline',
     'has-headline',
     'has-footer',
+    'role',
 ])
 
 <div class="p-4 rounded border mb-2 bg-white">
@@ -26,7 +27,11 @@
                 <tr>
                     <th scope="row">{{ $region->name }}</th>
                     <td>
+                        @if($role === 'regional-operator')
                         <a class="btn btn-secondary btn-sm" href="{{ route('regional-operator.view-region', ['org_id' => $orgId, 'region_id' => $region->id]) }}">View Region</a>
+                        @elseif($role === 'organisation-reporter')
+                        <a class="btn btn-secondary btn-sm" href="{{ route('organisation-reporter.view-region', ['org_id' => $orgId, 'region_id' => $region->id]) }}">View Region</a>
+                        @endif
                     </td>
 
                 </tr>
